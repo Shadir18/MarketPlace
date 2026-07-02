@@ -93,6 +93,10 @@ class ProductController extends Controller
                 'price' => ['required']
             ]);
         try {
+            if (! Auth::user() || $product->seller_id !== Auth::user()->seller->id) {
+                DB::rollBack();
+                return response()->json(['message' => 'Unauthorized action'], 403);
+            }
             DB::beginTransaction();
             $product->update($attributes);
             DB::commit();
@@ -117,6 +121,10 @@ class ProductController extends Controller
     {
         DB::beginTransaction();
         try {
+            if (! Auth::user() || $product->seller_id !== Auth::user()->seller->id) {
+                DB::rollBack();
+                return response()->json(['message' => 'Unauthorized action'], 403);
+            }
             $product->delete();
             DB::commit();
             return response()->json([

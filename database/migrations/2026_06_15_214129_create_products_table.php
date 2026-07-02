@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(Seller::class);
             $table->string('title');
             $table->string('company');
-            $table->text('price');
+            $table->decimal('price', 10, 2);
             $table->timestamps();
         });
     }

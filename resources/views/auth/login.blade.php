@@ -73,16 +73,13 @@
                 password: password
             })
             .then(function(response){
-                if (response.data.token){
-                    localStorage.setItem('token', response.data.token);
-                }
                 window.location.href = '/products';
                 console.log(response.data);
             })
             .catch(function(error){
                 console.error(error);
                 if (error.response && error.response.status === 422) {
-                    const errors = error.response.data.error;
+                    const errors = error.response.data.errors;
                     if (errors.email) {
                         $('#email-error').removeClass('d-none').text(errors.email[0]);
                     }

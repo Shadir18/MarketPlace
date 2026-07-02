@@ -1,28 +1,37 @@
 <nav class="navbar navbar-expand-md bg-body-secondary shadow" data-bs-theme="dark">
   <div class="container fluid">
     <div class="collapse navbar-collapse" id="navbarNav">
-      <div class="navbar-nav w-100 d-flex justify-content-between">
-        @guest
-          <div class="navbar-nav w-100 d-flex align-items-center gap-3">
-            <a href="/products" class="navbar-brand text-light fw-bold me-auto">
-              <span class="brand-text fw-bold">MarketPlace</span>
-            </a>
-            <x-nav-link href="/home" :active="request()->is('home')" class="nav-link">Home</x-nav-link>
-            <x-nav-link href="/contact" :active="request()->is('contact')" class="nav-link">contact</x-nav-link>
-            <x-nav-link href="/login" :active="request()->is('login')" class="nav-link">Login</x-nav-link>
+      <div class="navbar-nav w-100 d-flex justify-content-start  align-items-center">
+        @if(Auth::check() && request()->is('/'))    
+        @else
+          <a href="/products" class="navbar-brand text-light fw-bold ms-5">
+            <span class="brand-text fw-bold ">MarketPlace</span>
+          </a>
+        @endif
+        <div class="navbar-nav w-100 d-flex align-items-center">
+            <div class="ms-auto d-flex align-items-center gap-3">
+              @guest
+                <x-nav-link href="/" :active="request()->is('/')" class="nav-link">Home</x-nav-link>
+                <x-nav-link href="/contact" :active="request()->is('contact')" class="nav-link">Contact</x-nav-link>
+                <x-nav-link href="/login" :active="request()->is('login')" class="nav-link">Login</x-nav-link>
+              @endguest
+              @auth
+                @if(!request()->is('/'))
+                <span class="navbar-text text-light small mx-2">
+                  Welcome, {{ auth()->user()->first_name }}
+                </span>
+                <form method="POST" action="/" class="form-inline mx-2">
+                  @csrf
+                  <button type="submit" onclick="handleLogout()" class="btn btn-danger btn-sm px-3 font-weight-bold">Log Out</button>
+                </form>
+                  @else
+                  <x-nav-link href="/products" class="nav-link">Home</x-nav-link>
+                  @endif
+              @endauth
+            </div>
           </div>
-        @endguest
-
-        @auth
-          <span class="navbar-text text-light small mx-2">
-            Welcome, {{ auth()->user()->first_name }}
-          </span>
-          <form method="POST" action="/" class="form-inline mx-2">
-            @csrf
-            <button type="submit" onclick="handleLogout()" class="btn btn-danger btn-sm px-3 font-weight-bold">Log Out</button>
-          </form>
-        @endauth
       </div>
     </div>
   </div>
 </nav>
+

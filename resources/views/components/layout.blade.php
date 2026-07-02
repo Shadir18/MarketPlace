@@ -15,18 +15,6 @@
     <x-sidebar />
     @endauth
     <main class="app-main">
-      {{-- @auth
-        <div class="container-fluid mb-4">
-          <div class="bg-white py-4 px-4 shadow-sm rounded-3 border d-flex justify-content-between align-items-center gap-4">
-            <h1 class="h3 font-weight-bold mb-0 text-secondary" style="letter-spacing: -0.5px;"> 
-              {{ $heading ?? '' }} 
-            </h1> 
-            <div>
-              <x-button href="/products/create"> Create Product </x-button>
-            </div>
-          </div>
-        </div>
-      @endauth --}}
       <div>
         <div>
           {{ $slot }}

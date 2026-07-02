@@ -1,7 +1,4 @@
 <x-layout>
-    @guest
-        <x-header />
-    @endguest
 
     <div class="login-page bg-body-secondary d-flex justify-content-center align-items-center" style="min-height: 100vh;">
         <div class="login-box" style="width: 360px;">

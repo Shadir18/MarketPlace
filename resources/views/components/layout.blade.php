@@ -9,10 +9,11 @@
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 </head>
 <body class="layout-fixed sidebar-expand-lg sidebar-mini bg-body-tertiary">
-  <div class="app-wrapper">
-    @auth
     <x-header />
-    <x-sidebar />
+    @auth
+      @if(!request()->is('/'))
+        <x-sidebar />
+      @endif
     @endauth
     <main class="app-main">
       <div>
@@ -21,7 +22,6 @@
         </div>
       </div>
     </main>
-  </div>
 </body>
 </html>
 <script type="module">

@@ -12,7 +12,6 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/about', 'about');
 });
 Route::view('/contact', 'contact');
-Route::view('/menu', 'menu');
 Route::view('/', 'home');
 
 Route::get('/register', [RegisteredUserController::class, 'create']);

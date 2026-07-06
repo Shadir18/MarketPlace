@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md bg-body-secondary shadow navbar-fixed-top" data-bs-theme="dark">
+<nav class="navbar navbar-expand-md bg-body-secondary shadow fixed-top" data-bs-theme="dark">
   <div class="container fluid">
     <div class="collapse navbar-collapse" id="navbarNav">
       <div class="navbar-nav w-100 d-flex justify-content-between">
@@ -14,13 +14,15 @@
         @endguest
 
         @auth
-          <span class="navbar-text text-light small mx-2">
-            Welcome, {{ auth()->user()->first_name }}
-          </span>
-          <form method="POST" action="/" class="form-inline mx-2">
-            @csrf
-            <button type="submit" onclick="handleLogout()" class="btn btn-danger btn-sm px-3 font-weight-bold">Log Out</button>
-          </form>
+          <div class="ms-auto d-flex align-items-center gap-2">
+            <span class="navbar-text text-light small mx-2">
+              Welcome, {{ auth()->user()->first_name }}
+            </span>
+            <form method="POST" action="/logout" class="form-inline mx-2">
+              @csrf
+              <button type="submit" onclick="handleLogout()" class="btn btn-danger btn-sm px-3 font-weight-bold">Log Out</button>
+            </form>
+          </div>
         @endauth
       </div>
     </div>

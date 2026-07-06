@@ -50,6 +50,20 @@
                         @enderror
                     </div>
 
+                    <div class="form-group mb-4">
+                        <label for="image" class="font-weight-bold d-block mb-2">Product Image</label>
+                        
+                        @if($product->image)
+                            <div class="mb-3">
+                                <p class="small text-muted mb-1">Current Image:</p>
+                                <img src="{{ asset('storage/' . $product->image) }}" class="img-thumbnail" style="max-height: 150px; object-fit: contain;" alt="Current Product Image">
+                            </div>
+                        @endif
+
+                        <input id="image" type="file" name="image" class="form-control" accept="image/*">
+                        <small class="form-text text-muted">Leave empty if you don't want to change the image.</small>
+                    </div>
+
                     <div class="border-top pt-3 d-flex justify-content-between align-items-center">
                         <button type="submit" form="delete-form" class="btn btn-outline-danger">
                             <i class="fas fa-trash-alt mr-1"></i> Delete Product
@@ -78,15 +92,10 @@
             $('.invalid-feedback').remove();
             $('.is-invalid').removeClass('is-invalid');
             const id = "{{ $product->id }}";
-            const title = $('#title').val();
-            const company = $('#company').val();
-            const price = $('#price').val();
+            const formData = new FormData(this);
+            formData.append('_method', 'PATCH');
 
-            axios.patch(`/products/${id}`, {
-                title: title,
-                company: company,
-                price: price
-            })
+            axios.post(`/products/${id}`, formData)
             .then(function(response){
                 window.location.href = `/products/${id}`;
                 console.log(response.data);

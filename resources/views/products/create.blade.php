@@ -23,7 +23,7 @@
                         <div>
                             <x-form-input id="title" 
                                           name="title" 
-                                          placeholder="Apple Iphone" 
+                                          placeholder="Iphone" 
                                           class="form-control" 
                                           required>
                             </x-form-input>
@@ -36,7 +36,7 @@
                         <div>
                             <x-form-input id="company" 
                                           name="company" 
-                                          placeholder="Vista G" 
+                                          placeholder="Apple" 
                                           class="form-control" 
                                           required>
                             </x-form-input>
@@ -56,6 +56,14 @@
                         </div>
                     </x-form-field>
 
+                    <x-form-field class="form-group mb-4">
+                    <x-form-label for="image" class="font-weight-bold text-dark mb-2">Product Image</x-form-label>
+                        <div>
+                            <input id="image" type="file" name="image" class="form-control" accept="image/*">
+                            <x-form-error name="image" class="invalid-feedback d-block mt-1"></x-form-error>
+                        </div>
+                    </x-form-field>
+
                     <div class="border-top pt-3 mt-4 d-flex justify-content-end align-items-center">
                         <a href="/products" class="btn btn-light border mr-2 px-4"> Cancel </a>
                         
@@ -72,7 +80,7 @@
     $(document).ready(function() {
         $('#productForm').on('submit', function(e) {
             e.preventDefault();
-            const formData = Object.fromEntries(new FormData(this));
+            const formData = new FormData(this)
             axios.post('/products', formData)
             .then(function(response) {
                 if (response.data.message) {

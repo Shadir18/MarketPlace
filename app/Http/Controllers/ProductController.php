@@ -39,7 +39,8 @@ class ProductController extends Controller
         $attributes = $request->validate([
             'title' => ['required', 'min:5'],
             'company' => ['required'],
-            'price' => ['required']
+            'price' => ['required'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif']
         ]);
         $seller = Auth::user()->seller;
         if (! $seller) {
@@ -50,6 +51,10 @@ class ProductController extends Controller
         }
         try {
             DB::beginTransaction();
+            if ($request->hasFile('image')){
+                $path = $request->file('image')->store('products', 'public');
+                $attributes['image'] = $path;
+            }
             $attributes['seller_id'] = $seller->id;
             $product = Product::create($attributes);
             DB::commit();
@@ -92,10 +97,15 @@ class ProductController extends Controller
         $attributes = $request->validate([
                 'title' => ['required', 'min:5'],
                 'company' => ['required'],
-                'price' => ['required']
+                'price' => ['required'],
+                'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif']
             ]);
         try {
             DB::beginTransaction();
+            if ($request->hasFile('image')) {
+                $path = $request->file('image')->store('products', 'public');
+                $attributes['image'] = $path;
+            }
             $product->update($attributes);
             DB::commit();
             return response()->json([

@@ -8,6 +8,11 @@
             <div class="card-header bg-dark text-white p-4">
                 <h2 class="h4 mb-0 font-weight-bold">{{ $product->title }}</h2>
             </div>
+            @if($product->image)
+                <div class="text-center bg-light border-bottom p-3">
+                    <img src="{{ asset('storage/' . $product->image) }}" class="img-fluid rounded shadow-sm" style="max-height: 350px; object-fit: contain;" alt="{{ $product->title }}">
+                </div>
+            @endif
             
             <div class="card-body p-4">
                 <div class="row mb-3">

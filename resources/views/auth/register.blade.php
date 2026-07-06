@@ -17,7 +17,7 @@
                 <div class="card-body register-card-body p-4">
                     <div id="success-alert" class="alert alert-success d-none mb-3 fw-bold"></div>
 
-                    <form id="registerForm py-10">
+                    <form id="registerForm" class="py-10">
                         @csrf
                         
                         <x-form-field class="mb-3">

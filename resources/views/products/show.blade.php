@@ -28,7 +28,7 @@
                 <div class="row mb-4">
                     <div class="col-sm-4 text-muted font-weight-bold">Seller:</div>
                     <div class="col-sm-8">
-                        <span class="badge {{ $product->seller?->name ? 'badge-info' : 'badge-secondary' }} px-3 py-2">
+                        <span class="badge {{ $product->seller?->name ? 'bg-info text-dark' : 'bg-secondary text-white' }} px-3 py-2">
                             {{ $product->seller?->name ?? 'Unassigned Seller' }}
                         </span>
                     </div>

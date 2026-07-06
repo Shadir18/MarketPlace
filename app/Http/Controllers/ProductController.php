@@ -87,6 +87,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $this->authorize('update', $product); 
         $attributes = $request->validate([
                 'title' => ['required', 'min:5'],
                 'company' => ['required'],
@@ -115,6 +116,7 @@ class ProductController extends Controller
      */
     public function destroy(Request $request, Product $product)
     {
+        $this->authorize('delete', $product); 
         DB::beginTransaction();
         try {
             $product->delete();

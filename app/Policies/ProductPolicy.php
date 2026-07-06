@@ -12,4 +12,14 @@ class ProductPolicy
     {
         return $product->seller->user->is($user);
     }
+
+    public function update(User $user, Product $product): bool
+    {
+        return $user->seller !== null && $user->seller->id === $product->seller_id;
+    }
+    
+    public function delete(User $user, Product $product): bool
+    {
+        return $user->seller !== null && $user->seller->id === $product->seller_id;
+    }
 }

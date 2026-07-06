@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 use function Pest\Laravel\json;
 
@@ -87,7 +88,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $this->authorize('update', $product); 
+        Gate::authorize('update', $product);
         $attributes = $request->validate([
                 'title' => ['required', 'min:5'],
                 'company' => ['required'],
@@ -116,7 +117,7 @@ class ProductController extends Controller
      */
     public function destroy(Request $request, Product $product)
     {
-        $this->authorize('delete', $product); 
+        Gate::authorize('update', $product);
         DB::beginTransaction();
         try {
             $product->delete();

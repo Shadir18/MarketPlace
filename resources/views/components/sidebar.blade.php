@@ -9,6 +9,13 @@
         <nav class="mt-2" aria-label="Main navigation">
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" data-accordion="false" id="navigation">
 
+                <li class="nav-item">
+                    <x-nav-link href="/products" :active="request()->is('products')">
+                        <i class="nav-icon bi bi-grid"></i>
+                        <p>Dashboard</p>
+                    </x-nav-link>
+                </li>
+
                 <li class="nav-item {{ request()->is('posts*') ? 'menu-open' : '' }}">
                     <x-nav-link href="#" class="nav-link {{ request()->is('posts*') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-file-earmark-text-fill"></i>

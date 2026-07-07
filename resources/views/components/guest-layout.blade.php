@@ -10,7 +10,7 @@
 </head>
 <body class="bg-light">
 
-    <x-header /> 
+    <x-guest-header /> 
 
     <main class="py-3">
         <div class="container">

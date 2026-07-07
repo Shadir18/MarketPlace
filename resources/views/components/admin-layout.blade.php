@@ -10,7 +10,7 @@
 </head>
 <body class="layout-fixed sidebar-expand-lg bg-body-gradient">
     <div class="app-wrapper">
-        <x-header /> 
+        <x-admin-header /> 
         @if(!request()->is('/'))
             <x-sidebar />
         @endif

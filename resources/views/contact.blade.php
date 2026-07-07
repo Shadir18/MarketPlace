@@ -1,8 +1,5 @@
-<x-layout>
-    @guest
-        <x-header />
-    @endguest
+<x-guest-layout>
     <h1>
         welcome to Market Place
     </h1>
-</x-layout>
+</x-guest-layout>

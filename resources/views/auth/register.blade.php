@@ -1,4 +1,4 @@
-<x-layout>
+<x-guest-layout>
     <x-slot:heading>
         Register
     </x-slot:heading>
@@ -85,7 +85,7 @@
             </div>
         </div>
     </div>
-</x-layout>
+</x-guest-layout>
 
 <script type="module">
     $(document).ready(function(){

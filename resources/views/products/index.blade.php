@@ -1,7 +1,4 @@
-<x-layout>
-    <x-slot:heading>
-        <span>Product Details</span>
-    </x-slot:heading>
+<x-admin-layout>
 
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-8">
@@ -25,4 +22,4 @@
             </div>
         </div>
     </div>
-</x-layout>
+</x-admin-layout>

@@ -1,4 +1,4 @@
-<x-layout>
+<x-guest-layout>
 
     <div class="login-page bg-body-secondary d-flex justify-content-center align-items-center" style="min-height: 100vh;">
         <div class="login-box" style="width: 360px;">
@@ -57,7 +57,7 @@
             </div>
         </div>
     </div>
-</x-layout>
+</x-guest-layout>
 
 <script type="module">
     $(document).ready(function(){

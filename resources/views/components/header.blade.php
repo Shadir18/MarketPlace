@@ -24,7 +24,7 @@
                 <span class="navbar-text text-light small mx-2">
                   Welcome, {{ auth()->user()->first_name }}
                 </span>
-                <form method="POST" action="/" class="form-inline mx-2">
+                <form method="POST" action="/logout" class="form-inline mx-2">
                   @csrf
                   <button type="submit" onclick="handleLogout()" class="btn btn-danger btn-sm px-3 font-weight-bold">Log Out</button>
                 </form>

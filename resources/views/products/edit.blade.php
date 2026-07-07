@@ -1,4 +1,4 @@
-<x-layout>
+<x-admin-layout>
     <x-slot:heading>
         Edit Product: {{ $product->title }}
     </x-slot:heading>
@@ -69,7 +69,7 @@
         @csrf
         @method('DELETE')
     </form>
-</x-layout>
+</x-admin-layout>
 <script type="module">
     $(document).ready(function(){
         $('#editProductForm').on('submit', function(e) {

@@ -1,4 +1,4 @@
-<x-layout>
+<x-admin-layout>
     <x-slot:heading>
         Create Product
     </x-slot:heading>
@@ -67,7 +67,7 @@
             </div>
         </div>
     </div>
-</x-layout>
+</x-admin-layout>
 <script type="module">
     $(document).ready(function() {
         $('#productForm').on('submit', function(e) {

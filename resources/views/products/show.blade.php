@@ -1,7 +1,4 @@
-<x-layout>
-    <x-slot:heading>
-        Product Details
-    </x-slot:heading>
+<x-admin-layout>
 
     <div class="container my-5">
         <div class="card shadow-sm mx-auto" style="max-width: 600px;">
@@ -45,4 +42,4 @@
             </div>
         </div>
     </div>
-</x-layout>
+</x-admin-layout>

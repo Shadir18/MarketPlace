@@ -1,7 +1,7 @@
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
     <div class="sidebar-brand">
         <a href="/products" class="brand-link">
-            <span class="brand-text fw-light">Dashboard</span>
+            <span class="brand-text fw-light"> {{ env('APP_NAME')}} </span>
         </a>
     </div>
 
@@ -10,7 +10,7 @@
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" data-accordion="false" id="navigation">
 
                 <li class="nav-item">
-                    <x-nav-link href="/products" :active="request()->is('products')">
+                    <x-nav-link href="/dashboard" :active="request()->is('dashboard')">
                         <i class="nav-icon bi bi-grid"></i>
                         <p>Dashboard</p>
                     </x-nav-link>

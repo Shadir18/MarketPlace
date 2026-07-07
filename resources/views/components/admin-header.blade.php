@@ -1,8 +1,5 @@
 <nav class="container-fluid navbar navbar-expand-md bg-body-secondary shadow" data-bs-theme="dark">
   <div class="container fluid">
-    <a href="/products" class="navbar-brand text-light fw-bold {{ request()->is('/') ? '' : 'ms-5' }}">
-      <span class="brand-text fw-bold">MarketPlace Admin</span>
-    </a>
     <div class="collapse navbar-collapse" id="navbarNav">
       <div class="navbar-nav w-100 d-flex align-items-center">
         <div class="ms-auto d-flex align-items-center gap-3">

@@ -1,7 +1,19 @@
 <nav class="container-fluid navbar navbar-expand-md bg-body-secondary shadow" data-bs-theme="dark">
   <div class="container fluid">
     <a href="/" class="navbar-brand text-light fw-bold ms-5">
-      <span class="brand-text fw-bold">Home Page</span>
+      <span class="brand-text fw-bold">
+        @if(request()->is('about'))
+        About Us
+        @elseif(request()->is('contact'))
+            Contact Us
+        @elseif(request()->is('login'))
+            Login
+        @elseif(request()->is('register'))
+            Register
+        @else
+            Home Page
+        @endif
+      </span>
     </a>
 
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -11,6 +23,7 @@
                 <x-nav-link href="/products" :active="request()->is('/')" class="nav-link">Home</x-nav-link>
                 <x-nav-link href="/about" :active="request()->is('about')" class="nav-link">About</x-nav-link>
                 <x-nav-link href="/contact" :active="request()->is('contact')" class="nav-link">Contact</x-nav-link>
+                <x-nav-link href="/products" :active="request()->is('/products')" class="nav-link">Dashboard</x-nav-link>                
             @endauth
             @guest
                 <x-nav-link href="/" :active="request()->is('/')" class="nav-link">Home</x-nav-link>

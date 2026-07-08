@@ -1,6 +1,7 @@
 import './bootstrap';
 import $ from 'jquery';
 import axios from 'axios';
+import DataTable from 'datatables.net-dt';
 
 window.$ = $;
 window.jQuery = $;

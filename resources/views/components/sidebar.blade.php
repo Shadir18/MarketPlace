@@ -69,7 +69,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <x-nav-link href="/types" :active="request()->is('types*')">
+                    <x-nav-link href="/vehicleTypes" :active="request()->is('vehicleTypes*')">
                         <i class="nav-icon bi bi-grid-fill"></i>
                         <p>Manage Types</p>
                     </x-nav-link>

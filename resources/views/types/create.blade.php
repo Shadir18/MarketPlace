@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="border-top pt-3 d-flex justify-content-end gap-2">
-                        <a href="/vehicleTypes" class="btn btn-light border px-4">Cancel</a>
+                        <a href="/types" class="btn btn-light border px-4">Cancel</a>
                         <button type="submit" class="btn btn-primary px-4 fw-bold">Save Configuration</button>
                     </div>
                 </form>
@@ -40,15 +40,13 @@
 <script type="module">
         document.getElementById('createTypeForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
-
-            axios.post('/vehicleTypes', {
+            axios.post('/types', {
                 name: document.getElementById('name').value,
                 slug: document.getElementById('slug').value,
                 is_active: document.getElementById('is_active').checked ? 1 : 0
             })
             .then(function(response) {
-                window.location.href = '/vehicleTypes';
+                window.location.href = '/types';
             })
             .catch(function(error) {
                 if (error.response && error.response.status === 422) {

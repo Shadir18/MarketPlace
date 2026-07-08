@@ -1,13 +1,13 @@
 <x-admin-layout>
     <div class="container my-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="h4 mb-0 font-weight-bold">Manage Vehicle </h2>
-            <a href="{{ route('vehicleTypes.create') }}" class="btn btn-primary btn-sm fw-bold">Add New</a>
+            <h2 class="h4 mb-0 font-weight-bold">Types</h2>
+            <a href="{{ route('types.create') }}" class="btn btn-primary btn-sm fw-bold">Add New</a>
         </div>
 
         <div class="card shadow-sm border-0 bg-white p-4">
             <div class="table-responsive">
-                <table id="vehicleTypeTable" class="table table-striped table-hover align-middle mb-0 w-100 border">
+                <table id="TypeTable" class="table table-striped table-hover align-middle mb-0 w-100 border">
                     <thead class="table-light">
                         <tr>
                             <th class="ps-3">ID</th>
@@ -18,7 +18,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($vehicleTypes as $type)
+                        @foreach ($types as $type)
                             <tr id="row-{{ $type->id }}">
                                 <td class="ps-3 text-muted">{{ $type->id }}</td>
                                 <td><strong>{{ $type->name }}</strong></td>
@@ -29,7 +29,7 @@
                                     </span>
                                 </td>
                                 <td class="text-end pe-3">
-                                    <a href="{{ route('vehicleTypes.edit', $type->id) }}" class="btn btn-sm btn-warning fw-bold me-1">Edit</a>
+                                    <a href="{{ route('types.edit', $type->id) }}" class="btn btn-sm btn-warning fw-bold me-1">Edit</a>
                                     <button onclick="deleteType({{ $type->id }})" class="btn btn-sm btn-danger fw-bold">Delete</button>
                                 </td>
                             </tr>
@@ -42,11 +42,11 @@
 </x-admin-layout>
 <script type="module">
 $(document).ready(function() {
-    const table = $('#vehicleTypeTable').DataTable({
+    const table = $('#TypeTable').DataTable({
         responsive: true,
         pageLength: 10,
         columnDefs: [
-            { targets: 'no-sort', orderable: false }
+            { targets: 'sort', orderable: false }
         ],
         dom: "<'row mb-3'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6 text-md-end'f>>" +
         "<'row'<'col-sm-12'tr>>" +
@@ -55,7 +55,7 @@ $(document).ready(function() {
 
     window.deleteType = function(id) {
         if (confirm('Are you sure you want to delete this type?')) {
-        axios.delete(`/vehicleTypes/${id}`)
+        axios.delete(`/types/${id}`)
             .then(function(response) {
                 table.row(`#row-${id}`).remove().draw(false);
             })

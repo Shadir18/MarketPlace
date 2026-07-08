@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\VehicleType;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
-class VehicleTypeController extends Controller
+class TypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $vehicleTypes = VehicleType::latest()->get();
-        return view('vehicleTypes.index', compact('vehicleTypes'));
+        $types = Type::latest()->get();
+        return view('types.index', compact('types'));
+        
     }
 
     /**
@@ -23,7 +24,7 @@ class VehicleTypeController extends Controller
      */
     public function create()
     {
-        return view('vehicleTypes.create');
+        return view('types.create');
     }
 
     /**
@@ -33,7 +34,7 @@ class VehicleTypeController extends Controller
     {
         $validatedData = $request->validate ([
             'name' => ['required', 'string', 'max:255'],
-            'slug' => ['nullable', 'string', 'max:255', 'unique:vehicle_types,slug'],
+            'slug' => ['nullable', 'string', 'max:255', 'unique:types,slug'],
             'is_active' => ['nullable', 'boolean']
         ]);
         if (empty($validatedData['slug'])) {
@@ -44,12 +45,12 @@ class VehicleTypeController extends Controller
 
         DB::beginTransaction();
         try{
-            $vehicleType = VehicleType::create($validatedData);
+            $type = Type::create($validatedData);
             DB::commit();
             return response()->json([
                 'success' => true,
                 'message' => 'Vehicle type configuration saved successfully!',
-                'redirect_url' => route('vehicleTypes.index')
+                'redirect_url' => route('types.index')
             ], 201);
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -63,27 +64,27 @@ class VehicleTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(VehicleType $vehicleType)
+    public function show(Type $type)
     {
-        return view('vehicleTypes.show', compact('vehicleType'));
+        return view('types.show', compact('type'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(VehicleType $vehicleType)
+    public function edit(Type $type)
     {
-        return view('vehicleTypes.edit', compact('vehicleType'));
+        return view('types.edit', compact('type'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, VehicleType $vehicleType)
+    public function update(Request $request, Type $type)
     {
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255', 'unique:vehicle_types,slug,' . $vehicleType->id],
+            'slug' => ['required', 'string', 'max:255', 'unique:types,slug,' . $type->id],
             'is_active' => ['nullable', 'boolean']
         ]);
 
@@ -92,13 +93,13 @@ class VehicleTypeController extends Controller
 
         DB::beginTransaction();
         try {
-            $vehicleType->update($validatedData);
+            $type->update($validatedData);
             DB::commit();
 
             return response()->json([
                 'success' => true,
                 'message' => 'Vehicle configuration properties successfully adjusted!',
-                'redirect_url' => route('vehicleTypes.index')
+                'redirect_url' => route('types.index')
             ], 200);
 
         } catch (\Throwable $th) {
@@ -113,11 +114,11 @@ class VehicleTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(VehicleType $vehicleType)
+    public function destroy(Type $type)
     {
         DB::beginTransaction();
         try {
-            $vehicleType->delete();
+            $type->delete();
             DB::commit();
 
             return response()->json([

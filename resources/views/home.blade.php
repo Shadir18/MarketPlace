@@ -1,5 +1,5 @@
 <x-guest-layout>
     <h1>
-        welcome to Market Place
+        Welcome to the Home Page!
     </h1>
 </x-guest-layout>

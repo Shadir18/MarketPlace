@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ModelController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
@@ -11,6 +12,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('products', ProductController::class);
     Route::view('/about', 'about');
 });
+Route::resource('models', ModelController::class)->except('edit', 'cerate');
 Route::view('/contact', 'contact');
 Route::view('/about', 'about');
 Route::view('/', 'home');

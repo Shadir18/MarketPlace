@@ -45,7 +45,7 @@
         axios.get('/types')
             .then(function (response) {
                 const table = $('#TypeTable').DataTable({
-                    dadata: response.data,
+                    data: response.data,
                     columns: [
                         {data: 'id'},
                         {data: 'name'},

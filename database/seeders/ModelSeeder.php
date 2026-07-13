@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Model;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
 class ModelSeeder extends Seeder
@@ -168,5 +170,12 @@ class ModelSeeder extends Seeder
             "Zongshen",
             "Zotye",
         ];
+        foreach ($model as $name){
+            Model::create([
+                'name' => $name,
+                'slug' => Str::slug($name),
+                'is_active' => true,
+            ]);
+        }
     }
 }

@@ -16,12 +16,9 @@
                     
                     <div class="form-group mb-4">
                         <label for="title" class="font-weight-bold">Product Name</label>
-                        <input id="title" 
-                               type="text" 
-                               name="title" 
+                        <input id="title" type="text" name="title" 
                                class="form-control @error('title') is-invalid @enderror" 
-                               value="{{ $product->title }}" 
-                               required>
+                               value="{{ $product->title }}" required>
                         @error('title') 
                             <div class="invalid-feedback">{{ $message }}</div> 
                         @enderror
@@ -29,21 +26,13 @@
                     
                     <div class="form-group mb-4">
                         <label for="company" class="font-weight-bold">Company</label>
-                        <x-form-input id="company" 
-                                      type="text" 
-                                      name="company" 
-                                      class="form-control" 
-                                      value="{{ $product->company }}">
+                        <x-form-input id="company" type="text" name="company" class="form-control" value="{{ $product->company }}">
                         </x-form-input>
                     </div>
 
                     <div class="form-group mb-4">
                         <label for="price" class="font-weight-bold">Price</label>
-                        <x-form-input id="price" 
-                                      type="text" 
-                                      name="price" 
-                                      class="form-control" 
-                                      value="{{ $product->price }}">
+                        <x-form-input id="price" type="text" name="price" class="form-control" value="{{ $product->price }}">
                         </x-form-input>
                         @error('price') 
                             <div class="invalid-feedback">{{ $message }}</div> 

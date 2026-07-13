@@ -21,11 +21,7 @@
                     <x-form-field class="form-group mb-4">
                         <x-form-label for="title" class="font-weight-bold text-dark mb-2">Product Name</x-form-label>
                         <div>
-                            <x-form-input id="title" 
-                                          name="title" 
-                                          placeholder="Apple Iphone" 
-                                          class="form-control" 
-                                          required>
+                            <x-form-input id="title" name="title" placeholder="Apple Iphone" class="form-control" required>
                             </x-form-input>
                             <x-form-error name="title" class="invalid-feedback d-block mt-1"></x-form-error>
                         </div>
@@ -34,11 +30,7 @@
                     <x-form-field class="form-group mb-4">
                         <x-form-label for="company" class="font-weight-bold text-dark mb-2">Company</x-form-label>
                         <div>
-                            <x-form-input id="company" 
-                                          name="company" 
-                                          placeholder="Vista G" 
-                                          class="form-control" 
-                                          required>
+                            <x-form-input id="company" name="company" placeholder="Vista G" class="form-control" required>
                             </x-form-input>
                             <x-form-error name="company" class="invalid-feedback d-block mt-1"></x-form-error>
                         </div>
@@ -47,10 +39,7 @@
                     <x-form-field class="form-group mb-4">
                         <x-form-label for="price" class="font-weight-bold text-dark mb-2">Price</x-form-label>
                         <div>
-                            <x-form-input id="price" 
-                                          name="price" 
-                                          placeholder="$499" 
-                                          class="form-control">
+                            <x-form-input id="price" name="price" placeholder="$499" class="form-control">
                             </x-form-input>
                             <x-form-error name="price" class="invalid-feedback d-block mt-1"></x-form-error>
                         </div>

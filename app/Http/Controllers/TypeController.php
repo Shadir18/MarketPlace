@@ -6,8 +6,6 @@ use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-use function PHPSTORM_META\type;
-
 class TypeController extends Controller
 {
     /**
@@ -37,8 +35,8 @@ class TypeController extends Controller
             'slug' => 'required',
             'is_active' => 'nullable|boolean',
         ]);
-        DB::beginTransaction();
         try {
+            DB::beginTransaction();
             $type = Type::create($attributes);
             DB::commit();
             return response()->json([
@@ -105,8 +103,8 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        DB::beginTransaction();
         try {
+            DB::beginTransaction();
             $type->delete();
             DB::commit();
             return response()->json([

@@ -81,8 +81,8 @@ class ModelController extends Controller
             'title' => 'required',
             'type' => 'required'
         ]);
-        DB::beginTransaction();
         try {
+            DB::beginTransaction();
             $model = Model::findOrFail($id);
             $model->update($attributes);
             DB::commit();
@@ -105,8 +105,8 @@ class ModelController extends Controller
      */
     public function destroy(string $id)
     {
-        DB::beginTransaction();
         try{
+            DB::beginTransaction();
             $model = Model::findOrFail($id);
             $model->delete();
             DB::commit();

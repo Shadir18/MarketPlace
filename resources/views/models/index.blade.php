@@ -38,16 +38,14 @@
 </x-admin-layout>
 <script type="module">
     $(document).ready(function (){
-        axios.get('models')
+        axios.get('/models')
             .then(function (response) {
-                const table = $('#ModelTable').DataTable({
-                    data: response.data.data,
-                    columns: [
-                        {data: 'id'},
-                        {data: 'name'},
-                        {data: 'slug'},                        
-                        {data: 'is_active'},
-                        {data: 'actions'}
+                $('#ModelTable').DataTable({
+                    columnDefs: [
+                        {
+                            targets: 4,
+                            orderable: false
+                        }
                     ]
             });
         })

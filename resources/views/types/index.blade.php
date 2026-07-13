@@ -44,20 +44,15 @@
     $(document).ready(function (){
         axios.get('/types')
             .then(function (response) {
-                const table = $('#TypeTable').DataTable({
-                    data: response.data,
-                    columns: [
-                        {data: 'id'},
-                        {data: 'name'},
-                        {data: 'slug'},
-                        {data: 'status'},
-                        {data: 'actions'}
+                $('#TypelTable').DataTable({
+                    columnDefs: [
+                        {
+                            targets: 4,
+                            orderable: false
+                        }
                     ]
             });
         })
-        .catch(function (error) {
-            console.error(error.response.data);
-        });
 
         //Delete Function
         $(document).on('click', '.delete-btn', function(e){

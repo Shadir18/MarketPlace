@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('models', function (Blueprint $table) {
             $table->id();
-            $table->string('c1');
-            $table->string('c2');
-            $table->string('c3');
+            $table->string('name');
+            $table->string('title');
+            $table->string('type');
             $table->timestamps();
         });
     }

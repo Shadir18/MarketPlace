@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', [SessionController::class, 'create'])->name('login');
 Route::middleware(['auth'])->group(function () {
     Route::resource('products', ProductController::class);
+    Route::resource('models', ModelController::class);
     Route::view('/about', 'about');
 });
-Route::resource('models', ModelController::class)->except('edit', 'cerate');
 Route::view('/contact', 'contact');
 Route::view('/about', 'about');
 Route::view('/', 'home');

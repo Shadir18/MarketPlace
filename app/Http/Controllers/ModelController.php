@@ -13,11 +13,8 @@ class ModelController extends Controller
      */
     public function index()
     {
-        $model = Model::all();
-        return response()->json([
-            'success' => true,
-            'data' => $model
-        ], 200);
+        $models = Model::latest()->simplePaginate(5);
+        return view('models.index', compact('models'));
     }
 
     /**
@@ -25,7 +22,7 @@ class ModelController extends Controller
      */
     public function create()
     {
-
+        return view('models.create');
     }
 
     /**
@@ -34,12 +31,12 @@ class ModelController extends Controller
     public function store(Request $request)
     {
         $attributes = $request->validate([
-            'c1' => 'required',
-            'c2' => 'required',
-            'c3' => 'required'
+            'name' => 'required',
+            'title' => 'required',
+            'type' => 'required'
         ]);
-        DB::beginTransaction();
         try {
+            DB::beginTransaction();
             $model = Model::create($attributes);
             DB::commit();
             return response()->json([
@@ -62,10 +59,7 @@ class ModelController extends Controller
     public function show(string $id)
     {
         $model = Model::findOrFail($id);
-        return response()->json([
-            'success' => true,
-            'data' => $model
-        ], 200);
+        return view('models.show', compact('model'));
     }
 
     /**
@@ -73,7 +67,8 @@ class ModelController extends Controller
      */
     public function edit(string $id)
     {
-        
+        $model = Model::findOrFail($id);
+        return view('models.edit', compact('model'));
     }
 
     /**
@@ -82,9 +77,9 @@ class ModelController extends Controller
     public function update(Request $request, string $id)
     {
         $attributes = $request->validate([
-            'c1' => 'required',
-            'c2' => 'required',
-            'c3' => 'required'
+            'name' => 'required',
+            'title' => 'required',
+            'type' => 'required'
         ]);
         DB::beginTransaction();
         try {

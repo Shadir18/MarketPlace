@@ -2,17 +2,19 @@
 
 namespace Database\Seeders;
 
+use App\Models\Type;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
-class Type extends Seeder
+class TypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $vehicletypes = [
+        $types = [
             'Car',
             'Van',
             'SUV / Jeep',
@@ -27,5 +29,12 @@ class Type extends Seeder
             'Motorcycle',
             'Bicycles'
         ];
+        foreach ($types as $name){
+            Type::create([
+                'name' => $name,
+                'slug' => Str::slug($name),
+                'is_active' => true,
+            ]);
+        }
     }
 }

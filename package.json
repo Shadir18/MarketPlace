@@ -17,6 +17,11 @@
         "axios": "^1.18.0",
         "bootstrap": "^5.3.8",
         "bootstrap-icons": "^1.13.1",
+        "datatables.net-buttons-dt": "^3.2.6",
+        "datatables.net-dt": "^2.3.8",
+        "datatables.net-responsive-dt": "^3.0.8",
+        "datatables.net-searchbuilder-dt": "^1.8.4",
+        "datatables.net-searchpanes-dt": "^2.3.5",
         "jquery": "^3.7.1",
         "overlayscrollbars": "^2.16.0",
         "popper.js": "^1.16.1"

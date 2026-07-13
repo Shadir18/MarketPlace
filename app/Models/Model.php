@@ -8,7 +8,7 @@ class Model extends EloquentModel
 {
     protected $fillable = [
         'name',
-        'title',
-        'type',
+        'slug',
+        'is_active',
     ];
 }

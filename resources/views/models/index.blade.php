@@ -12,8 +12,8 @@
                         <tr>
                             <th class="ps-3">ID</th>
                             <th>Name</th>
-                            <th>Title</th>
-                            <th>Type</th>
+                            <th>slug</th>
+                            <th>Active Status</th>
                             <th class="text-end pe-3 no-sort">Actions</th>
                         </tr>
                     </thead>
@@ -21,9 +21,9 @@
                         @foreach ($models as $model)
                             <tr id="row-{{ $model->id }}">
                                 <td class="ps-3 text-muted">{{ $model->id }}</td>
-                                <td> <strong>{{ $model->title }}</strong> </td>
-                                <td>{{ $model->name }}</td>
-                                <td>{{ $model->type }}</td>
+                                <td> <strong>{{ $model->name }}</strong> </td>
+                                <td>{{ $model->slug }}</td>                                
+                                <td>{{ $model->is_active }}</td>
                                 <td class="text-end pe-3">
                                     <a href="{{ route('models.edit', $model->id) }}" class="btn btn-sm btn-warning fw-bold me-1">Edit</a>
                                     <button data-id="{{ $model->id }}" class="btn btn-sm btn-danger fw-bold delete-btn">Delete</button>
@@ -44,9 +44,9 @@
                     data: response.data.data,
                     columns: [
                         {data: 'id'},
-                        {data: 'title'},
                         {data: 'name'},
-                        {data: 'type'},
+                        {data: 'slug'},                        
+                        {data: 'is_active'},
                         {data: 'actions'}
                     ]
             });

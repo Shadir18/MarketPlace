@@ -18,15 +18,15 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="title" class="form-label fw-bold">Title</label>
-                        <input id="title" name="title" type="text" class="form-control" value="{{ $model->title }}" required>
-                        <div class="invalid-feedback" id="error-title"></div>
+                        <label for="slug" class="form-label fw-bold">Title</label>
+                        <input id="slug" name="slug" type="text" class="form-control" value="{{ $model->slug }}" required>
+                        <div class="invalid-feedback" id="error-slug"></div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="type" class="form-label fw-bold">Type</label>
-                        <input id="type" name="type" type="text" class="form-control" value="{{ $model->type }}" required>
-                        <div class="invalid-feedback" id="error-type"></div>
+                        <label for="is_active" class="form-label fw-bold">Type</label>
+                        <input id="is_active" name="is_active" type="text" class="form-control" value="{{ $model->is_active }}" required>
+                        <div class="invalid-feedback" id="error-is_active"></div>
                     </div>
 
                     <div class="border-top pt-3 d-flex justify-content-end gap-2">

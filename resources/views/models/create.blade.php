@@ -17,15 +17,15 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="title" class="form-label fw-bold">Title </label>
-                        <input type="model-2" id="title" name="title" placeholder="Title" class="form-control">
-                        <div class="invalid-feedback" id="error-title"></div>
+                        <label for="slug" class="form-label fw-bold">Slug </label>
+                        <input type="model-2" id="slug" name="slug" placeholder="Slug" class="form-control">
+                        <div class="invalid-feedback" id="error-slug"></div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="type" class="form-label fw-bold">Type </label>
-                        <input type="model-3" id="type" name="type" placeholder="" class="form-control">
-                        <div class="invalid-feedback" id="error-type"></div>
+                        <label for="is_active" class="form-label fw-bold">Active</label>
+                        <input is_active="model-3" id="is_active" name="is_active" placeholder="Yes or No" class="form-control">
+                        <div class="invalid-feedback" id="error-is_active"></div>
                     </div>
 
                     <div class="border-top pt-3 d-flex justify-content-end gap-2">

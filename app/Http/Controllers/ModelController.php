@@ -32,8 +32,8 @@ class ModelController extends Controller
     {
         $attributes = $request->validate([
             'name' => 'required',
-            'title' => 'required',
-            'type' => 'required'
+            'slug' => 'required',
+            'is_active' => 'required'
         ]);
         try {
             DB::beginTransaction();
@@ -78,8 +78,8 @@ class ModelController extends Controller
     {
         $attributes = $request->validate([
             'name' => 'required',
-            'title' => 'required',
-            'type' => 'required'
+            'slug' => 'required',
+            'is_active' => 'required'
         ]);
         try {
             DB::beginTransaction();

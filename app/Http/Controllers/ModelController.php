@@ -13,7 +13,7 @@ class ModelController extends Controller
      */
     public function index()
     {
-        $models = Model::latest()->paginate(10);
+        $models = Model::latest()->get();
         return view('models.index', compact('models'));
     }
 

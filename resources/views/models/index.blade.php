@@ -34,29 +34,19 @@
                 </table>
             </div>
 
-            <div class="d-flex justify-content-end mt-3">
-                {{ $models->links() }}
-            </div>
-
         </div>
     </div>
 </x-admin-layout>
 <script type="module">
     $(document).ready(function (){
-        axios.get('/models')
-            .then(function (response) {
-                $('#ModelTable').DataTable({
-                    columnDefs: [
-                        {
-                            targets: 4,
-                            orderable: false
-                        }
-                    ]
-            });
-        })
-        .catch(function (error) {
-            console.error(error.response.data);
-        });
+        $('#ModelTable').DataTable({
+            columnDefs: [
+                {
+                    targets: 4,
+                    orderable: false
+                }
+            ]
+    });
 
         //Delete Function
         $(document).on('click', '.delete-btn', function(e){

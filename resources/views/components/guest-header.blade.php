@@ -10,12 +10,14 @@
       <div class="navbar-nav w-100 d-flex align-items-center">
         <div class="ms-auto d-flex align-items-center gap-3">
             @auth
+                <x-nav-link href="/post_ads" :active="request()->is('/post_ads')" class="nav-link">Post Ads</x-nav-link>
                 <x-nav-link href="/products" :active="request()->is('/')" class="nav-link">Home</x-nav-link>
                 <x-nav-link href="/about" :active="request()->is('about')" class="nav-link">About</x-nav-link>
                 <x-nav-link href="/contact" :active="request()->is('contact')" class="nav-link">Contact</x-nav-link>
                 <x-nav-link href="/products" :active="request()->is('/products')" class="nav-link">Dashboard</x-nav-link>                
             @endauth
             @guest
+                <x-nav-link href="/login" :active="request()->is('/post_ads')" class="nav-link">Post Ads</x-nav-link>
                 <x-nav-link href="/" :active="request()->is('/')" class="nav-link">Home</x-nav-link>
                 <x-nav-link href="/about" :active="request()->is('about')" class="nav-link">About</x-nav-link>
                 <x-nav-link href="/contact" :active="request()->is('contact')" class="nav-link">Contact</x-nav-link>

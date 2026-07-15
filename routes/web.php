@@ -14,6 +14,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('models', ModelController::class);
     Route::resource('categories', CategoryController::class);
+    Route::view('/post_ads', 'post_ads');
     Route::view('/about', 'about');
     Route::resource('types', TypeController::class);
 });

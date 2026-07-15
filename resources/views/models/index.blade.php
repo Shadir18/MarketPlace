@@ -40,12 +40,15 @@
 <script type="module">
     $(document).ready(function (){
         $('#ModelTable').DataTable({
-            columnDefs: [
-                {
-                    targets: 4,
-                    orderable: false
-                }
-            ]
+            "dom": "<'row mb-3 align-items-center'<'col-md-6'l><'col-md-6 d-flex justify-content-end'f>>" +
+               "<'row'<'col-md-12'tr>>" +
+              "<'row mt-3 align-items-center'<'col-md-6'i><'col-md-6 d-flex justify-content-end'p>>",
+        columnDefs: [
+            {
+                targets: 4,
+                orderable: false
+            }
+        ]
     });
 
         //Delete Function

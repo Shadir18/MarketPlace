@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisteredUserController;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('models', ModelController::class);
+    Route::resource('categories', CategoryController::class);
     Route::view('/about', 'about');
     Route::resource('types', TypeController::class);
 });

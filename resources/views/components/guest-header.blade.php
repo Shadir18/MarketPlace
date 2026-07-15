@@ -1,18 +1,8 @@
 <nav class="container-fluid navbar navbar-expand-md bg-body-secondary shadow" data-bs-theme="dark">
   <div class="container fluid">
-    <a href="/" class="navbar-brand text-light fw-bold ms-5">
-      <span class="brand-text fw-bold">
-        @if(request()->is('about'))
-        About Us
-        @elseif(request()->is('contact'))
-            Contact Us
-        @elseif(request()->is('login'))
-            Login
-        @elseif(request()->is('register'))
-            Register
-        @else
-            Home Page
-        @endif
+    <a href="/" class="navbar-brand text-light ms-5">
+      <span class="brand-text">
+        {{ env('APP_NAME')}}
       </span>
     </a>
 

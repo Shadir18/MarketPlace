@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use App\Models\Seller;
 
@@ -16,7 +17,7 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
-    public function store(Request $request)
+    public function createUser (Request $request): User
     {
         $attributes = request()->validate([
             'first_name' => ['required'],
@@ -24,12 +25,18 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required', Password::min(6), 'confirmed'],
         ]);
+        $attributes['password'] = Hash::make($attributes['password']);
+        return User::create($attributes);
+    }
+
+    public function store(Request $request)
+    {
         try {
             DB::beginTransaction();
-            $user = User::create($attributes);
+            $user = $this->createUser($request);
             Seller::create([
                 'user_id' => $user->id,
-                'name' => $attributes['first_name']
+                'name' => $user->first_name,
             ]);
             DB::commit();
             Auth::login($user);

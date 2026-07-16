@@ -6,11 +6,13 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
 // Route::get('/', [SessionController::class, 'create'])->name('login');
 Route::middleware(['auth'])->group(function () {
+    Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
     Route::resource('models', ModelController::class);
     Route::resource('categories', CategoryController::class);

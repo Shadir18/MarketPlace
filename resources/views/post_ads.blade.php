@@ -19,7 +19,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
 
-                    <form id="postAdForm" action="/products" method="POST">
+                    <form id="postAdForm" action="/post_ads" method="POST">
                         @csrf
                         
                         <x-form-field class="mb-3">
@@ -32,19 +32,19 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <x-form-field class="mb-3">
-                                    <x-form-label for="company" class="form-label fw-semibold">Brand</x-form-label>
-                                    <x-form-input type="text" name="company" id="company" class="form-control" required />
-                                    <x-form-error name="company" />
-                                    <div class="invalid-feedback d-block" id="error-company"></div>
+                                    <x-form-label for="brand_name" class="form-label fw-semibold">Brand</x-form-label>
+                                    <x-form-input type="text" name="brand_name" id="brand_name" class="form-control" required />
+                                    <x-form-error name="brand_name" />
+                                    <div class="invalid-feedback d-block" id="error-brand_name"></div>
                                 </x-form-field>
                             </div>
 
                             <div class="col-md-6">
                                 <x-form-field class="mb-3">
-                                    <x-form-label for="model" class="form-label fw-semibold">Model</x-form-label>
-                                    <x-form-input type="text" name="model" id="model" class="form-control" required />
-                                    <x-form-error name="model" />
-                                    <div class="invalid-feedback d-block" id="error-model"></div>
+                                    <x-form-label for="model_name" class="form-label fw-semibold">Model</x-form-label>
+                                    <x-form-input type="text" name="model_name" id="model_name" class="form-control" required />
+                                    <x-form-error name="model_name" />
+                                    <div class="invalid-feedback d-block" id="error-model_name"></div>
                                 </x-form-field>
                             </div>
                         </div>
@@ -52,10 +52,10 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <x-form-field class="mb-3">
-                                    <x-form-label for="year" class="form-label fw-semibold">Year of Manufacture</x-form-label>
-                                    <x-form-input type="number" name="year" id="year" class="form-control" min="1900" required />
-                                    <x-form-error name="year" />
-                                    <div class="invalid-feedback d-block" id="error-year"></div>
+                                    <x-form-label for="man_year" class="form-label fw-semibold">Year of Manufacture</x-form-label>
+                                    <x-form-input type="number" name="man_year" id="man_year" class="form-control" min="1900" required />
+                                    <x-form-error name="man_year" />
+                                    <div class="invalid-feedback d-block" id="error-man_year"></div>
                                 </x-form-field>
                             </div>
 
@@ -96,16 +96,12 @@ $(document).ready(function(){
         const formData = new FormData(this);
         axios.post('/post_ads' ,formData)
         .then(function(response){
-            toastify({
+            Toastify({
                 text: "Product successfully added!",
                 duration: 3000,
                 gravity: "top", 
                 position: "right", 
-                style: {
-                    background: "linear-gradient(to right, #00b09b, #96c93d)"
-                }
             }).showToast();
-            
             $('#postAdForm')[0].reset();
         }).catch (function (error){
             Toastify({
@@ -113,9 +109,6 @@ $(document).ready(function(){
                 duration: 3000,
                 gravity: "top",
                 position: "right",
-                style: {
-                    background: "linear-gradient(to right, #ff5f6d, #ffc371)"
-                }
             }).showToast();
             console.error(error);
         }).finally(function(){

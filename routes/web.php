@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ModelController;
+use App\Http\Controllers\PostAdsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
@@ -16,7 +17,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('models', ModelController::class);
     Route::resource('categories', CategoryController::class);
-    Route::view('/post_ads', 'post_ads');
+    Route::get('/post_ads', [PostAdsController::class, 'create']);
+    Route::post('/post_ads', [PostAdsController::class, 'store']);
     Route::view('/about', 'about');
     Route::resource('types', TypeController::class);
 });

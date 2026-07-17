@@ -6,9 +6,9 @@
             <h1 class="display-4 fw-bold mb-4 shadow-sm shine-effect">Welcome To MarketPlace</h1>
             
             <form action="/search" method="GET" class="w-100" style="max-width: 650px;">
-                <div class="input-group input-group-lg bg-white rounded-pill p-1 shadow-lg align-items-center">
-                    <input type="text" name="query" class="form-control border-0 shadow-none bg-transparent text-dark ps-4 pe-2" placeholder="What are you looking for?" required>
-                    <button class="btn btn-primary rounded-pill px-4 fw-semibold shadow-sm" type="submit">
+                <div class="glass input-group input-group-lg p-1 align-items-center hover-glow">
+                    <input id="" type="text" name="" class="form-control border-0 shadow-none bg-transparent text-white ps-4 pe-2" style="--bs-secondary-color: #ffffff;" placeholder="What are you looking for?">
+                    <button class=" glass btn btn-primary rounded-pill px-4 fw-semibold shadow-sm" type="submit">
                         Search
                     </button>
                 </div>

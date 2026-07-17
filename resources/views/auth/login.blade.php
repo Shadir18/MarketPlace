@@ -42,7 +42,7 @@
                             <a href="/forgot-password" class="text-decoration-none small">Forgot password?</a>
                         </div>
                         <div class="d-grid mb-3">
-                            <x-form-button type="submit" class="btn btn-primary py-2 font-weight-bold shadow-sm">
+                            <x-form-button type="submit" class="glass btn btn-primary py-2 font-weight-bold shadow-sm">
                             Sign In
                             </x-form-button>
                         </div>

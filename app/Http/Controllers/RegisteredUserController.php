@@ -17,7 +17,7 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
-    public function createUser (Request $request): User
+    public function store(Request $request)
     {
         $attributes = request()->validate([
             'first_name' => ['required'],
@@ -25,15 +25,9 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required', Password::min(6), 'confirmed'],
         ]);
-        $attributes['password'] = Hash::make($attributes['password']);
-        return User::create($attributes);
-    }
-
-    public function store(Request $request)
-    {
         try {
             DB::beginTransaction();
-            $user = $this->createUser($request);
+            $user = User::create($attributes);
             Seller::create([
                 'user_id' => $user->id,
                 'name' => $user->first_name,

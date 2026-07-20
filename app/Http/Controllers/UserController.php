@@ -34,14 +34,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $attributes = $request->validate([
-            'first_name' => ['required'],
-            'last_name' => ['required'],
-            'email' => ['required', 'email'],
-            'password' => ['required', Password::min(6), 'confirmed'],
-        ]);
         try {
             DB::beginTransaction();
+            $attributes = $request->validate([
+                'first_name' => ['required'],
+                'last_name' => ['required'],
+                'email' => ['required', 'email'],
+                'password' => ['required', Password::min(6), 'confirmed'],
+            ]);
             $user = User::create($attributes);
             DB::commit();
             return response()->json([

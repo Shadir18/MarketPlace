@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Model extends EloquentModel
 {
@@ -11,4 +12,9 @@ class Model extends EloquentModel
         'slug',
         'is_active',
     ];
+
+    public function postAds(): HasMany
+    {
+        return $this->hasMany(PostAds::class);
+    }
 }

@@ -29,7 +29,10 @@
                             <div class="invalid-feedback d-block" id="error-title"></div>
                         </x-form-field>
 
-                        <div class="row">
+                        <input type="hidden" name="type_id" value="1">
+                        <input type="hidden" name="model_id" value="1">
+                        <input type="hidden" name="category_id" value="1">
+                        {{-- <div class="row">
                             <div class="col-md-6">
                                 <x-form-field class="mb-3">
                                     <x-form-label for="brand_name" class="form-label fw-semibold">Brand</x-form-label>
@@ -47,7 +50,7 @@
                                     <div class="invalid-feedback d-block" id="error-model_name"></div>
                                 </x-form-field>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row">
                             <div class="col-md-6">
@@ -96,21 +99,9 @@ $(document).ready(function(){
         const formData = new FormData(this);
         axios.post('/post_ads' ,formData)
         .then(function(response){
-            Toastify({
-                text: "Product successfully added!",
-                duration: 3000,
-                gravity: "top", 
-                position: "right", 
-            }).showToast();
             $('#postAdForm')[0].reset();
         }).catch (function (error){
-            Toastify({
-                text: "Error adding product. Please try again.",
-                duration: 3000,
-                gravity: "top",
-                position: "right",
-            }).showToast();
-            console.error(error);
+            console.error(error.response.data);
         }).finally(function(){
             $submitBtn.prop('disabled', false).text('Add Product');
         });

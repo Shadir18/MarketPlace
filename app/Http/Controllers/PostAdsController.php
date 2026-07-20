@@ -31,12 +31,13 @@ class PostAdsController extends Controller
     public function store(Request $request)
     {
         $attributes = $request->validate([
-            'title'         => 'required',
-            'brand_name'    => 'required',
-            'model_name'    => 'required',
-            'man_year'      => 'required',
-            'mileage'       => 'required',
-            'price'         => 'required',
+            'title'        => 'required',
+            'man_year'     => 'required',
+            'mileage'      => 'required',
+            'price'        => 'required',
+            'type_id'      => 'required|exists:types,id',
+            'model_id'     => 'required|exists:models,id',
+            'category_id'  => 'required|exists:categories,id',
         ]);
         try{
             DB::beginTransaction();

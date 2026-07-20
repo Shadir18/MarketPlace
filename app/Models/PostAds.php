@@ -10,8 +10,6 @@ class PostAds extends Model
     protected $fillable = [
         'user_id',
         'title',
-        'brand_name',
-        'model_name',
         'man_year',
         'mileage',
         'price',

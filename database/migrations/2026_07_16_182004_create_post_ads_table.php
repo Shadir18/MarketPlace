@@ -19,8 +19,6 @@ return new class extends Migration
             $table->foreignId('type_id')->constrained()->onDelete('cascade');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('title');
-            $table->string('brand_name');
-            $table->string('model_name');
             $table->year('man_year');
             $table->string('mileage');
             $table->integer('price');

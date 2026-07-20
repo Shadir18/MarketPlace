@@ -24,7 +24,6 @@
         "datatables.net-searchpanes-dt": "^2.3.5",
         "jquery": "^3.7.1",
         "overlayscrollbars": "^2.16.0",
-        "popper.js": "^1.16.1",
-        "toastify-js": "^1.12.0"
+        "popper.js": "^1.16.1"
     }
 }

@@ -14,11 +14,29 @@ class PostAds extends Model
         'model_name',
         'man_year',
         'mileage',
-        'price'
+        'price',
+        'type_id',
+        'model_id',
+        'category_id'
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function type():BelongsTo
+    {
+        return $this->belongsTo(Type::class);
+    }
+
+    public function model():BelongsTo
+    {
+        return $this->belongsTo(Model::class);
+    }
+
+    public function category():BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 }

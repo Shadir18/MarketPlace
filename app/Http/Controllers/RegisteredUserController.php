@@ -17,18 +17,6 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
-    public function createUser (Request $request): User
-    {
-        $attributes = request()->validate([
-            'first_name' => ['required'],
-            'last_name' => ['required'],
-            'email' => ['required', 'email'],
-            'password' => ['required', Password::min(6), 'confirmed'],
-        ]);
-        $attributes['password'] = Hash::make($attributes['password']);
-        return User::create($attributes);
-    }
-
     public function store(Request $request)
     {
         try {

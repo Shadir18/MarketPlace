@@ -17,13 +17,11 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
-    public function store(Request $request, UserController $userController)
+    public function store(array $attributes)
     {
         try {
             DB::beginTransaction();
-            $response = $userController->store($request);
-            $data = $response->getData();
-            $user = User::find($data->user->id);
+            $user = User::create($attributes);
             Seller::create([
                 'user_id' => $user->id,
                 'name' => $user->first_name,
@@ -37,10 +35,12 @@ class RegisteredUserController extends Controller
                 'user' => $user
             ], 201);
         } catch (\Throwable $th) {
-            DB::rollBack();
-            return response()->json([
-            'message' => 'Registration failed',
-        ], 500);
-        }
+    DB::rollBack();
+
+    return response()->json([
+        'message' => $th->getMessage(),
+        'line' => $th->getLine(),
+    ], 500);
+}
     }
 }

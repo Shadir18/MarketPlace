@@ -32,24 +32,17 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, RegisteredUserController $registeredUserController)
     {
         try {
-            DB::beginTransaction();
             $attributes = $request->validate([
                 'first_name' => ['required'],
                 'last_name' => ['required'],
                 'email' => ['required', 'email'],
                 'password' => ['required', Password::min(6), 'confirmed'],
             ]);
-            $user = User::create($attributes);
-            DB::commit();
-            return response()->json([
-                'message' => 'Your account has been created successfully!',
-                'user' => $user
-            ], 201);
+            return $registeredUserController->store($attributes);
         } catch (\Throwable) {
-            DB::rollBack();
             return response()->json([
             'message' => 'Registration failed',
         ], 500);

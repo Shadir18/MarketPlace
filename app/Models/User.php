@@ -27,6 +27,11 @@ class User extends Authenticatable
         return $this->hasOne(Seller::class);
     }
 
+    public function postAds()
+    {
+        return $this->hasMany(PostAds::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *

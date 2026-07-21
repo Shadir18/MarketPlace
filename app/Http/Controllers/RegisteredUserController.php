@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use App\Models\Seller;
 
@@ -16,32 +17,30 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
-    public function store(Request $request)
+    public function store(array $attributes)
     {
-        $attributes = request()->validate([
-            'first_name' => ['required'],
-            'last_name' => ['required'],
-            'email' => ['required', 'email'],
-            'password' => ['required', Password::min(6), 'confirmed'],
-        ]);
         try {
             DB::beginTransaction();
             $user = User::create($attributes);
             Seller::create([
                 'user_id' => $user->id,
-                'name' => $attributes['first_name']
+                'name' => $user->first_name,
             ]);
             DB::commit();
-            Auth::login($user);
+            if (! Auth::check()){
+                Auth::login($user);
+            }
             return response()->json([
                 'message' => 'Your account has been created successfully!',
                 'user' => $user
             ], 201);
         } catch (\Throwable $th) {
-            DB::rollBack();
-            return response()->json([
-            'message' => 'Registration failed',
-        ], 500);
-        }
+    DB::rollBack();
+
+    return response()->json([
+        'message' => $th->getMessage(),
+        'line' => $th->getLine(),
+    ], 500);
+}
     }
 }

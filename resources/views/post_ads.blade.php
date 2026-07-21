@@ -55,10 +55,10 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <x-form-field class="mb-3">
-                                    <x-form-label for="man_year" class="form-label fw-semibold">Year of Manufacture</x-form-label>
-                                    <x-form-input type="number" name="man_year" id="man_year" class="form-control" min="1900" required />
-                                    <x-form-error name="man_year" />
-                                    <div class="invalid-feedback d-block" id="error-man_year"></div>
+                                    <x-form-label for="manufacture_year" class="form-label fw-semibold">Year of Manufacture</x-form-label>
+                                    <x-form-input type="number" name="manufacture_year" id="manufacture_year" class="form-control" min="1900" required />
+                                    <x-form-error name="manufacture_year" />
+                                    <div class="invalid-feedback d-block" id="error-manufacture_year"></div>
                                 </x-form-field>
                             </div>
 

@@ -32,7 +32,7 @@ class PostAdsController extends Controller
     {
         $attributes = $request->validate([
             'title'        => 'required',
-            'man_year'     => 'required',
+            'manufacture_year'     => 'required',
             'mileage'      => 'required',
             'price'        => 'required',
             'type_id'      => 'required|exists:types,id',

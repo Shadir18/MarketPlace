@@ -12,9 +12,4 @@ class Type extends Model
         'slug',
         'is_active'
     ];
-
-    public function postAds(): HasMany
-    {
-        return $this->hasMany(PostAds::class);
-    }
 }

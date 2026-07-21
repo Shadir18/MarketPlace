@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('type_id')->constrained()->onDelete('cascade');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('title');
-            $table->year('man_year');
+            $table->year('manufacture_year');
             $table->string('mileage');
             $table->integer('price');
             $table->timestamps();

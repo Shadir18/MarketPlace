@@ -14,7 +14,8 @@ class PostAdsController extends Controller
      */
     public function index()
     {
-        //
+        $postAds = PostAds::latest('user')->get();
+        return view('post_ads.index', compact('postAds'));
     }
 
     /**
@@ -22,7 +23,7 @@ class PostAdsController extends Controller
      */
     public function create()
     {
-        return view ('post_ads');
+        return view ('post_ads.create');
     }
 
     /**

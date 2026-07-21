@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Model as ModelsModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -30,7 +31,7 @@ class PostAds extends Model
 
     public function model():BelongsTo
     {
-        return $this->belongsTo(Model::class);
+        return $this->belongsTo(ModelsModel::class);
     }
 
     public function category():BelongsTo

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\PostAdsController;
 use App\Http\Controllers\ProductController;
@@ -24,6 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/post_ads/{id}/approve', [PostAdsController::class, 'approve'])->name('post_ads.approve');
     Route::get('/post_ads/rejected', [PostAdsController::class, 'rejectedIndex'])->name('post_ads.rejected');
     Route::patch('/post_ads/{id}/reject', [PostAdsController::class, 'reject'])->name('post_ads.rejected');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::view('/about', 'about');
     Route::resource('types', TypeController::class);
 });

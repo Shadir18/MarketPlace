@@ -22,6 +22,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('post_ads/listed', PostAdsController::class);
     Route::get('/post_ads/approved', [PostAdsController::class, 'approvedIndex'])->name('post_ads.approved');
     Route::patch('/post_ads/{id}/approve', [PostAdsController::class, 'approve'])->name('post_ads.approve');
+    Route::get('/post_ads/rejected', [PostAdsController::class, 'rejectedIndex'])->name('post_ads.rejected');
+    Route::patch('/post_ads/{id}/reject', [PostAdsController::class, 'reject'])->name('post_ads.rejected');
     Route::view('/about', 'about');
     Route::resource('types', TypeController::class);
 });

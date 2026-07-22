@@ -16,6 +16,7 @@ class PostAds extends Model
         'price',
         'type_id',
         'model_id',
+        'is_approve',
         'category_id'
     ];
 

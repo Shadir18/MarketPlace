@@ -1,13 +1,12 @@
 <x-admin-layout>
     <div class="container my-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="h4 mb-0 fw-bold">Listed Vehicle Advertisements</h2>
-            <a href="{{ route('listed.create') }}" class="btn btn-primary btn-sm fw-bold">Create New Ad</a>
+            <h2 class="h4 mb-0 fw-bold">Approved Vehicle Advertisements</h2>
         </div>
 
         <div class="card shadow-sm border-0 bg-white p-4">
             <div class="table-responsive">
-                <table id="listtable" class="table table-striped table-hover align-middle mb-0 w-100 border">
+                <table id="approvetable" class="table table-striped table-hover align-middle mb-0 w-100 border">
                     <thead class="table-light">
                         <tr>
                             <th>#id</th>
@@ -16,7 +15,6 @@
                             <th>Mileage</th>
                             <th>Price (LKR)</th>
                             <th>Posted By</th>
-                            <th class="text-center">Approve</th>
                         </tr>
                     </thead>
                     @foreach ($postAds as $ad)
@@ -27,11 +25,6 @@
                             <td> {{ $ad->mileage }} </td>
                             <td> {{ $ad->price }} </td>
                             <td> {{ $ad->user->last_name }}</td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-success btn-sm fw-bold btn-approve" data-id="{{ $ad->id }}">
-                                    Approve
-                                </button>
-                            </td>
                         </tr>
                     @endforeach
                 </table>
@@ -41,34 +34,12 @@
 </x-admin-layout>
 <script type="module">
     $(document).ready(function () {
-        axios.get('/post_ads')
+        axios.get('/post_ads/approved')
             .then(function (response) {
-                $('#listtable').DataTable({
+                $('#approvetable').DataTable({
                     "dom": "<'row mb-3 align-items-center'<'col-md-6'l><'col-md-6 d-flex justify-content-end'f>>" +
                     "<'row'<'col-md-12'tr>>" +
                     "<'row mt-3 align-items-center'<'col-md-6'i><'col-md-6 d-flex justify-content-end'p>>",
-            });
-        });
-        $('#listtable').on('click', '.btn-approve', function (){
-            let $button = $(this);
-            let post = $button.data('id');
-            let $row = $button.closest('tr');
-            if (!confirm('Are you sure you want to approve this ad?')) {
-                return;
-            }
-            $button.prop('disabled', true);
-            axios.patch(`/post_ads/${post}/approve`)
-            .then(function (response){
-                if(response.data.success){
-                    $row.fadeOut(400, function(){
-                        $(this).remove();
-                    });
-                }
-            })
-            .catch(function (error){
-                $button.prop('disabled', false);
-                console.error(error);
-                alert('Please try again!');
             });
         });
     });

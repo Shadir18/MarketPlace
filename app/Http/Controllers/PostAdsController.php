@@ -14,10 +14,37 @@ class PostAdsController extends Controller
      */
     public function index()
     {
-        $postAds = PostAds::with(['user'])->latest()->get();
+        $postAds = PostAds::with(['user'])->latest()->where('is_approve', false)->get();
         return view('post_ads.listed.index', compact('postAds'));
     }
 
+    //approved ads page
+    public function approvedIndex()
+    {
+        $postAds = PostAds::with(['user'])->latest()->where('is_approve', true)->get();
+        return view('post_ads.approved.index', compact('postAds'));
+    }
+
+    public function approve(string $id)
+    {
+        try{
+            DB::beginTransaction();
+            $postAds = PostAds::findOrFail($id);
+            $postAds->update(['is_approve' => true]);
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => 'Post Ad approved successfully!',
+                'data' => $postAds
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to approve post ad.'
+            ], 500);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      */

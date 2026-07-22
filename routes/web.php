@@ -20,6 +20,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/post_ads', [PostAdsController::class, 'create']);
     Route::post('/post_ads', [PostAdsController::class, 'store']);
     Route::resource('post_ads/listed', PostAdsController::class);
+    Route::get('/post_ads/approved', [PostAdsController::class, 'approvedIndex'])->name('post_ads.approved');
+    Route::patch('/post_ads/{id}/approve', [PostAdsController::class, 'approve'])->name('post_ads.approve');
     Route::view('/about', 'about');
     Route::resource('types', TypeController::class);
 });

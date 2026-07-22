@@ -2,7 +2,7 @@
     <div class="container my-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="h4 mb-0 fw-bold">Vehicle Advertisements</h2>
-            <a href="{{ route('post_ads.create') }}" class="btn btn-primary btn-sm fw-bold">Create New Ad</a>
+            <a href="{{ route('listed.create') }}" class="btn btn-primary btn-sm fw-bold">Create New Ad</a>
         </div>
 
         <div class="card shadow-sm border-0 bg-white p-4">

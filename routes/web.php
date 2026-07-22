@@ -19,7 +19,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::get('/post_ads', [PostAdsController::class, 'create']);
     Route::post('/post_ads', [PostAdsController::class, 'store']);
-    Route::resource('post_ads', PostAdsController::class);
+    Route::resource('post_ads/listed', PostAdsController::class);
     Route::view('/about', 'about');
     Route::resource('types', TypeController::class);
 });

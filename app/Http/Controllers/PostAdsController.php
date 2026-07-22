@@ -15,7 +15,7 @@ class PostAdsController extends Controller
     public function index()
     {
         $postAds = PostAds::with(['user'])->latest()->get();
-        return view('post_ads.index', compact('postAds'));
+        return view('post_ads.listed.index', compact('postAds'));
     }
 
     /**

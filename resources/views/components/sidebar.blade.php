@@ -27,7 +27,7 @@
                     
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <x-nav-link href="/post_ads/listed" :active="request()->is('post_ads/listed')">
+                            <x-nav-link href="/post_ads" :active="request()->is('post_ads')">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>List</p>
                             </x-nav-link>

@@ -7,7 +7,7 @@
 
         <div class="card shadow-sm border-0 bg-white p-4">
             <div class="table-responsive">
-                <table id="posttable" class="table table-striped table-hover align-middle mb-0 w-100 border">
+                <table id="listtable" class="table table-striped table-hover align-middle mb-0 w-100 border">
                     <thead class="table-light">
                         <tr>
                             <th>#id</th>
@@ -16,7 +16,6 @@
                             <th>Mileage</th>
                             <th>Price (LKR)</th>
                             <th>Posted By</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     @foreach ($postAds as $ad)
@@ -26,7 +25,7 @@
                             <td> {{ $ad->manufacture_year }} </td>
                             <td> {{ $ad->mileage }} </td>
                             <td> {{ $ad->price }} </td>
-                            <td> {{ $ad->first_name }}</td> 
+                            <td> {{ $ad->user->last_name }}</td> 
                         </tr>
                     @endforeach
                 </table>
@@ -36,16 +35,13 @@
 </x-admin-layout>
 <script type="module">
     $(document).ready(function () {
-        $('#posttable').DataTable({
-            "dom": "<'row mb-3 align-items-center'<'col-md-6'l><'col-md-6 d-flex justify-content-end'f>>" +
-                   "<'row'<'col-md-12'tr>>" +
-                   "<'row mt-3 align-items-center'<'col-md-6'i><'col-md-6 d-flex justify-content-end'p>>",
-            columnDefs: [
-                {
-                    targets: 7, 
-                    orderable: false
-                }
-            ]
-        });
+        axios.get('/post_ads')
+            .then(function (response) {
+                $('#listtable').DataTable({
+                    "dom": "<'row mb-3 align-items-center'<'col-md-6'l><'col-md-6 d-flex justify-content-end'f>>" +
+                    "<'row'<'col-md-12'tr>>" +
+                    "<'row mt-3 align-items-center'<'col-md-6'i><'col-md-6 d-flex justify-content-end'p>>",
+            });
+        })
     });
 </script>

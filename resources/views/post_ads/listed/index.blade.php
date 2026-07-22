@@ -31,6 +31,9 @@
                                 <button type="button" class="btn btn-success btn-sm fw-bold btn-approve" data-id="{{ $ad->id }}">
                                     Approve
                                 </button>
+                                <button type="button" class="btn btn-danger btn-sm fw-bold btn-reject" data-id="{{ $ad->id }}">
+                                    Reject
+                                </button>
                             </td>
                         </tr>
                     @endforeach
@@ -49,27 +52,35 @@
                     "<'row mt-3 align-items-center'<'col-md-6'i><'col-md-6 d-flex justify-content-end'p>>",
             });
         });
-        $('#listtable').on('click', '.btn-approve', function (){
-            let $button = $(this);
-            let post = $button.data('id');
-            let $row = $button.closest('tr');
-            if (!confirm('Are you sure you want to approve this ad?')) {
-                return;
+        //approve 
+        $('#listtable').on('click', '.btn-approve', function (e){
+            e.preventDefault();
+            const id = $(this).data('id');
+            if (confirm('Are you sure you want to approve this product?')){
+                axios.patch(`/post_ads/${id}/approve`)
+                .then(function (response){
+                    window.location.href = '/post_ads/listed';
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.error(error.response.data);
+                });
             }
-            $button.prop('disabled', true);
-            axios.patch(`/post_ads/${post}/approve`)
-            .then(function (response){
-                if(response.data.success){
-                    $row.fadeOut(400, function(){
-                        $(this).remove();
-                    });
-                }
-            })
-            .catch(function (error){
-                $button.prop('disabled', false);
-                console.error(error);
-                alert('Please try again!');
-            });
+        });
+        //rejected
+        $('#listtable').on('click', '.btn-reject', function (e){
+            e.preventDefault();
+            const id = $(this).data('id');
+            if (confirm('Are you sure you want to approve this product?')){
+                axios.patch(`/post_ads/${id}/reject`)
+                .then(function (response){
+                    window.location.href = '/post_ads/rejected';
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.error(error.response.data);
+                });
+            }
         });
     });
 </script>

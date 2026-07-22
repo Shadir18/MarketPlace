@@ -33,13 +33,13 @@
                             </x-nav-link>
                         </li>
                         <li class="nav-item">
-                            <x-nav-link href="/posts/approved" :active="request()->is('posts/approved')">
+                            <x-nav-link href="/post_ads/approved" :active="request()->is('post_ads/approved')">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Approved</p>
                             </x-nav-link>
                         </li>
                         <li class="nav-item">
-                            <x-nav-link href="/posts/rejected" :active="request()->is('posts/rejected')">
+                            <x-nav-link href="/post_ads/rejected" :active="request()->is('post_ads/rejected')">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Rejected</p>
                             </x-nav-link>

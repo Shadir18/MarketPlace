@@ -14,10 +14,64 @@ class PostAdsController extends Controller
      */
     public function index()
     {
-        $postAds = PostAds::with(['user'])->latest()->get();
+        $postAds = PostAds::with(['user'])->latest()->where('status', 0)->get();
         return view('post_ads.listed.index', compact('postAds'));
     }
 
+    //approved ads page
+    public function approvedIndex()
+    {
+        $postAds = PostAds::with(['user'])->latest()->where('status', 1)->get();
+        return view('post_ads.approved.index', compact('postAds'));
+    }
+
+    public function approve(string $id)
+    {
+        try{
+            DB::beginTransaction();
+            $postAds = PostAds::findOrFail($id);
+            $postAds->update(['status' => 1]);
+            DB::commit();
+            return response()->json([
+                'success' => 1,
+                'message' => 'Post Ad approved successfully!',
+                'data' => $postAds
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to approve post ad.'
+            ], 500);
+        }
+    }
+    //rejected index page
+    public function rejectedIndex()
+    {
+        $postAds = PostAds::with(['user'])->latest()->where('status', 2)->get();
+        return view('post_ads.rejected.index', compact('postAds'));
+    }
+
+    public function reject(string $id)
+    {
+        try{
+            DB::beginTransaction();
+            $postAds = PostAds::findOrFail($id);
+            $postAds->update(['status' => 2]);
+            DB::commit();
+            return response()->json([
+                'success' => 2,
+                'message' => 'Post Ad approved successfully!',
+                'data' => $postAds
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to approve post ad.'
+            ], 500);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      */

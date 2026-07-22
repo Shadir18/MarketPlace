@@ -1,7 +1,7 @@
 <x-admin-layout>
     <div class="container my-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="h4 mb-0 fw-bold">Vehicle Advertisements</h2>
+            <h2 class="h4 mb-0 fw-bold">Listed Vehicle Advertisements</h2>
             <a href="{{ route('listed.create') }}" class="btn btn-primary btn-sm fw-bold">Create New Ad</a>
         </div>
 
@@ -16,6 +16,7 @@
                             <th>Mileage</th>
                             <th>Price (LKR)</th>
                             <th>Posted By</th>
+                            <th class="text-center">Approve</th>
                         </tr>
                     </thead>
                     @foreach ($postAds as $ad)
@@ -25,7 +26,15 @@
                             <td> {{ $ad->manufacture_year }} </td>
                             <td> {{ $ad->mileage }} </td>
                             <td> {{ $ad->price }} </td>
-                            <td> {{ $ad->user->last_name }}</td> 
+                            <td> {{ $ad->user->last_name }}</td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-success btn-sm fw-bold btn-approve" data-id="{{ $ad->id }}">
+                                    Approve
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm fw-bold btn-reject" data-id="{{ $ad->id }}">
+                                    Reject
+                                </button>
+                            </td>
                         </tr>
                     @endforeach
                 </table>
@@ -42,6 +51,36 @@
                     "<'row'<'col-md-12'tr>>" +
                     "<'row mt-3 align-items-center'<'col-md-6'i><'col-md-6 d-flex justify-content-end'p>>",
             });
-        })
+        });
+        //approve 
+        $('#listtable').on('click', '.btn-approve', function (e){
+            e.preventDefault();
+            const id = $(this).data('id');
+            if (confirm('Are you sure you want to approve this product?')){
+                axios.patch(`/post_ads/${id}/approve`)
+                .then(function (response){
+                    window.location.href = '/post_ads/listed';
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.error(error.response.data);
+                });
+            }
+        });
+        //rejected
+        $('#listtable').on('click', '.btn-reject', function (e){
+            e.preventDefault();
+            const id = $(this).data('id');
+            if (confirm('Are you sure you want to approve this product?')){
+                axios.patch(`/post_ads/${id}/reject`)
+                .then(function (response){
+                    window.location.href = '/post_ads/rejected';
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.error(error.response.data);
+                });
+            }
+        });
     });
 </script>

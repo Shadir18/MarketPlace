@@ -80,6 +80,14 @@
                             <br>
                         </x-form-field>
 
+                        <x-form-field class="mb-4">
+                            <x-form-label for="postads_img" class="form-label fw-semibold">Insert Vehicle Images</x-form-label>
+                            <x-form-input type="file" name="postads_img[]" id="postads_img" class="form-control" multiple accept="postads_img/*" required />
+                            <x-form-error name="postads_img" />
+                            <div class="invalid-feedback d-block" id="error-postads_img"></div>
+                            <br>
+                        </x-form-field>
+
                         <div class="d-flex align-items-center justify-content-end gap-2 pt-3 border-top">
                             <a href="/" class="btn btn-outline-secondary px-4">Cancel</a>
                             <x-form-button type="submit" id="submitBtn" class="btn btn-primary px-4 fw-bold">Publish Vehicle Ad</x-form-button>

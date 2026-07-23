@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PostAds;
+use App\Models\PostadsImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -90,6 +91,8 @@ class PostAdsController extends Controller
             'manufacture_year'     => 'required',
             'mileage'      => 'required',
             'price'        => 'required',
+            'postads_img'  => 'required|array',
+            'postads_img.*'=> 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'type_id'      => 'required|exists:types,id',
             'model_id'     => 'required|exists:models,id',
             'category_id'  => 'required|exists:categories,id',
@@ -98,6 +101,15 @@ class PostAdsController extends Controller
             DB::beginTransaction();
             $attributes['user_id'] = Auth::id();
             $postAd = PostAds::create($attributes);
+            if($request->hasFile('postads_img')){
+                foreach ($request->file('postads_img')as $postads_img){
+                    $path = $postads_img->store('postads_images', 'public');
+                    PostadsImage::create([
+                        'post_ads_id' => $postAd->id,
+                        'postads_img' => $path,
+                    ]);
+                }
+            }
             DB::commit();
             return response()->json([
                 'success' => true,
@@ -108,7 +120,9 @@ class PostAdsController extends Controller
             DB::rollBack();
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to create product'
+                'message' => $th->getMessage(),
+                'line' => $th->getLine(),
+                'file' => $th->getFile(),
             ], 500);
         }
     }

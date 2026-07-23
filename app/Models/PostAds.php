@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Model as ModelsModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PostAds extends Model
 {
@@ -19,6 +20,11 @@ class PostAds extends Model
         'status',
         'category_id'
     ];
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(PostadsImage::class, 'post_ads_id');
+    }
 
     public function user(): BelongsTo
     {

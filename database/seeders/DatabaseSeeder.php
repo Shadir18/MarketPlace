@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ModelSeeder::class,
             TypeSeeder::class,
-            CategoriesSeeder::class
+            CategoriesSeeder::class,
+            PostAdSeeder::class,
         ]);
     }
 }

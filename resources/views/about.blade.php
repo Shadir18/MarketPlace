@@ -1,95 +1,82 @@
 <x-guest-layout>
 
-<section class="bg-dark text-light rounded-4 min-vh-75 d-flex flex-column justify-content-between p-4 p-md-5 mb-4 position-relative overflow-hidden" data-bs-theme="dark">
-    
+<section class="bg-body-tertiary text-dark rounded-4 min-vh-75 d-flex flex-column justify-content-between p-4 p-md-5 mb-4 border border-light-subtle shadow-sm">
+
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <span class="badge text-bg-warning text-uppercase px-3 py-2 rounded-pill fw-bold tracking-wider">
-            About {{ env('APP_NAME', 'The Marketplace') }}
+        <span class="badge text-bg-warning text-dark text-uppercase px-3 py-2 rounded-pill fw-bold tracking-wider">
+            About Us
         </span>
-        <span class="text-secondary small d-none d-sm-inline">Verified Listings & Direct Chat</span>
+        <span class="text-muted small d-none d-sm-inline">Safe & Direct Vehicle Marketplace</span>
     </div>
 
-    <div class="my-auto py-4">
-        <div class="row align-items-center g-4">
-            <div class="col-lg-7">
-                <h1 class="display-4 fw-extrabold mb-3 text-white lh-sm">
-                    Buy & sell vehicles <br class="d-none d-md-inline">
-                    <span class="text-warning">without the hassle.</span>
+    <div class="my-auto py-2">
+        <div class="row g-4 align-items-center">
+            
+            <div class="col-lg-5">
+                <h1 class="display-5 fw-bold mb-3 text-dark">
+                    Driven by trust, <br>
+                    <span class="text-warning">built for simplicity.</span>
                 </h1>
-                <p class="lead text-secondary mb-4 style-max-width" style="max-width: 55ch;">
-                    {{ env('APP_NAME', 'This marketplace') }} connects buyers and sellers directly. Post your listing in minutes, browse verified ads, and make deals with complete peace of mind.
+                <p class="text-secondary mb-4" style="max-width: 45ch;">
+                    {{ env('APP_NAME', 'Our marketplace') }} was created to take the friction out of buying and selling vehicles. No hidden middleman fees, no automated spam—just verified buyers and sellers dealing directly with one another.
                 </p>
-                <div class="d-flex flex-wrap gap-3">
-                    <x-button href="/post_ads" class="btn btn-warning btn-lg fw-semibold px-4">
-                        <i class="bi bi-plus-circle me-2"></i>Post an ad
+
+                <div class="d-flex flex-wrap gap-2">
+                    <x-button href="/post_ads" class="btn btn-warning text-dark fw-semibold px-4 py-2 shadow-sm">
+                        <i class="bi bi-plus-circle me-2"></i>Post an Ad Now
                     </x-button>
-                    <a href="#features" class="btn btn-outline-light btn-lg px-4">
-                        How it works
-                    </a>
                 </div>
             </div>
 
-            <div class="col-lg-5">
-                <div class="bg-body-tertiary p-4 rounded-4 border border-secondary border-opacity-25">
-                    <div class="d-flex align-items-center gap-3 mb-3">
-                        <div class="bg-warning text-dark rounded-circle p-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
-                            <i class="bi bi-shield-check fs-4"></i>
+            <div class="col-lg-7">
+                <div class="d-flex flex-column gap-3">
+                    
+                    <div class="d-flex align-items-start gap-3 p-3 rounded-4 bg-white border border-light-subtle shadow-sm">
+                        <div class="bg-warning bg-opacity-10 text-warning p-3 rounded-3 d-flex align-items-center justify-content-center flex-shrink-0">
+                            <i class="bi bi-shield-check fs-3"></i>
                         </div>
                         <div>
-                            <h2 class="h6 mb-0 text-white fw-bold">100% Reviewed Ads</h2>
-                            <small class="text-secondary">Every ad is checked before going live</small>
+                            <h3 class="h6 fw-bold text-dark mb-1">Human-Reviewed Listings</h3>
+                            <p class="small text-muted mb-0">Every listing undergoes manual moderation before going live to ensure real photos, accurate pricing, and honest vehicle details.</p>
                         </div>
                     </div>
-                    <hr class="border-secondary opacity-25 my-3">
-                    <div class="d-flex justify-content-between text-center">
-                        <div>
-                            <div class="h5 mb-0 text-warning fw-bold">Fast</div>
-                            <small class="text-secondary">Post in minutes</small>
+
+                    <div class="d-flex align-items-start gap-3 p-3 rounded-4 bg-white border border-light-subtle shadow-sm">
+                        <div class="bg-warning bg-opacity-10 text-warning p-3 rounded-3 d-flex align-items-center justify-content-center flex-shrink-0">
+                            <i class="bi bi-chat-dots-fill fs-3"></i>
                         </div>
-                        <div class="border-start border-secondary opacity-25"></div>
                         <div>
-                            <div class="h5 mb-0 text-warning fw-bold">Direct</div>
-                            <small class="text-secondary">Buyer to seller</small>
-                        </div>
-                        <div class="border-start border-secondary opacity-25"></div>
-                        <div>
-                            <div class="h5 mb-0 text-warning fw-bold">Free</div>
-                            <small class="text-secondary">No hidden fees</small>
+                            <h3 class="h6 fw-bold text-dark mb-1">Direct Peer-to-Peer Deals</h3>
+                            <p class="small text-muted mb-0">Communicate directly with vehicle owners or buyers. Negotiate terms, arrange test drives, and close the deal on your timeline.</p>
                         </div>
                     </div>
+
+                    <div class="d-flex align-items-start gap-3 p-3 rounded-4 bg-white border border-light-subtle shadow-sm">
+                        <div class="bg-warning bg-opacity-10 text-warning p-3 rounded-3 d-flex align-items-center justify-content-center flex-shrink-0">
+                            <i class="bi bi-speedometer2 fs-3"></i>
+                        </div>
+                        <div>
+                            <h3 class="h6 fw-bold text-dark mb-1">Quick & Simple Posting</h3>
+                            <p class="small text-muted mb-0">List your car, bike, or truck in under three minutes with our streamlined submission process.</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+
         </div>
     </div>
 
-    <div id="features" class="pt-4 border-top border-secondary border-opacity-25">
-        <div class="row g-3">
-            <div class="col-md-4">
-                <div class="d-flex align-items-start gap-3 p-2">
-                    <i class="bi bi-tag-fill text-warning fs-4 mt-1"></i>
-                    <div>
-                        <h3 class="h6 fw-bold mb-1 text-white">1. Post</h3>
-                        <p class="small text-secondary mb-0">Add photos, set details, and go live rapidly.</p>
-                    </div>
-                </div>
+    <div class="pt-4 border-top border-light-subtle mt-4">
+        <div class="row text-center text-md-start text-muted">
+            <div class="col-md-4 mb-2 mb-md-0">
+                <small><i class="bi bi-check-circle-fill text-warning me-1"></i> Verified Seller Profiles</small>
             </div>
-            <div class="col-md-4">
-                <div class="d-flex align-items-start gap-3 p-2">
-                    <i class="bi bi-search text-warning fs-4 mt-1"></i>
-                    <div>
-                        <h3 class="h6 fw-bold mb-1 text-white">2. Discover</h3>
-                        <p class="small text-secondary mb-0">Filter by category, model, and vehicle type.</p>
-                    </div>
-                </div>
+            <div class="col-md-4 mb-2 mb-md-0 text-md-center">
+                <small><i class="bi bi-tag-fill text-warning me-1"></i> No Hidden Platform Fees</small>
             </div>
-            <div class="col-md-4">
-                <div class="d-flex align-items-start gap-3 p-2">
-                    <i class="bi bi-chat-dots-fill text-warning fs-4 mt-1"></i>
-                    <div>
-                        <h3 class="h6 fw-bold mb-1 text-white">3. Deal</h3>
-                        <p class="small text-secondary mb-0">Chat directly and close the deal on your terms.</p>
-                    </div>
-                </div>
+            <div class="col-md-4 text-md-end">
+                <small><i class="bi bi-star-fill text-warning me-1"></i> Trusted Community</small>
             </div>
         </div>
     </div>

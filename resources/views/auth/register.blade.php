@@ -97,7 +97,7 @@
                 if (response.data && response.data.redirect_url){
                     window.location.href = response.data.redirect_url;
                 } else {
-                    window.location.href = '/products';
+                    window.location.href = '/dashboard';
                 }
             })
             .catch(function(error){

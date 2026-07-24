@@ -73,7 +73,7 @@
                 if (response.data.token){
                     localStorage.setItem('token', response.data.token);
                 }
-                window.location.href = '/products';
+                window.location.href = '/dashboard';
                 console.log(response.data);
             })
             .catch(function(error){

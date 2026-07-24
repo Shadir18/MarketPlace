@@ -15,16 +15,45 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::create([
-            'first_name' => 'Default',
-            'last_name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('123456'), 
-        ]);
+        $users = [
+            [
+                'first_name' => 'Default',
+                'last_name' => 'Admin',
+                'email' => 'admin@example.com',
+                'password' => Hash::make('123456'),
+            ],
+            [
+                'first_name' => 'Virat',
+                'last_name' => 'Kohli',
+                'email' => 'Virat@example.com',
+                'password' => Hash::make('123456'),
+            ],
+            [
+                'first_name' => 'Steve',
+                'last_name' => 'Smith',
+                'email' => 'Steve@example.com',
+                'password' => Hash::make('123456'),
+            ],
+            [
+                'first_name' => 'Kumar',
+                'last_name' => 'Sangakkara',
+                'email' => 'Kumar@example.com',
+                'password' => Hash::make('123456'),
+            ],
+            [
+                'first_name' => 'David',
+                'last_name' => 'Warner',
+                'email' => 'David@example.com',
+                'password' => Hash::make('123456'),
+            ],
+        ];
 
-        Seller::create([
-            'user_id' => $user->id,
-            'name' => $user->first_name,
-        ]);
+        foreach ($users as $userData) {
+            $user = User::create($userData);
+            Seller::create([
+                'user_id' => $user->id,
+                'name' => $user->first_name . ' ' . $user->last_name,
+            ]);
+        }
     }
 }

@@ -76,11 +76,19 @@
                 </li>
 
                 <li class="nav-item">
+                    <x-nav-link href="/contactmessages" :active="request()->is('contactmessages*')">
+                        <i class="nav-icon bi bi-chat-left-text"></i>
+                        <p>Inquiries</p>
+                    </x-nav-link>
+                </li>
+
+                <li class="nav-item">
                     <x-nav-link href="/settings" :active="request()->is('settings*')">
                         <i class="nav-icon bi bi-gear-fill"></i>
                         <p>Settings</p>
                     </x-nav-link>
                 </li>
+                
             </ul>
         </nav>
     </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\PostAdsController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
+use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Route;
 
 
@@ -31,8 +33,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('types', TypeController::class);
     Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
     Route::post('/settings', [SettingsController::class, 'update'])->name('settings.update');
+    Route::resource('/contactmessages', ContactMessageController::class);
     });
-Route::view('/contact', 'contact');
+Route::get('/contact', [ContactMessageController::class, 'create'])->name('contact.create');
+Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');
 Route::view('/about', 'about');
 Route::view('/', 'home');
 

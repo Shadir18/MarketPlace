@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContactMessage;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +14,7 @@ class ContactMessageController extends Controller
      */
     public function index()
     {
-        $contactMessages = ContactMessage::latest()->get();
+        $contactMessages = ContactMessage::with(['setting'])->get();
         return view('contactmessages.index', compact('contactMessages'));
     }
 
@@ -22,7 +23,8 @@ class ContactMessageController extends Controller
      */
     public function create()
     {
-        return view('contact');
+        $setting = Setting::first();
+        return view('contact', compact('setting'));
     }
 
     /**

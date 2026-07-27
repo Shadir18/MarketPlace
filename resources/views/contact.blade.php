@@ -28,7 +28,7 @@
                         </div>
                         <div>
                             <div class="small text-muted">Email Us</div>
-                            <div class="fw-semibold text-dark">supportmarketplace@gmail.com</div>
+                            <div class="fw-semibold text-dark"> {{ $setting->email }}</div>
                         </div>
                     </div>
 
@@ -38,7 +38,7 @@
                         </div>
                         <div>
                             <div class="small text-muted">Support Hours</div>
-                            <div class="fw-semibold text-dark">Mon - Fri: 9:00 AM - 6:00 PM</div>
+                            <div class="fw-semibold text-dark"> {{ $setting->contacting_hours }}</div>
                         </div>
                     </div>
                 </div>

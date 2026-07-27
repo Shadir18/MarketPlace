@@ -50,7 +50,7 @@
 
                     <div class="text-center border-top pt-3 mt-3">
                         <p class="mb-0 small text-muted">
-                            Don't have an account? <a href="/register" class="text-decoration-none text-success font-weight-bold">Register</a>
+                            Don't have an account? <a href="/register" class="text-decoration-none text-primary font-weight-bold">Register</a>
                         </p>
                     </div>
                 </div>

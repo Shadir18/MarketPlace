@@ -46,7 +46,7 @@
 
             <div class="col-lg-7">
                 <div class="bg-white p-4 p-md-5 rounded-4 border border-light-subtle shadow-sm">
-                    <form id="inquiriesForm" action="/contact" method="POST">
+                    <form id="inquiriesForm" action="/contactmessages" method="POST">
                         @csrf
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
@@ -102,7 +102,7 @@ $(document).ready(function(){
         const $submitBtn = $('#submitBtn');
         $submitBtn.prop('disabled', true).text('Adding....');
         const formData = new FormData(this);
-        axios.post('/post_ads' ,formData)
+        axios.post('/contact' ,formData)
         .then(function(response){
             $('#inquiriesForm')[0].reset();
         }).catch (function (error){

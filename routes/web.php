@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('types', TypeController::class);
     Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
     Route::post('/settings', [SettingsController::class, 'update'])->name('settings.update');
-    Route::resource('/contactmessages', ContactMessageController::class)->only(['index']);
+    Route::resource('/contactmessages', ContactMessageController::class);
     });
 Route::get('/contact', [ContactMessageController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');

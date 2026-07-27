@@ -39,7 +39,9 @@
                     <div class="card h-100 bg-white rounded-4 border border-light-subtle shadow-sm overflow-hidden d-flex flex-column">
     
                         <div class="position-relative bg-light" style="height: 220px;">
-                            <img src="{{ asset('storage/' . ($ad->images->first()?->postads_img )) }}" alt="{{ $ad->title }}" class="w-100 h-100 object-fit-cover">
+                            <a href="{{ asset('storage/' . ($ad->images->first()?->postads_img)) }}" class="glightbox">
+                                <img src="{{ asset('storage/' . ($ad->images->first()?->postads_img )) }}" alt="{{ $ad->title }}" class="w-100 h-100 object-fit-cover">
+                            </a>
                             <span class="position-absolute top-0 end-0 bg-warning text-dark fw-bold px-3 py-1 m-3 rounded-pill shadow-sm small">
                                 {{ ($ad->price ) }}
                             </span>
@@ -88,3 +90,10 @@
         </div>
     </section>
 </x-guest-layout>
+<script type="module">
+    document.addEventListener("DOMContentLoaded", function () {
+        const lightbox = GLightbox({
+            selector: '.glightbox'
+        });
+    });
+</script>

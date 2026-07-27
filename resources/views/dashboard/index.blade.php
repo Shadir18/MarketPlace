@@ -1,6 +1,5 @@
 <x-admin-layout>
     <div class="container-fluid py-4">
-
         <div class="row mb-4">
             <div class="col-12">
                 <h3 class="mb-0">Marketplace Dashboard</h3>

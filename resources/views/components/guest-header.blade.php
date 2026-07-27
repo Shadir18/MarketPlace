@@ -1,4 +1,4 @@
-<nav class="container-fluid navbar navbar-expand-md bg-body-secondary shadow" data-bs-theme="dark">
+<nav class="container-fluid navbar navbar-expand-md bg-body-secondary shadow sticky-top" data-bs-theme="dark">
   <div class="container fluid">
     <a href="/" class="navbar-brand text-light ms-5">
       <span class="brand-text">

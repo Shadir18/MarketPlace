@@ -1,5 +1,4 @@
 <x-admin-layout>
-    <div class="container my-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="h4 mb-0 font-weight-bold">Models</h2>
             <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm fw-bold">Add New</a>
@@ -35,7 +34,6 @@
             </div>
 
         </div>
-    </div>
 </x-admin-layout>
 <script type="module">
     $(document).ready(function (){

@@ -12,4 +12,9 @@ class ContactMessage extends Model
         'subject',
         'message'
     ];
+
+    public function setting()
+    {
+        return $this->belongsTo(Setting::class);
+    }
 }

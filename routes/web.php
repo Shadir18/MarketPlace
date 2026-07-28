@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\PostAdsController;
 use App\Http\Controllers\ProductController;
@@ -38,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/contact', [ContactMessageController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');
 Route::view('/about', 'about');
-Route::view('/', 'home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/register', [RegisteredUserController::class, 'create']);
 Route::post('/register', [UserController::class, 'store']);

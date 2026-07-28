@@ -43,7 +43,7 @@
                                 <img src="{{ asset('storage/' . ($ad->images->first()?->postads_img )) }}" alt="{{ $ad->title }}" class="w-100 h-100 object-fit-cover">
                             </a>
                             <span class="position-absolute top-0 end-0 bg-warning text-dark fw-bold px-3 py-1 m-3 rounded-pill shadow-sm small">
-                                {{ ($ad->price ) }}
+                                ${{ ($ad->price ) }}.00
                             </span>
                         </div>
 
@@ -61,14 +61,14 @@
                             </h3>
 
                             <div class="d-flex align-items-center gap-3 text-secondary small mb-3">
-                                <span><i class="bi bi-speedometer2 text-warning me-1"></i> {{ ($ad->mileage) }} km</span>
+                                <span><i class="bi bi-speedometer2 text-warning me-1"></i> {{ ($ad->mileage) }}Km </span>
                                 <span><i class="bi bi-calendar3 text-warning me-1"></i> {{ $ad->manufacture_year }}</span>
                             </div>
 
                             <div class="mt-auto pt-3 border-top border-light-subtle d-flex align-items-center justify-content-between text-muted small">
                                 <span class="d-flex align-items-center gap-1">
                                     <i class="bi bi-person-circle text-warning"></i> 
-                                    {{ $ad->user->name ?? 'User' }}
+                                    {{ $ad->user->first_name }}
                                 </span>
                                 <span class="d-flex align-items-center gap-1">
                                     <i class="bi bi-clock text-warning"></i> 

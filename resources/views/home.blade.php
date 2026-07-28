@@ -36,7 +36,7 @@
                     <div class="card h-100 bg-white rounded-4 border border-light-subtle shadow-sm overflow-hidden d-flex flex-column">
     
                         <div class="position-relative bg-light" style="height: 220px;">
-                            <img src="{{ asset('storage/' . ($ad->images->first()?->postads_img )) }}" alt="{{ $ad->title }}" class="w-100 h-100 object-fit-cover">
+                            <img src="{{ asset('storage/' . ($ad->images->first()?->postads_img ?? 'no-image.jpg' )) }}" alt="{{ $ad->title }}" class="w-100 h-100 object-fit-cover">
                             <span class="position-absolute top-0 end-0 bg-warning text-dark fw-bold px-3 py-1 m-3 rounded-pill shadow-sm small">
                                 LKR {{ ($ad->price ) }}.00
                             </span>

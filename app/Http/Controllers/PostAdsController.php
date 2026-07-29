@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Model;
 use App\Models\PostAds;
 use App\Models\PostadsImage;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +18,7 @@ class PostAdsController extends Controller
      */
     public function index()
     {
-        $postAds = PostAds::with(['user'])->latest()->where('status', 0)->get();
+        $postAds = PostAds::with(['user', 'category', 'type', 'category'])->latest()->where('status', 0)->get();
         return view('post_ads.listed.index', compact('postAds'));
     }
 
@@ -78,7 +81,10 @@ class PostAdsController extends Controller
      */
     public function create()
     {
-        return view ('post_ads.create');
+        $categories = Category::all();
+        $models = Model::all();
+        $types = Type::all();
+        return view ('post_ads.create', compact('categories', 'models', 'types'));
     }
 
     /**

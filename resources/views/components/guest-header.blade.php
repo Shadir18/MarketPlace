@@ -22,7 +22,7 @@
                 <x-nav-link href="/about" :active="request()->is('about')" class="nav-link fw-bold">About</x-nav-link>
                 <x-nav-link href="/contact" :active="request()->is('contact')" class="nav-link fw-bold">Contact</x-nav-link>
                 <x-nav-link href="/login" :active="request()->is('login')" class="nav-link fw-bold">Login</x-nav-link>
-                <x-nav-link href="/register" :active="request()->is('register')" class="btn btn-outline-dark fw-semibold rounded-pill px-3">Register</x-nav-link>
+                <x-nav-link href="/register" :active="request()->is('register')" class="btn btn-outline-warning fw-semibold rounded-pill px-3">Register</x-nav-link>
             @endguest
         </div>
       </div>

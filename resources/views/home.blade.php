@@ -16,7 +16,7 @@
                     <div class="input-group input-group-lg bg-white p-1 rounded-pill border border-light-subtle shadow-sm">
                         <input type="text" name="query" class="form-control border-0 bg-transparent text-dark ps-4 pe-2 shadow-none" placeholder="What are you looking for?">
                         <button class="btn btn-warning text-dark fw-semibold rounded-pill px-4" type="submit">
-                            <i class="bi bi-search me-1"></i> Search
+                            <i class="bi bi-search me-1"></i> testing
                         </button>
                     </div>
                 </form>

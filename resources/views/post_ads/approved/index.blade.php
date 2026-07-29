@@ -10,6 +10,9 @@
                         <tr>
                             <th>#id</th>
                             <th>Title</th>
+                            <th>Category</th>
+                            <th>Type</th>
+                            <th>Model</th>
                             <th>Year</th>
                             <th>Mileage</th>
                             <th>Price (LKR)</th>
@@ -19,7 +22,10 @@
                     @foreach ($postAds as $ad)
                         <tr id="row-{{ $ad->id }}">
                             <td> {{ $ad->id }} </td>
-                            <td> {{ $ad->title}} </td>
+                            <td> {{ $ad->title }} </td>
+                            <td> {{$ad->category->name }} </td>
+                            <td> {{$ad->type->name }} </td>
+                            <td> {{$ad->model->name }} </td>
                             <td> {{ $ad->manufacture_year }} </td>
                             <td> {{ $ad->mileage }} </td>
                             <td> {{ $ad->price }} </td>

@@ -32,25 +32,6 @@
                         <input type="hidden" name="type_id" value="1">
                         <input type="hidden" name="model_id" value="1">
                         <input type="hidden" name="category_id" value="1">
-                        {{-- <div class="row">
-                            <div class="col-md-6">
-                                <x-form-field class="mb-3">
-                                    <x-form-label for="brand_name" class="form-label fw-semibold">Brand</x-form-label>
-                                    <x-form-input type="text" name="brand_name" id="brand_name" class="form-control" required />
-                                    <x-form-error name="brand_name" />
-                                    <div class="invalid-feedback d-block" id="error-brand_name"></div>
-                                </x-form-field>
-                            </div>
-
-                            <div class="col-md-6">
-                                <x-form-field class="mb-3">
-                                    <x-form-label for="model_name" class="form-label fw-semibold">Model</x-form-label>
-                                    <x-form-input type="text" name="model_name" id="model_name" class="form-control" required />
-                                    <x-form-error name="model_name" />
-                                    <div class="invalid-feedback d-block" id="error-model_name"></div>
-                                </x-form-field>
-                            </div>
-                        </div> --}}
 
                         <div class="row">
                             <div class="col-md-6">

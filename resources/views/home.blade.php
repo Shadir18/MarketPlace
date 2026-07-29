@@ -104,7 +104,7 @@
                             <div class="mt-auto pt-3 border-top border-light-subtle d-flex align-items-center justify-content-between text-muted small">
                                 <span class="d-flex align-items-center gap-1">
                                     <i class="bi bi-person-circle text-warning"></i> 
-                                    {{ $ad->user->name ?? 'User' }}
+                                    {{ $ad->user->last_name ?? 'User' }}
                                 </span>
                                 <span class="d-flex align-items-center gap-1">
                                     <i class="bi bi-clock text-warning"></i> 

@@ -23,10 +23,51 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
-            <div>
-                <h2 class="fw-bold text-dark mb-1">Latest Approved Listings</h2>
-                <p class="text-secondary small mb-0">Discover recent additions to our marketplace</p>
+        <div class="mt-5 mb-4 pb-3 border-bottom border-light-subtle">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+                <div>
+                    <h2 class="fw-bold text-dark mb-0">Latest Approved Listings</h2>
+                    <p class="text-secondary small mb-0">Discover recent additions to our marketplace</p>
+                </div>
+
+                <form action="{{ route('home') }}" method="GET" class="d-flex align-items-center gap-2">
+                    @if(request('query'))
+                        <input type="hidden" name="query" value="{{ request('query') }}">
+                    @endif
+                    @if(request('category'))
+                        <input type="hidden" name="category" value="{{ request('category') }}">
+                    @endif
+
+                    <div class="d-flex align-items-center bg-white border border-light-subtle rounded-4 px-3 py-2 shadow-sm">
+                        <i class="bi bi-sort-down text-warning me-2 fs-5"></i>
+                        <span class="text-secondary small me-2 d-none d-sm-inline">Sort by:</span>
+                        <select name="sort" class="form-select border-0 bg-transparent p-0 text-dark fw-bold small shadow-none cursor-pointer" style="width: auto;" onchange="this.form.submit()">
+                            <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Latest Ads</option>
+                            <option value="price_low" {{ request('sort') == 'price_low' ? 'selected' : '' }}>Price: Low to High</option>
+                            <option value="price_high" {{ request('sort') == 'price_high' ? 'selected' : '' }}>Price: High to Low</option>
+                        </select>
+                    </div>
+
+                    @if(request('category') || request('sort') || request('query'))
+                        <a href="{{ route('home') }}" class="btn btn-outline-danger btn-sm rounded-4 px-3 py-2 shadow-sm fw-semibold d-flex align-items-center gap-1" title="Clear Filters">
+                            <i class="bi bi-arrow-counterclockwise"></i> Reset
+                        </a>
+                    @endif
+                </form>
+            </div>
+
+            <div class="d-flex align-items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+                <a href="{{ route('home', array_merge(request()->except('category'))) }}" 
+                class="btn btn-sm rounded-pill px-4 py-2 fw-semibold text-nowrap transition-all {{ !request('category') ? 'btn-dark shadow-sm' : 'btn-light border border-light-subtle text-secondary' }}">
+                    <i class="bi bi-grid-fill me-1"></i> All Items
+                </a>
+
+                @foreach($categories as $category)
+                    <a href="{{ route('home', array_merge(request()->except('category'), ['category' => $category->id])) }}" 
+                    class="btn btn-sm rounded-pill px-4 py-2 fw-semibold text-nowrap transition-all {{ request('category') == $category->id ? 'btn-warning text-dark shadow-sm' : 'btn-light border border-light-subtle text-dark hover-warning' }}">
+                        {{ $category->name }}
+                    </a>
+                @endforeach
             </div>
         </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\PostAds;
 use Illuminate\Http\Request;
 
@@ -10,10 +11,33 @@ class HomeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $postAds = PostAds::with(['images', 'user', 'category'])->where('status', 1)->latest()->get();
-        return view('home', compact('postAds'));
+        $query = PostAds::with(['images', 'user', 'category'])->where('status', 1);
+        
+        if ($request->filled('query')) {
+            $query->where('title', 'like', '%' . $request->query('query') . '%');
+        }
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->category);
+        }
+        if ($request->filled('sort')) {
+            switch ($request->sort) {
+                case 'price_low':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price_high':
+                    $query->orderBy('price', 'desc');
+                default:
+                $query->latest();
+                break;
+            }
+        } else {
+            $query->latest();
+        }
+        $postAds = $query->get();
+        $categories = Category::all();
+        return view('home', compact('postAds', 'categories'));
     }
 
     /**

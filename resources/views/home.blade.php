@@ -12,11 +12,11 @@
                     Browse through thousands of approved listings from verified sellers across multiple categories.
                 </p>
 
-                <form action="/search" method="GET" class="w-100 mx-auto" style="max-width: 600px;">
+                <form action="{{ route('home') }}" method="GET" class="w-100 mx-auto" style="max-width: 600px;">
                     <div class="input-group input-group-lg bg-white p-1 rounded-pill border border-light-subtle shadow-sm">
-                        <input type="text" name="query" class="form-control border-0 bg-transparent text-dark ps-4 pe-2 shadow-none" placeholder="What are you looking for?">
+                        <input type="text" name="query" value="{{ request('query') }}" class="form-control border-0 bg-transparent text-dark ps-4 pe-2 shadow-none" placeholder="What are you looking for?">
                         <button class="btn btn-warning text-dark fw-semibold rounded-pill px-4" type="submit">
-                            <i class="bi bi-search me-1"></i> testing
+                            <i class="bi bi-search me-1"></i> Search
                         </button>
                     </div>
                 </form>
@@ -104,7 +104,7 @@
                             <div class="mt-auto pt-3 border-top border-light-subtle d-flex align-items-center justify-content-between text-muted small">
                                 <span class="d-flex align-items-center gap-1">
                                     <i class="bi bi-person-circle text-warning"></i> 
-                                    {{ $ad->user->last_name ?? 'User' }}
+                                    {{ $ad->user->name ?? 'User' }}
                                 </span>
                                 <span class="d-flex align-items-center gap-1">
                                     <i class="bi bi-clock text-warning"></i> 

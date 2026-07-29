@@ -29,9 +29,49 @@
                             <div class="invalid-feedback d-block" id="error-title"></div>
                         </x-form-field>
 
-                        <input type="hidden" name="type_id" value="1">
-                        <input type="hidden" name="model_id" value="1">
-                        <input type="hidden" name="category_id" value="1">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <x-form-field class="mb-3">
+                                    <x-form-label for="category_id" class="form-label fw-semibold">Category</x-form-label>
+                                    <select name="category_id" id="category_id" class="form-select" required>
+                                        <option value="" disabled selected>Select Category</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <x-form-error name="category_id" />
+                                    <div class="invalid-feedback d-block" id="error-category_id"></div>
+                                </x-form-field>
+                            </div>
+
+                            <div class="col-md-4">
+                                <x-form-field class="mb-3">
+                                    <x-form-label for="model_id" class="form-label fw-semibold">Model / Make</x-form-label>
+                                    <select name="model_id" id="model_id" class="form-select" required>
+                                        <option value="" disabled selected>Select Model</option>
+                                        @foreach($models as $model)
+                                            <option value="{{ $model->id }}">{{ $model->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <x-form-error name="model_id" />
+                                    <div class="invalid-feedback d-block" id="error-model_id"></div>
+                                </x-form-field>
+                            </div>
+
+                            <div class="col-md-4">
+                                <x-form-field class="mb-3">
+                                    <x-form-label for="type_id" class="form-label fw-semibold">Vehicle Type</x-form-label>
+                                    <select name="type_id" id="type_id" class="form-select" required>
+                                        <option value="" disabled selected>Select Type</option>
+                                        @foreach($types as $type)
+                                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <x-form-error name="type_id" />
+                                    <div class="invalid-feedback d-block" id="error-type_id"></div>
+                                </x-form-field>
+                            </div>
+                        </div>
 
                         <div class="row">
                             <div class="col-md-6">

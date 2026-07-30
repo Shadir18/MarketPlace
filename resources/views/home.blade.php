@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        <div class="row g-3">
+        <div class="row g-4">
             @forelse ($postAds as $ad)
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".2s">
                     <div class="card h-100 bg-white rounded-4 border border-light-subtle shadow-sm overflow-hidden d-flex flex-column">

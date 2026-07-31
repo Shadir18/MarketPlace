@@ -4,8 +4,8 @@
             <a href="{{ route('listed.create') }}" class="btn btn-primary btn-sm fw-bold">Create New Ad</a>
         </div>
 
-        <div class="card shadow-sm border-0 bg-white p-4">
-            <div class="table-responsive">
+        <div class="card shadow-sm border-0 bg-white p-2">
+            <div class="table-responsive" style="height: 750px;">
                 <table id="listtable" class="table table-striped table-hover align-middle mb-0 w-100 border">
                     <thead class="table-light">
                         <tr>

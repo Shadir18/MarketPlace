@@ -3,7 +3,7 @@
             <h2 class="h4 mb-0 fw-bold">Approved Vehicle Advertisements</h2>
         </div>
 
-        <div class="card shadow-sm border-0 bg-white p-4">
+        <div class="card shadow-sm border-0 bg-white p-2 min-vh-100">
             <div class="table-responsive">
                 <table id="approvetable" class="table table-striped table-hover align-middle mb-0 w-100 border">
                     <thead class="table-light">

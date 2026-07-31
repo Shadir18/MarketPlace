@@ -4,8 +4,8 @@
             <a href="{{ route('models.create') }}" class="btn btn-primary btn-sm fw-bold">Add New</a>
         </div>
 
-        <div class="card shadow-sm border-0 bg-white p-4">
-            <div class="table-responsive">
+        <div class="card shadow-sm border-0 bg-white p-2 sticky-top">
+        <div class="table-responsive" style="height: 750px;">
                 <table id="ModelTable" class="table table-striped table-hover align-middle mb-0 w-100 border">
                     <thead class="table-light">
                         <tr>
@@ -32,7 +32,6 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
 </x-admin-layout>
 <script type="module">
@@ -40,7 +39,7 @@
         $('#ModelTable').DataTable({
             "dom": "<'row mb-3 align-items-center'<'col-md-6'l><'col-md-6 d-flex justify-content-end'f>>" +
                "<'row'<'col-md-12'tr>>" +
-              "<'row mt-3 align-items-center'<'col-md-6'i><'col-md-6 d-flex justify-content-end'p>>",
+              "<'row mt-3 align-items-center sticky-bottom'<'col-md-6'i><'col-md-6 d-flex justify-content-end'p>>",
         columnDefs: [
             {
                 targets: 4,

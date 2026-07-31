@@ -31,7 +31,10 @@
                         @endforeach
                     </tbody>
                 </table>
+<<<<<<< HEAD
             </div>
+=======
+>>>>>>> a47108ca40d7a0399ee6c682f65fc717856413fb
         </div>
 </x-admin-layout>
 <script type="module">

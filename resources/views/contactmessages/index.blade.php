@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="h4 mb-0 fw-bold">User Request Messages</h2>
     </div>
 
@@ -31,7 +31,6 @@
                     </tr>
                 @endforeach
             </table>
-        </div>
     </div>
 </x-admin-layout>
 <script type="module">

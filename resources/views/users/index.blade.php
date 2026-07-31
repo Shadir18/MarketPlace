@@ -31,8 +31,6 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-
         </div>
 </x-admin-layout>
 <script type="module">

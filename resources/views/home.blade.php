@@ -74,7 +74,10 @@
         <div class="row g-4">
             @forelse ($postAds as $ad)
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".2s">
-                    <div class="card h-100 bg-white rounded-4 border border-light-subtle shadow-sm overflow-hidden d-flex flex-column">
+                    <div class="card h-100 bg-white rounded-4 border border-light-subtle shadow-sm overflow-hidden d-flex flex-column cursor-pointer" 
+                     data-bs-toggle="modal" 
+                     data-bs-target="#adModal-{{ $ad->id }}"
+                     style="cursor: pointer;">
     
                         <div class="position-relative bg-light" style="height: 220px;">
                             <img src="{{ asset('storage/' . ($ad->images->first()?->postads_img ?? 'no-image.jpg' )) }}" alt="{{ $ad->title }}" class="w-100 h-100 object-fit-cover">
@@ -91,13 +94,13 @@
                             </div>
 
                             <h3 class="h5 fw-bold text-dark mb-2">
-                                <a href="#" class="text-decoration-none text-dark hover-warning">
+                                <a  class="text-decoration-none text-dark hover-warning">
                                     {{ $ad->title }}
                                 </a>
                             </h3>
 
                             <div class="d-flex align-items-center gap-3 text-secondary small mb-3">
-                                <span><i class="bi bi-speedometer2 text-warning me-1"></i> {{ ($ad->mileage) }} km</span>
+                                <span><i class="bi bi-speedometer2 text-warning me-1"></i> {{ ($ad->mileage) }} </span>
                                 <span><i class="bi bi-calendar3 text-warning me-1"></i> {{ $ad->manufacture_year }}</span>
                             </div>
 
@@ -110,6 +113,64 @@
                                     <i class="bi bi-clock text-warning"></i> 
                                     {{ $ad->created_at->diffForHumans() }}
                                 </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="adModal-{{ $ad->id }}" tabindex="-1" aria-labelledby="adModalLabel-{{ $ad->id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content rounded-4 border-0 shadow">
+                            <div class="modal-header border-bottom border-light-subtle">
+                                <h5 class="modal-title fw-bold text-dark" id="adModalLabel-{{ $ad->id }}">
+                                    {{ $ad->title }}
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <div class="rounded-3 overflow-hidden border border-light-subtle">
+                                            <img src="{{ asset('storage/' . ($ad->images->first()?->postads_img ?? 'no-image.jpg')) }}" alt="{{ $ad->title }}" class="img-fluid w-100 object-fit-cover" style="max-height: 300px;">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 d-flex flex-column justify-content-between">
+                                        <div>
+                                            <span class="badge bg-warning text-dark fw-bold mb-2">
+                                                {{ $ad->category->name ?? 'General' }}
+                                            </span>
+                                            <h3 class="text-warning fw-bold mb-3">LKR {{ number_format($ad->price, 2) }}</h3>
+                                            
+                                            <ul class="list-group list-group-flush mb-3 small">
+                                                <li class="list-group-item d-flex justify-content-between px-0">
+                                                    <strong class="text-secondary">Mileage:</strong>
+                                                    <span class="fw-semibold">{{ $ad->mileage }} </span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between px-0">
+                                                    <strong class="text-secondary">Manufacture Year:</strong>
+                                                    <span class="fw-semibold">{{ $ad->manufacture_year }}</span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between px-0">
+                                                    <strong class="text-secondary">Seller:</strong>
+                                                    <span class="fw-semibold">{{ $ad->user->first_name ?? '' }} {{ $ad->user->last_name ?? 'User' }}</span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between px-0">
+                                                    <strong class="text-secondary">Posted:</strong>
+                                                    <span class="fw-semibold">{{ $ad->created_at->format('M d, Y') }}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        @if($ad->description)
+                                            <div class="mt-2">
+                                                <h6 class="fw-bold text-dark mb-1">Description</h6>
+                                                <p class="text-secondary small mb-0">{{ $ad->description }}</p>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer border-top border-light-subtle">
+                                <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>

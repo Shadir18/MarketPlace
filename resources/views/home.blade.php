@@ -74,10 +74,22 @@
         <div class="row g-4">
             @forelse ($postAds as $ad)
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".2s">
-                    <div class="card h-100 bg-white rounded-4 border border-light-subtle shadow-sm overflow-hidden d-flex flex-column cursor-pointer" 
-                     data-bs-toggle="modal" 
-                     data-bs-target="#adModal-{{ $ad->id }}"
-                     style="cursor: pointer;">
+                    <div class="card post-card h-100 bg-white rounded-4 border border-light-subtle shadow-sm overflow-hidden d-flex flex-column cursor-pointer"
+                    data-bs-toggle="modal"
+                    data-bs-target="#adModal"
+                    style="cursor: pointer;"
+                    data-id="{{ $ad->id }}"
+                    data-title="{{ $ad->title }}"
+                    data-price="{{ number_format($ad->price, 2) }}"
+                    data-image="{{ asset('storage/' . ($ad->images->first()?->postads_img ?? 'no-image.jpg')) }}"
+                    data-category-name="{{ $ad->category->name }}"
+                    data-model-name="{{ $ad->model->name }}"
+                    data-type-name="{{ $ad->type->name }}"
+                    data-mileage="{{ $ad->mileage }}"
+                    data-manufacture_year="{{ $ad->manufacture_year }}"
+                    data-seller="{{ $ad->user->first_name }} {{ $ad->user->last_name }}"
+                    data-posted="{{ $ad->created_at->format('M d, Y') }}"
+                    >
     
                         <div class="position-relative bg-light" style="height: 220px;">
                             <img src="{{ asset('storage/' . ($ad->images->first()?->postads_img ?? 'no-image.jpg' )) }}" alt="{{ $ad->title }}" class="w-100 h-100 object-fit-cover">
@@ -117,76 +129,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="adModal-{{ $ad->id }}" tabindex="-1" aria-labelledby="adModalLabel-{{ $ad->id }}" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered">
-                        <div class="modal-content rounded-4 border-0 shadow">
-                            <div class="modal-header border-bottom border-light-subtle">
-                                <h5 class="modal-title fw-bold text-dark" id="adModalLabel-{{ $ad->id }}">
-                                    {{ $ad->title }}
-                                </h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body p-4">
-                                <div class="row g-4">
-                                    <div class="col-md-6">
-                                        <div class="rounded-3 overflow-hidden border border-light-subtle">
-                                            <img src="{{ asset('storage/' . ($ad->images->first()?->postads_img ?? 'no-image.jpg')) }}" alt="{{ $ad->title }}" class="img-fluid w-100 object-fit-cover" style="max-height: 300px;">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 d-flex flex-column justify-content-between">
-                                        <div>
-                                            <span class="badge bg-warning text-dark fw-bold mb-2">
-                                                {{ $ad->category->name ?? 'General' }}
-                                            </span>
-                                            <h3 class="text-warning fw-bold mb-3">LKR {{ number_format($ad->price, 2) }}</h3>
-                                            
-                                            <ul class="list-group list-group-flush mb-3 small">
-                                                <li class="list-group-item d-flex justify-content-between px-0">
-                                                    <strong class="text-secondary">Category: </strong>
-                                                    <span class="fw-semibold">{{ $ad->category->name }}</span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between px-0">
-                                                    <strong class="text-secondary">Model: </strong>
-                                                    <span class="fw-semibold">{{ $ad->model->name }}</span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between px-0">
-                                                    <strong class="text-secondary">Vehicle Type: </strong>
-                                                    <span class="fw-semibold">{{ $ad->type->name }}</span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between px-0">
-                                                    <strong class="text-secondary">Mileage:</strong>
-                                                    <span class="fw-semibold">{{ $ad->mileage }} </span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between px-0">
-                                                    <strong class="text-secondary">Manufacture Year:</strong>
-                                                    <span class="fw-semibold">{{ $ad->manufacture_year }}</span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between px-0">
-                                                    <strong class="text-secondary">Seller:</strong>
-                                                    <span class="fw-semibold">{{ $ad->user->first_name ?? '' }} {{ $ad->user->last_name ?? 'User' }}</span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between px-0">
-                                                    <strong class="text-secondary">Posted:</strong>
-                                                    <span class="fw-semibold">{{ $ad->created_at->format('M d, Y') }}</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        @if($ad->description)
-                                            <div class="mt-2">
-                                                <h6 class="fw-bold text-dark mb-1">Description</h6>
-                                                <p class="text-secondary small mb-0">{{ $ad->description }}</p>
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer border-top border-light-subtle">
-                                <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             @empty
                 <div class="col-12">
                     <div class="text-center py-5 bg-body-tertiary rounded-4 border border-light-subtle">
@@ -198,5 +140,94 @@
             </form>
             @endforelse
         </div>
+        <div class="modal fade" id="adModal" tabindex="-1" aria-labelledby="adModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content rounded-4 border-0 shadow">
+                    <div class="modal-header border-bottom border-light-subtle">
+                        <h5 class="modal-title fw-bold text-dark" id="adModalLabel">
+                            {{-- lead tit --}}
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="rounded-3 overflow-hidden border border-light-subtle">
+                                    <img id="modal-img" src="" alt="" class="img-fluid w-100 object-fit-cover" style="max-height: 300px;">
+                                </div>
+                            </div>
+                            <div class="col-md-6 d-flex flex-column justify-content-between">
+                                <div>
+                                    <span id="modal-category" class="badge bg-warning text-dark fw-bold mb-2"></span>
+                                    <h3 id="modal-price" class="text-warning fw-bold mb-3">LKR</h3>
+                                    
+                                    <ul class="list-group list-group-flush mb-3 small">
+                                        <li class="list-group-item d-flex justify-content-between px-0">
+                                            <strong class="text-secondary">Category: </strong>
+                                            <span id="modal-category-name" class="fw-semibold"></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between px-0">
+                                            <strong class="text-secondary">Model: </strong>
+                                            <span id="modal-model-name" class="fw-semibold"></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between px-0">
+                                            <strong class="text-secondary">Vehicle Type: </strong>
+                                            <span id="modal-type-name" class="fw-semibold"></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between px-0">
+                                            <strong class="text-secondary">Mileage:</strong>
+                                            <span id="modal-mileage" class="fw-semibold"></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between px-0">
+                                            <strong class="text-secondary">Manufacture Year:</strong>
+                                            <span id="modal-manufacture_year" class="fw-semibold"></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between px-0">
+                                            <strong class="text-secondary">Seller:</strong>
+                                            <span id="modal-seller" class="fw-semibold"></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between px-0">
+                                            <strong class="text-secondary">Posted:</strong>
+                                            <span id="modal-posted" class="fw-semibold"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top border-light-subtle">
+                        <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </x-guest-layout>
+<script type="module">
+$(document).ready(function () {
+    $(document).on('click', '.post-card', function () {
+        var title = $(this).data('title');
+        var price = $(this).data('price');
+        var image = $(this).data('image');
+        var categoryName = $(this).data('category-name');
+        var modelName = $(this).data('model-name');
+        var typeName = $(this).data('type-name');
+        var mileage = $(this).data('mileage');
+        var manufactureYear = $(this).data('manufacture_year');
+        var seller = $(this).data('seller');
+        var posted = $(this).data('posted');
+
+        $('#adModalLabel').text(title);
+        $('#modal-img').attr('src', image).attr('alt', title);
+        $('#modal-category').text(categoryName);
+        $('#modal-price').text('LKR ' + price);
+        $('#modal-category-name').text(categoryName);
+        $('#modal-model-name').text(modelName);
+        $('#modal-type-name').text(typeName);
+        $('#modal-mileage').text(mileage);
+        $('#modal-manufacture_year').text(manufactureYear);
+        $('#modal-seller').text(seller);
+        $('#modal-posted').text(posted);
+    });
+});
+</script>

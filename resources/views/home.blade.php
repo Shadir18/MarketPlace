@@ -142,6 +142,18 @@
                                             
                                             <ul class="list-group list-group-flush mb-3 small">
                                                 <li class="list-group-item d-flex justify-content-between px-0">
+                                                    <strong class="text-secondary">Category: </strong>
+                                                    <span class="fw-semibold">{{ $ad->category->name }}</span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between px-0">
+                                                    <strong class="text-secondary">Model: </strong>
+                                                    <span class="fw-semibold">{{ $ad->model->name }}</span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between px-0">
+                                                    <strong class="text-secondary">Vehicle Type: </strong>
+                                                    <span class="fw-semibold">{{ $ad->type->name }}</span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between px-0">
                                                     <strong class="text-secondary">Mileage:</strong>
                                                     <span class="fw-semibold">{{ $ad->mileage }} </span>
                                                 </li>

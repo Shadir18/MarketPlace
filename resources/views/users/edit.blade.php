@@ -1,52 +1,94 @@
 <x-admin-layout>
     <x-slot:heading>Editing : {{ $users->last_name }}</x-slot:heading>
 
-    <div class="container my-5">
-        <div class="card shadow-sm mx-auto" style="max-width: 600px;">
-            <div class="card-header bg-dark text-white p-4">
-                <h4 class="mb-0 fw-bold">Modify </h4>
-            </div>
+    <div class="d-flex align-items-center justify-content-center py-4" style="min-height: 80vh;">
+        <div class="w-100" style="max-width: 480px;">
             
-            <div class="card-body p-4">
-                <form id="editUserForm" method="POST" action="/users/{{ $users->id }}" >
-                    @csrf
-                    
-                    <div class="mb-3">
-                        <label for="first_name" class="form-label fw-bold">First Name</label>
-                        <input id="first_name" name="first_name" type="text" class="form-control" value="{{ $users->first_name }}" required>
-                        <div class="invalid-feedback" id="error-first_name"></div>
-                    </div>
+            <div class="text-center mb-4">
+                <span class="badge text-bg-warning text-dark text-uppercase px-3 py-2 rounded-pill fw-bold tracking-wider mb-3">
+                    User Management
+                </span>
+                <h1 class="h2 fw-bold text-dark mb-1">
+                    Edit User Profile
+                </h1>
+                <p class="text-secondary small mb-0">Update account details for {{ $users->first_name }} {{ $users->last_name }}</p>
+            </div>
 
-                    <div class="mb-3">
-                        <label for="last_name" class="form-label fw-bold">Last Name</label>
-                        <input id="last_name" name="last_name" type="text" class="form-control" value="{{ $users->last_name }}" required>
-                        <div class="invalid-feedback" id="error-last_name"></div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="email" class="form-label fw-bold">Mail</label>
-                        <input id="email" name="email" type="text" class="form-control" value="{{ $users->email }}" required>
-                        <div class="invalid-feedback" id="error-email"></div>
-                    </div>
+            <div class="card bg-white rounded-4 border border-light-subtle shadow-sm overflow-hidden">
+                <div class="card-body p-4 p-sm-5">
 
-                    <div id="div1" class="mb-3">
-                        <label for="password" class="form-label fw-bold">New Password</label>
-                        <input id="password" name="password" type="text" class="form-control" placeholder="New Password" autocomplete="new-password" onfocus="this.type='password'">
-                        <div class="invalid-feedback" id="error-password"></div>
-                    </div>
+                    <form id="editUserForm" method="POST" action="/users/{{ $users->id }}">
+                        @csrf
 
-                    <div id="div2" class="mb-3 ">
-                        <label for="password_confirmation" class="form-label fw-bold">Confirm New Password</label>
-                        <input id="password_confirmation" name="password_confirmation" type="text" class="form-control" placeholder="Confirm New Password" autocomplete="new-password" onfocus="this.type='password'">
-                        <div class="invalid-feedback" id="error-password_confirmation"></div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="first_name" class="form-label text-dark fw-semibold small">First Name</label>
+                            <div class="input-group bg-light border border-light-subtle rounded-3 overflow-hidden mb-2">
+                                <input id="first_name" name="first_name" type="text" value="{{ $users->first_name }}" class="form-control border-0 bg-transparent text-dark ps-3 pe-2 shadow-none" required>
+                                <span class="input-group-text bg-transparent border-0 text-warning px-3">
+                                    <i class="bi bi-person-fill"></i>
+                                </span>
+                            </div>
+                            <div class="invalid-feedback" id="error-first_name"></div>
+                        </div>
 
-                    <div class="border-top pt-3 d-flex justify-content-end gap-2">
-                        <button id="chngpassbtn" type="button" class="btn btn-primary me-auto">Change password</button>
-                        <a href="/users" class="btn btn-light border px-4">Cancel</a>
-                        <button type="submit" class="btn btn-success px-4 fw-bold">Update Context</button>
-                    </div>
-                </form>
+                        <div class="mb-3">
+                            <label for="last_name" class="form-label text-dark fw-semibold small">Last Name</label>
+                            <div class="input-group bg-light border border-light-subtle rounded-3 overflow-hidden mb-2">
+                                <input id="last_name" name="last_name" type="text" value="{{ $users->last_name }}" class="form-control border-0 bg-transparent text-dark ps-3 pe-2 shadow-none" required>
+                                <span class="input-group-text bg-transparent border-0 text-warning px-3">
+                                    <i class="bi bi-person-vcard-fill"></i>
+                                </span>
+                            </div>
+                            <div class="invalid-feedback" id="error-last_name"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label text-dark fw-semibold small">Email Address</label>
+                            <div class="input-group bg-light border border-light-subtle rounded-3 overflow-hidden mb-2">
+                                <input id="email" name="email" type="email" value="{{ $users->email }}" class="form-control border-0 bg-transparent text-dark ps-3 pe-2 shadow-none" required>
+                                <span class="input-group-text bg-transparent border-0 text-warning px-3">
+                                    <i class="bi bi-envelope-fill"></i>
+                                </span>
+                            </div>
+                            <div class="invalid-feedback" id="error-email"></div>
+                        </div>
+
+                        <div id="div1" class="mb-3">
+                            <label for="password" class="form-label text-dark fw-semibold small">New Password</label>
+                            <div class="input-group bg-light border border-light-subtle rounded-3 overflow-hidden mb-2">
+                                <input id="password" name="password" type="text" placeholder="New Password" autocomplete="new-password" onfocus="this.type='password'" class="form-control border-0 bg-transparent text-dark ps-3 pe-2 shadow-none">
+                                <span class="input-group-text bg-transparent border-0 text-warning px-3">
+                                    <i class="bi bi-lock-fill"></i>
+                                </span>
+                            </div>
+                            <div class="invalid-feedback" id="error-password"></div>
+                        </div>
+
+                        <div id="div2" class="mb-4">
+                            <label for="password_confirmation" class="form-label text-dark fw-semibold small">Confirm New Password</label>
+                            <div class="input-group bg-light border border-light-subtle rounded-3 overflow-hidden mb-2">
+                                <input id="password_confirmation" name="password_confirmation" type="text" placeholder="Confirm New Password" autocomplete="new-password" onfocus="this.type='password'" class="form-control border-0 bg-transparent text-dark ps-3 pe-2 shadow-none">
+                                <span class="input-group-text bg-transparent border-0 text-warning px-3">
+                                    <i class="bi bi-shield-lock-fill"></i>
+                                </span>
+                            </div>
+                            <div class="invalid-feedback" id="error-password_confirmation"></div>
+                        </div>
+
+                        <div class="mb-4">
+                            <button id="chngpassbtn" type="button" class="btn btn-outline-warning text-dark border-warning w-100 rounded-pill fw-bold py-2 d-flex align-items-center justify-content-center gap-2">
+                                <i class="bi bi-key-fill"></i> Change Password
+                            </button>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between pt-3 border-top border-light-subtle gap-2">
+                            <a href="/users" class="btn btn-outline-secondary px-4 rounded-pill">Cancel</a>
+                            <button type="submit" class="btn btn-warning text-dark fw-bold rounded-pill px-4 shadow-sm d-flex align-items-center gap-2">
+                                <i class="bi bi-check-circle-fill"></i> Update User
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

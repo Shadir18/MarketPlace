@@ -38,7 +38,7 @@
                     <i class="bi bi-arrow-left me-1"></i> Go Back
                 </a>
 
-                <a href="" class="btn btn-primary">
+                <a href="" class="btn btn-warning">
                     <i class="bi bi-reply-fill me-1"></i> Reply via Email
                 </a>
             </div>

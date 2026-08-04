@@ -1,7 +1,7 @@
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
     <div class="sidebar-brand">
         <a href="/dashboard" class="brand-link">
-            <span class="brand-text fw-light"> {{ env('APP_NAME')}} </span>
+            <span class="brand-text fw-bold fs-5 text-warning"> {{ env('APP_NAME')}} </span>
         </a>
     </div>
 

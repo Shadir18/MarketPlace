@@ -2,9 +2,10 @@
     <div class="container-fluid py-4">
 
         <div class="row mb-4">
-            <div class="col-12">
-                <h3 class="mb-0">Marketplace Dashboard</h3>
-                <p class="text-sm text-muted">Overview of your marketplace statistics and actions.</p>
+            <div class="col-12 text-center text-md-start">
+                <span class="badge text-bg-warning text-dark text-uppercase px-3 py-1 rounded-pill fw-bold small">Overview</span>
+                <h2 class="h3 fw-bold text-dark mt-2 mb-1">Marketplace Dashboard</h2>
+                <p class="text-secondary small mb-0">Overview of your marketplace statistics and actions.</p>
             </div>
         </div>
 
@@ -64,26 +65,25 @@
 
         </div>
 
-        <div class="row mb-4">
-            
-            <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="row g-3 mb-4">
+            <div class="col-lg-4">
                 <div class="card shadow-sm h-100">
-                    <div class="card-header bg-transparent">
-                        <h6 class="mb-0">Quick Actions</h6>
-                    </div>
-                    <div class="card-body d-grid gap-2">
-                        <a href="{{ route('categories.index') }}" class="btn btn-outline-primary">
-                            Categories
-                        </a>
-                        <a href="{{ route('models.index') }}" class="btn btn-outline-primary">
-                            Models
-                        </a>
-                        <a href="{{ route('listed.index') }}" class="btn btn-warning">
-                            Listes Ads
-                        </a>
-                        <a href="{{ route('post_ads.approved') }}" class="btn btn-success">
-                            Approved Ads
-                        </a>
+                    <div class="card-body p-4">
+                        <h6 class="fw-bold text-dark mb-3">Quick Actions</h6>
+                        <div class="d-grid gap-2">
+                            <a href="{{ route('categories.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill fw-semibold py-2">
+                                Categories
+                            </a>
+                            <a href="{{ route('models.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill fw-semibold py-2">
+                                Models
+                            </a>
+                            <a href="{{ route('listed.index') }}" class="btn btn-warning text-dark btn-sm rounded-pill fw-bold py-2 shadow-sm">
+                                Listed Ads
+                            </a>
+                            <a href="{{ route('post_ads.approved') }}" class="btn btn-dark btn-sm rounded-pill fw-bold py-2 shadow-sm">
+                                Approved Ads
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,84 +1,91 @@
 <x-admin-layout>
-    <div class="register-page bg-body-secondary py-2">
-        <div class="register-box mx-auto" style="max-width: 500px;">
-            <div class="card card-outline card-primary shadow-sm">
-                
-                <div class="card-header text-center p-4">
-                    <h2 class="h4 mb-1 fw-bold">Create Account</h2>
-                    <p class="small text-muted mb-0">
-                        Please fill out the details below to create your secure user account.
-                    </p>
-                </div>
+    <div class="d-flex align-items-center justify-content-center py-4" style="min-height: 80vh;">
+        <div class="w-100" style="max-width: 480px;">
+            
+            <div class="text-center mb-4">
+                <span class="badge text-bg-warning text-dark text-uppercase px-3 py-2 rounded-pill fw-bold tracking-wider mb-3">
+                    Get Started
+                </span>
+                <h1 class="h2 fw-bold text-dark mb-1">
+                    Create Account
+                </h1>
+                <p class="text-secondary small mb-0">Fill in the details below to register a new user account.</p>
+            </div>
 
-                <div class="card-body register-card-body p-4">
-                    <div id="success-alert" class="alert alert-success d-none mb-3 fw-bold"></div>
+            <div class="card bg-white rounded-4 border border-light-subtle shadow-sm overflow-hidden">
+                <div class="card-body p-4 p-sm-5">
 
-                    <form id="registerForm" class="py-10">
+                    <div id="success-alert" class="alert alert-success rounded-3 d-none mb-4 small border-0 shadow-sm"></div>
+
+                    <form id="registerForm">
                         @csrf
-                        
+
                         <x-form-field class="mb-3">
-                            <x-form-label for="first_name" class="fw-bold mb-1">First Name</x-form-label>
-                            <div class="input-group ">
-                                <input  id="first_name" name="first_name" placeholder="Shadir" class="form-control mb-2" required>
-                                 <div class="input-group-text bg-light border-start-0 text-muted">
-                                    <span class="bi bi-person"></span>
-                                </div>
+                            <x-form-label for="first_name" class="form-label text-dark fw-semibold small">First Name</x-form-label>
+                            <div class="input-group bg-light border border-light-subtle rounded-3 overflow-hidden mb-2">
+                                <input id="first_name" name="first_name" type="text" placeholder="Shadir" class="form-control border-0 bg-transparent text-dark ps-3 pe-2 shadow-none" required>
+                                <span class="input-group-text bg-transparent border-0 text-warning px-3">
+                                    <i class="bi bi-person-fill"></i>
+                                </span>
                             </div>
-                            <span id="first_name-error" class="text-danger small mt-1 d-none d-block"></span>
+                            <span id="first_name-error" class="text-danger small mt-1 d-none"></span>
                         </x-form-field>
 
                         <x-form-field class="mb-3">
-                            <x-form-label for="last_name" class="fw-bold mb-1">Last Name</x-form-label>
-                            <div class="input-group">
-                                <input id="last_name" name="last_name" placeholder="Amjard" class="form-control mb-2" required />
-                                <div class="input-group-text bg-light border-start-0 text-muted">
-                                    <span class="bi bi-person-vcard"></span>
-                                </div>
+                            <x-form-label for="last_name" class="form-label text-dark fw-semibold small">Last Name</x-form-label>
+                            <div class="input-group bg-light border border-light-subtle rounded-3 overflow-hidden mb-2">
+                                <input id="last_name" name="last_name" type="text" placeholder="Amjard" class="form-control border-0 bg-transparent text-dark ps-3 pe-2 shadow-none" required>
+                                <span class="input-group-text bg-transparent border-0 text-warning px-3">
+                                    <i class="bi bi-person-vcard-fill"></i>
+                                </span>
                             </div>
-                            <span id="last_name-error" class="text-danger small mt-1 d-none d-block"></span>
+                            <span id="last_name-error" class="text-danger small mt-1 d-none"></span>
                         </x-form-field>
 
                         <x-form-field class="mb-3">
-                            <x-form-label for="email" class="fw-bold mb-1">Email Address</x-form-label>
-                            <div class="input-group">
-                                <input id="email" name="email" type="email" placeholder="testuser@gmail.com" class="form-control mb-2" required />
-                                <div class="input-group-text bg-light border-start-0 text-muted">
-                                    <span class="bi bi-envelope"></span>
-                                </div>
+                            <x-form-label for="email" class="form-label text-dark fw-semibold small">Email Address</x-form-label>
+                            <div class="input-group bg-light border border-light-subtle rounded-3 overflow-hidden mb-2">
+                                <input id="email" name="email" type="email" placeholder="testuser@gmail.com" class="form-control border-0 bg-transparent text-dark ps-3 pe-2 shadow-none" required>
+                                <span class="input-group-text bg-transparent border-0 text-warning px-3">
+                                    <i class="bi bi-envelope-fill"></i>
+                                </span>
                             </div>
-                            <span id="email-error" class="text-danger small mt-1 d-none d-block"></span>
+                            <span id="email-error" class="text-danger small mt-1 d-none"></span>
                         </x-form-field>
 
                         <x-form-field class="mb-3">
-                            <x-form-label for="password" class="fw-bold mb-1">Password</x-form-label>
-                            <div class="input-group">
-                                <input id="password" name="password" type="password" placeholder="••••••••" class="form-control mb-2" required />
-                                <div class="input-group-text bg-light border-start-0 text-muted">
-                                    <span class="bi bi-lock-fill"></span>
-                                </div>
+                            <x-form-label for="password" class="form-label text-dark fw-semibold small">Password</x-form-label>
+                            <div class="input-group bg-light border border-light-subtle rounded-3 overflow-hidden mb-2">
+                                <input id="password" name="password" type="password" placeholder="••••••••" class="form-control border-0 bg-transparent text-dark ps-3 pe-2 shadow-none" required>
+                                <span class="input-group-text bg-transparent border-0 text-warning px-3">
+                                    <i class="bi bi-lock-fill"></i>
+                                </span>
                             </div>
-                            <span id="password-error" class="text-danger small mt-1 d-none d-block"></span>
+                            <span id="password-error" class="text-danger small mt-1 d-none"></span>
                         </x-form-field>
 
                         <x-form-field class="mb-4">
-                            <x-form-label for="password_confirmation" class="fw-bold mb-1">Confirm Password</x-form-label>
-                            <div class="input-group">
-                                <input id="password_confirmation" name="password_confirmation" type="password" placeholder="••••••••" class="form-control mb-2" required />
-                                <div class="input-group-text bg-light border-start-0 text-muted">
-                                    <span class="bi bi-shield-lock"></span>
-                                </div>
+                            <x-form-label for="password_confirmation" class="form-label text-dark fw-semibold small">Confirm Password</x-form-label>
+                            <div class="input-group bg-light border border-light-subtle rounded-3 overflow-hidden mb-2">
+                                <input id="password_confirmation" name="password_confirmation" type="password" placeholder="••••••••" class="form-control border-0 bg-transparent text-dark ps-3 pe-2 shadow-none" required>
+                                <span class="input-group-text bg-transparent border-0 text-warning px-3">
+                                    <i class="bi bi-shield-lock-fill"></i>
+                                </span>
                             </div>
-                            <span id="password_confirmation-error" class="text-danger small mt-1 d-none d-block"></span>
+                            <span id="password_confirmation-error" class="text-danger small mt-1 d-none"></span>
                         </x-form-field>
 
-                        <div class="d-flex justify-content-between align-items-center border-top pt-3">
-                            <a href="/users" class="btn btn-light border px-4">Go Back</a>
-                            <x-form-button type="submit" class="btn btn-primary px-4 fw-bold">Register</x-form-button>
+                        <div class="d-flex align-items-center justify-content-between pt-3 border-top border-light-subtle gap-2">
+                            <a href="/users" class="btn btn-outline-secondary px-4 rounded-pill">Cancel</a>
+                            <x-form-button type="submit" class="btn btn-warning text-dark fw-bold rounded-pill px-4 shadow-sm d-flex align-items-center gap-2">
+                                <i class="bi bi-person-plus-fill fs-5"></i> Register
+                            </x-form-button>
                         </div>
                     </form>
-                </div>
 
+                </div>
             </div>
+
         </div>
     </div>
 </x-admin-layout>

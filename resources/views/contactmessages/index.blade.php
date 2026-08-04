@@ -3,7 +3,7 @@
         <h2 class="h4 mb-0 fw-bold">User Request Messages</h2>
     </div>
 
-    <div class="card shadow-sm border-0 bg-white p-4">
+    <div class="card shadow-sm border-0 bg-white p-2">
         <div class="table-responsive">
             <table id="ctcTable" class="table table-striped table-hover align-middle mb-0 w-100 border">
                 <thead class="table-light">
@@ -39,9 +39,16 @@
         axios.get('/post_ads/approved')
             .then(function (response) {
                 $('#approvetable').DataTable({
-                    "dom": "<'row mb-3 align-items-center'<'col-md-6'l><'col-md-6 d-flex justify-content-end'f>>" +
-                    "<'row'<'col-md-12'tr>>" +
-                    "<'row mt-3 align-items-center'<'col-md-6'i><'col-md-6 d-flex justify-content-end'p>>",
+                    layout:{
+                        bottomEnd: {
+                            paging: {
+                                firstLast: false
+                            }
+                        }
+                    },
+                    pageLength: 25,
+                    scrollY: 600,
+                    scroller: true,
             });
         });
     });

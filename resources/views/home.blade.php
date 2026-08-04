@@ -139,6 +139,7 @@
                 </div>
             </form>
             @endforelse
+            <div>{{ $postAds->links() }}</div>
         </div>
         <div class="modal fade" id="adModal" tabindex="-1" aria-labelledby="adModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">

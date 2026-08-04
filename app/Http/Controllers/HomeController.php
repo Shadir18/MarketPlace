@@ -35,7 +35,7 @@ class HomeController extends Controller
         } else {
             $query->latest();
         }
-        $postAds = $query->get();
+        $postAds = $query->latest()->paginate(20);
         $categories = Category::all();
         return view('home', compact('postAds', 'categories'));
     }

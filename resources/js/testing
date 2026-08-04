@@ -1,15 +1,17 @@
+
 import './bootstrap';
-import $ from 'jquery';
-window.$ = window.jQuery = $;
+
 import axios from 'axios';
 window.axios = axios;
-import DataTable from 'datatables.net-bs5';
+import $ from 'jquery';
+window.$ = window.jQuery = $;
 
 axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]')?.content;
 
+// Import Bootstrap/Popper dependencies
 import 'popper.js';
-import "bootstrap"
-import "admin-lte"
+import 'bootstrap';
+import 'admin-lte';
 import 'datatables.net-responsive';
 import 'datatables.net-responsive-bs5';
 import 'datatables.net-searchbuilder-bs5';

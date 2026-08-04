@@ -1,4 +1,4 @@
-<nav class="container-fluid navbar navbar-expand-md bg-body-secondary shadow" data-bs-theme="dark">
+<nav class="container-fluid navbar navbar-expand-md bg-body-secondary sticky-top shadow" data-bs-theme="dark">
   <div class="container fluid">
     <div class="collapse navbar-collapse" id="navbarNav">
       <div class="navbar-nav w-100 d-flex align-items-center">

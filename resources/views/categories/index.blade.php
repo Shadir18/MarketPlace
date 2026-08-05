@@ -22,7 +22,11 @@
                                 <td class="ps-3 text-muted">{{ $category->id }}</td>
                                 <td> <strong>{{ $category->name }}</strong> </td>
                                 <td>{{ $category->slug }}</td>                                
-                                <td>{{ $category->is_active }}</td>
+                                <td>
+                                    <span class="badge {{ $category->is_active ? 'bg-success' : 'bg-secondary' }}">
+                                        {{ $category->is_active ? 'Active' : 'Inactive' }}
+                                    </span>
+                                </td>
                                 <td class="text-end pe-3">
                                     <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-warning fw-bold me-1">Edit</a>
                                     <button data-id="{{ $category->id }}" class="btn btn-sm btn-danger fw-bold delete-btn">Delete</button>

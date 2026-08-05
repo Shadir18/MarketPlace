@@ -39,6 +39,17 @@
                     @endif
 
                     <div class="d-flex align-items-center bg-white border border-light-subtle rounded-4 px-3 py-2 shadow-sm">
+                        <span class="text-secondary small me-2">Show:</span>
+                        <select name="perpage" class="form-select border-0 bg-transparent p-0 text-dark fw-bold small shadow-none cursor-pointer" style="width: 3cm;" onchange="this.form.submit()">
+                            @foreach ([5, 10, 25, 50, 100] as $size)
+                                <option value="{{ $size }}" @selected(($postAdsPerPage ?? request('perpage')) == $size)>
+                                    {{ $size }} Entries
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="d-flex align-items-center bg-white border border-light-subtle rounded-4 px-3 py-2 shadow-sm">
                         <i class="bi bi-sort-down text-warning me-2 fs-5"></i>
                         <span class="text-secondary small me-2 d-none d-sm-inline">Sort by:</span>
                         <select name="sort" class="form-select border-0 bg-transparent p-0 text-dark fw-bold small shadow-none cursor-pointer" style="width: auto;" onchange="this.form.submit()">

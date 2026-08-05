@@ -4,7 +4,7 @@
             <a href="{{ route('models.create') }}" class="btn btn-primary btn-sm fw-bold">Add New</a>
         </div>
 
-        <div class="card shadow-sm border-0 bg-white p-2">
+
             <div class="table-responsive">
                 <table id="ModelTable" class="table table-striped table-hover align-middle mb-0 w-100 border">
                     <thead class="table-light">
@@ -33,7 +33,6 @@
                 </table>
             </div>
 
-        </div>
 </x-admin-layout>
 <script type="module">
     $(document).ready(function (){

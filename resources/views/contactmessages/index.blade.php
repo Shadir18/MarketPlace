@@ -3,7 +3,6 @@
         <h2 class="h4 mb-0 fw-bold">User Request Messages</h2>
     </div>
 
-    <div class="card shadow-sm border-0 bg-white p-2">
         <div class="table-responsive">
             <table id="ctcTable" class="table table-striped table-hover align-middle mb-0 w-100 border">
                 <thead class="table-light">
@@ -32,13 +31,12 @@
                 @endforeach
             </table>
         </div>
-    </div>
 </x-admin-layout>
 <script type="module">
     $(document).ready(function () {
         axios.get('/post_ads/approved')
             .then(function (response) {
-                $('#approvetable').DataTable({
+                $('#ctcTable').DataTable({
                     layout:{
                         bottomEnd: {
                             paging: {

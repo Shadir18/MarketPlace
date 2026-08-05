@@ -3,7 +3,6 @@
             <h2 class="h4 mb-0 fw-bold">Approved Vehicle Advertisements</h2>
         </div>
 
-        <div class="card shadow-sm border-0 bg-white p-2">
             <div class="table-responsive">
                 <table id="rejecttable" class="table table-striped table-hover align-middle mb-0 w-100 border">
                     <thead class="table-light">
@@ -34,7 +33,6 @@
                     @endforeach
                 </table>
             </div>
-        </div>
 </x-admin-layout>
 <script type="module">
     $(document).ready(function () {

@@ -22,7 +22,11 @@
                                 <td class="ps-3 text-muted">{{ $model->id }}</td>
                                 <td> <strong>{{ $model->name }}</strong> </td>
                                 <td>{{ $model->slug }}</td>                                
-                                <td>{{ $model->is_active }}</td>
+                                <td>
+                                    <span class="badge {{ $model->is_active ? 'bg-success' : 'bg-secondary' }}">
+                                        {{ $model->is_active ? 'Active' : 'Inactive' }}
+                                    </span>
+                                </td>
                                 <td class="text-end pe-3">
                                     <a href="{{ route('models.edit', $model->id) }}" class="btn btn-sm btn-warning fw-bold me-1">Edit</a>
                                     <button data-id="{{ $model->id }}" class="btn btn-sm btn-danger fw-bold delete-btn">Delete</button>

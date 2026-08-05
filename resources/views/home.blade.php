@@ -40,12 +40,10 @@
 
                     <div class="d-flex align-items-center bg-white border border-light-subtle rounded-4 px-3 py-2 shadow-sm">
                         <span class="text-secondary small me-2">Show:</span>
-                        <select name="perpage" class="form-select border-0 bg-transparent p-0 text-dark fw-bold small shadow-none cursor-pointer" style="width: 3cm;" onchange="this.form.submit()">
-                            @foreach ([5, 10, 25, 50, 100] as $size)
-                                <option value="{{ $size }}" @selected(($postAdsPerPage ?? request('perpage')) == $size)>
-                                    {{ $size }} Entries
-                                </option>
-                            @endforeach
+                        <select name="perpage" class="form-select border-0 bg-transparent p-0 text-dark fw-bold small shadow-none cursor-pointer" style="width: 1.5cm;" onchange="location = this.value;">
+                            <option value="?per_page=25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
+                            <option value="?per_page=50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
+                            <option value="?per_page=100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
                         </select>
                     </div>
 

@@ -4,8 +4,7 @@
             <a href="{{ route('categories.create') }}" class="btn btn-primary btn-sm fw-bold">Add New</a>
         </div>
 
-        <div class="card shadow-sm border-0 bg-white p-4">
-            <div class="table-responsive">
+            <div class="table-responsive p-0">
                 <table id="CategoryTable" class="table table-striped table-hover align-middle mb-0 w-100 border">
                     <thead class="table-light">
                         <tr>
@@ -37,20 +36,20 @@
                 </table>
             </div>
 
-        </div>
 </x-admin-layout>
 <script type="module">
     $(document).ready(function (){
         $('#CategoryTable').DataTable({
-            "dom": "<'row mb-3 align-items-center'<'col-md-6'l><'col-md-6 d-flex justify-content-end'f>>" +
-               "<'row'<'col-md-12'tr>>" +
-              "<'row mt-3 align-items-center'<'col-md-6'i><'col-md-6 d-flex justify-content-end'p>>",
-        columnDefs: [
-            {
-                targets: 4,
-                orderable: false
-            }
-        ]
+            layout:{
+                bottomEnd: {
+                    paging: {
+                        firstLast: false
+                    }
+                }
+            },
+            pageLength: 25,
+            scrollY: 600,
+            scroller: true,
     });
 
         //Delete Function

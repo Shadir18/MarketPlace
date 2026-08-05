@@ -14,8 +14,8 @@
         @if(!request()->is('/'))
             <x-sidebar />
         @endif
-        <main class="app-main pt-1 mt-1">
-            <div class="container-fluid p-2">
+        <main class="app-main pt-1 mt-2">
+            <div class="container-fluid p-0">
                 @if(isset($heading))
                     <div class="mb-4">
                         <h1 class="h3 mb-0 text-gray-800">{{ $heading }}</h1>

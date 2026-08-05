@@ -3,7 +3,6 @@
             <h2 class="h4 mb-0 fw-bold">Approved Vehicle Advertisements</h2>
         </div>
 
-        <div class="card shadow-sm border-0 bg-white p-4">
             <div class="table-responsive">
                 <table id="approvetable" class="table table-striped table-hover align-middle mb-0 w-100 border">
                     <thead class="table-light">
@@ -34,16 +33,22 @@
                     @endforeach
                 </table>
             </div>
-        </div>
 </x-admin-layout>
 <script type="module">
     $(document).ready(function () {
         axios.get('/post_ads/approved')
             .then(function (response) {
                 $('#approvetable').DataTable({
-                    "dom": "<'row mb-3 align-items-center'<'col-md-6'l><'col-md-6 d-flex justify-content-end'f>>" +
-                    "<'row'<'col-md-12'tr>>" +
-                    "<'row mt-3 align-items-center'<'col-md-6'i><'col-md-6 d-flex justify-content-end'p>>",
+                    layout:{
+                        bottomEnd: {
+                            paging: {
+                                firstLast: false
+                            }
+                        }
+                    },
+                    pageLength: 25,
+                    scrollY: 600,
+                    scroller: true,
             });
         });
     });

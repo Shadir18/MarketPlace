@@ -22,6 +22,7 @@
                 </form>
             </div>
         </div>
+        
 
         <div class="mt-5 mb-4 pb-3 border-bottom border-light-subtle">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
@@ -151,9 +152,9 @@
                 </div>
             </form>
             @endforelse
-            <div>
-                {{ $postAds->links() }}
-            </div>
+        </div>
+        <div class="pagination pt-4">
+            {{ $postAds->links() }}
         </div>
         <div class="modal fade" id="adModal" tabindex="-1" aria-labelledby="adModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">

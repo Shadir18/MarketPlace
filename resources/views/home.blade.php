@@ -82,19 +82,10 @@
                     </a>
                 @endforeach
             </div>
-            {{-- <form method="get" action="{{ route('home') }}" class="pt-2 mb-2">
-                <label for="per_page">Shows: </label>
-                <select name="per_page" onchange="this.form.submit()">
-                    <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
-                    <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
-                    <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
-                </select>
-            </form>
-        </div> --}}
 
         <div class="row g-4">
             @forelse ($postAds as $ad)
-                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".2s">
+                <div class="col-md-6 pt-2 col-lg-4 wow fadeInUp" data-wow-delay=".2s">
                     <div class="card post-card h-100 bg-white rounded-4 border border-light-subtle shadow-sm overflow-hidden d-flex flex-column cursor-pointer"
                     data-bs-toggle="modal"
                     data-bs-target="#adModal"
@@ -160,6 +151,9 @@
                 </div>
             </form>
             @endforelse
+            <div>
+                {{ $postAds->links() }}
+            </div>
         </div>
         <div class="modal fade" id="adModal" tabindex="-1" aria-labelledby="adModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">

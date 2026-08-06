@@ -35,7 +35,8 @@ class HomeController extends Controller
         } else {
             $query->latest();
         }
-        $postAds = $query->get();
+        $perpage = $request->input('per_page', 25);
+        $postAds = $query->paginate($perpage)->withQueryString();
         $categories = Category::all();
         return view('home', compact('postAds', 'categories'));
     }

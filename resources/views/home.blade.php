@@ -69,6 +69,14 @@
                     </a>
                 @endforeach
             </div>
+            <form method="get" action="{{ route('home') }}" class="pt-2 mb-2">
+                <label for="per_page">Shows: </label>
+                <select name="per_page" onchange="this.form.submit()">
+                    <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
+                    <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
+                    <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
+                </select>
+            </form>
         </div>
 
         <div class="row g-4">

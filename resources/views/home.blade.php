@@ -89,6 +89,7 @@
                     data-manufacture_year="{{ $ad->manufacture_year }}"
                     data-seller="{{ $ad->user->first_name }} {{ $ad->user->last_name }}"
                     data-posted="{{ $ad->created_at->format('M d, Y') }}"
+                    data-contact="{{ $ad->user->email}}"
                     >
     
                         <div class="position-relative bg-light" style="height: 220px;">
@@ -195,6 +196,10 @@
                             </div>
                         </div>
                     </div>
+                        <li class="text-end list-unstyled mb-1">
+                            <strong class="text-secondary">Contact info:</strong>
+                            <span id="modal-contact" class="text-end fw-semibold pe-4 mb-2"></span>
+                        </li>
                     <div class="modal-footer border-top border-light-subtle">
                         <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
                     </div>
@@ -216,6 +221,7 @@ $(document).ready(function () {
         var manufactureYear = $(this).data('manufacture_year');
         var seller = $(this).data('seller');
         var posted = $(this).data('posted');
+        var contact = $(this).data('contact');
 
         $('#adModalLabel').text(title);
         $('#modal-img').attr('src', image).attr('alt', title);
@@ -228,6 +234,7 @@ $(document).ready(function () {
         $('#modal-manufacture_year').text(manufactureYear);
         $('#modal-seller').text(seller);
         $('#modal-posted').text(posted);
+        $('#modal-contact').text(contact)
     });
 });
 </script>

@@ -31,12 +31,25 @@
                 </div>
 
                 <form action="{{ route('home') }}" method="GET" class="d-flex align-items-center gap-2">
+                    @if(request('per_page'))
+                        <input type="hidden" name="per_page" value="{{ request('per_page') }}">
+                    @endif
                     @if(request('query'))
                         <input type="hidden" name="query" value="{{ request('query') }}">
                     @endif
                     @if(request('category'))
                         <input type="hidden" name="category" value="{{ request('category') }}">
                     @endif
+
+                    <div class="d-flex align-items-center bg-white border border-light-subtle rounded-4 px-3 py-2 shadow-sm">
+                        <i class="bi bi-sort-down text-warning me-2 fs-5"></i>
+                        <span class="text-secondary small me-2 d-none d-sm-inline">Shows</span>
+                        <select name="per_page" class="form-select border-0 bg-transparent p-0 text-dark fw-bold small shadow-none cursor-pointer" style="width: 1.5cm;" onchange="this.form.submit()">
+                            <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
+                            <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
+                            <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
+                        </select>
+                    </div>
 
                     <div class="d-flex align-items-center bg-white border border-light-subtle rounded-4 px-3 py-2 shadow-sm">
                         <i class="bi bi-sort-down text-warning me-2 fs-5"></i>
@@ -69,7 +82,7 @@
                     </a>
                 @endforeach
             </div>
-            <form method="get" action="{{ route('home') }}" class="pt-2 mb-2">
+            {{-- <form method="get" action="{{ route('home') }}" class="pt-2 mb-2">
                 <label for="per_page">Shows: </label>
                 <select name="per_page" onchange="this.form.submit()">
                     <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
@@ -77,7 +90,7 @@
                     <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
                 </select>
             </form>
-        </div>
+        </div> --}}
 
         <div class="row g-4">
             @forelse ($postAds as $ad)

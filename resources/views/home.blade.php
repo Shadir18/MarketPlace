@@ -184,22 +184,58 @@
                                             <span id="modal-manufacture_year" class="fw-semibold"></span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between px-0">
-                                            <strong class="text-secondary">Seller:</strong>
-                                            <span id="modal-seller" class="fw-semibold"></span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between px-0">
                                             <strong class="text-secondary">Posted:</strong>
                                             <span id="modal-posted" class="fw-semibold"></span>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
+                            <div class="card shadow-sm" style="max-width: 800px;">
+                                <div class="table-responsive">
+                                    <table class="table align-middle mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <li class="list-group-item d-flex justify-content ">
+                                                        <span class="text-muted small text-uppercase fw-bold pe-1">Listed By:</span>
+                                                        <h6 id="modal-seller" class="fw-bold text-dark mb-0 fs-6"></h6>
+                                                    </li>
+                                                    <small id="modal-contact" class="text-secondary"></small>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <a href="tel:+941234567894" class="text-decoration-none fw-bold text-dark align-items-center">
+                                                    <i class="bi bi-telephone-fill text-warning fs-5"></i>
+                                                    <span>+94 123 4567894</span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td >
+                                                    <a href="#" class="btn btn-primary align-items-center w-25 gap-2">
+                                                    <i class="bi bi-chat-dots-fill"></i>
+                                                    <span>Chat with Seller</span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <a href="https://wa.me/941234567894" id="modal-whatsapp" target="_blank" class="btn btn-success gap-2 w-25 shadow-sm">
+                                                    <i class="bi bi-whatsapp"></i>
+                                                    <span>WhatsApp</span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                        <li class="text-end list-unstyled mb-1">
-                            <strong class="text-secondary">Contact info:</strong>
-                            <span id="modal-contact" class="text-end fw-semibold pe-4 mb-2"></span>
-                        </li>
                     <div class="modal-footer border-top border-light-subtle">
                         <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
                     </div>

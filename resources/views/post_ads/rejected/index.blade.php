@@ -1,6 +1,6 @@
 <x-admin-layout>
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="h4 mb-0 fw-bold">Approved Vehicle Advertisements</h2>
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h2 class="h4 p-2 fw-bold">Rejected Vehicle Advertisements</h2>
         </div>
 
             <div class="table-responsive">

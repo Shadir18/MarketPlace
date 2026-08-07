@@ -41,7 +41,7 @@
                         <li class="nav-item">
                             <x-nav-link href="/post_ads/rejected" :active="request()->is('post_ads/rejected')">
                                 <i class="nav-icon bi bi-circle"></i>
-                                <p>Rejected</p>
+                                <p>Invalid Name</p>
                             </x-nav-link>
                         </li>
                     </ul>

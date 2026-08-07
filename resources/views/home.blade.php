@@ -194,7 +194,7 @@
                                 <div class="justify-content-start">
                                     <div class="container-fluid">
                                         <div class="row pt-3">
-                                            <div class="col-6 col-md-4">
+                                            <div class="col-6 offset-6">
                                                 <div class="d-flex align-items-center">
                                                     <span class="text-muted small text-uppercase fw-bold pe-1">Listed By:</span>
                                                     <h6 id="modal-seller" class="fw-bold text-dark mb-0 fs-6"></h6>
@@ -203,7 +203,7 @@
                                             </div>
                                         </div>
                                         <div class="row pt-1 mb-2">
-                                            <div class="col-6 col-md-4">
+                                            <div class="col-6 offset-6">
                                                 <div class="d-flex align-items-center">
                                                     <a href="tel:+941234567894" class="text-decoration-none fw-bold text-warning align-items-center">
                                                     <i class="bi bi-telephone-fill fs-5"><span class="text-dark p-1 fs-6">+94 123 4567894</span></i>
@@ -212,9 +212,9 @@
                                             </div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6 col-md-4">
+                                            <div class="col-6 offset-6">
                                                 <div class="d-flex align-items-center">
-                                                    <a href="#" class="btn btn-primary align-items-center w-75 gap-2">
+                                                    <a href="#" class="btn btn-primary align-items-center w-50 gap-2">
                                                     <i class="bi bi-chat-dots-fill"></i>
                                                     <span>Chat with Seller</span>
                                                     </a>
@@ -222,9 +222,9 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <div class="col-6 col-md-4">
+                                            <div class="col-6 offset-6">
                                                 <div class="d-flex align-items-center">
-                                                    <a href="https://wa.me/941234567894" id="modal-whatsapp" target="_blank" class="btn btn-success w-75 gap-2 shadow-sm">
+                                                    <a href="https://wa.me/941234567894" id="modal-whatsapp" target="_blank" class="btn btn-success w-50 gap-2 shadow-sm">
                                                     <i class="bi bi-whatsapp"></i>
                                                     <span>WhatsApp</span>
                                                     </a>

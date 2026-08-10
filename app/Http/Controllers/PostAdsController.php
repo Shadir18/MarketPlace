@@ -25,7 +25,7 @@ class PostAdsController extends Controller
     //approved ads page
     public function approvedIndex()
     {
-        $postAds = PostAds::with(['user'])->latest()->where('status', 1)->get();
+        $postAds = PostAds::with(['user'])->latest()->whereIn('status', [1, 3])->get();
         return view('post_ads.approved.index', compact('postAds'));
     }
 
@@ -123,6 +123,29 @@ class PostAdsController extends Controller
                 'data' => $postAd
             ], 201);
         } catch (\Throwable $th){
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => $th->getMessage(),
+                'line' => $th->getLine(),
+                'file' => $th->getFile(),
+            ], 500);
+        }
+    }
+
+    public function sold(string $id)
+    {
+        try{
+            DB::beginTransaction();
+            $postAds = PostAds::findOrFail($id);
+            $postAds->update(['status' => 3]);
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => 'Post Ad solded!',
+                'data' => $postAds
+            ], 200);
+        } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json([
                 'success' => false,

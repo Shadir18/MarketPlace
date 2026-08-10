@@ -16,6 +16,7 @@
                             <th>Mileage</th>
                             <th>Price (LKR)</th>
                             <th>Posted By</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     @foreach ($postAds as $ad)
@@ -26,9 +27,23 @@
                             <td> {{$ad->type->name }} </td>
                             <td> {{$ad->model->name }} </td>
                             <td> {{ $ad->manufacture_year }} </td>
-                            <td> {{ $ad->mileage }} </td>
+                            <td style="width: 10%;"> {{ $ad->mileage }} </td>
                             <td> {{ $ad->price }} </td>
                             <td> {{ $ad->user->last_name }}</td>
+                            <td class="text-center">
+                                @if($ad->status == 3)
+                                <button type="button" class="btn btn-secondary btn-sm fw-bold w-50" data-id="{{ $ad->id }}" disabled>
+                                    Sold Out
+                                </button>
+                                @else
+                                <button type="button" class="btn btn-success btn-sm fw-bold btn-sold w-50" data-id="{{ $ad->id }}">
+                                    Sold
+                                </button>
+                                @endif
+                                <button type="button" class="btn btn-danger btn-sm fw-bold btn-reject " data-id="{{ $ad->id }}">
+                                    Reject
+                                </button>
+                            </td>
                         </tr>
                     @endforeach
                 </table>
@@ -50,6 +65,40 @@
                     scrollY: 600,
                     scroller: true,
             });
+        });
+        //MARK AS SOLD 
+        $('#approvetable').on('click', '.btn-sold', function (e){
+            e.preventDefault();
+            const $button = $(this);
+            const id = $button.data('id');
+            if (confirm('Are you sure you want changed this product as Sold?')){
+                axios.patch(`/post_ads/${id}/sold`)
+                .then(function (response){
+                    $button.text('Sold out');
+                    $button.removeClass('btn-success');
+                    $button.addClass('btn-secondary');
+                    $button.prop('disabled', true);
+                })
+                .catch(function (error) {
+                    console.error(error.response.data);
+                });
+            }
+        });
+
+        //rejected
+        $('#approvetable').on('click', '.btn-reject', function (e){
+            e.preventDefault();
+            const id = $(this).data('id');
+            if (confirm('Are you sure you want to reject this product?')){
+                axios.patch(`/post_ads/${id}/reject`)
+                .then(function (response){
+                    window.location.href = '/post_ads/approved';
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.error(error.response.data);
+                });
+            }
         });
     });
 </script>

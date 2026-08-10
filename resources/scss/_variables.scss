@@ -121,3 +121,16 @@ $navbar-dark-hover-color:     #fff;
     background: rgba(255, 255, 255, 0.550);
   }
 }
+// pagination theme
+.pagination .page-link {
+  color: #ffc107;
+}
+.pagination .page-item.active .page-link {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #212529;
+}
+.pagination .page-item .page-link:hover {
+  color: $warning;
+  border-color: $warning;
+}

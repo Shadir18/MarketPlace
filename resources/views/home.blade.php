@@ -22,6 +22,7 @@
                 </form>
             </div>
         </div>
+        
 
         <div class="mt-5 mb-4 pb-3 border-bottom border-light-subtle">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
@@ -31,12 +32,25 @@
                 </div>
 
                 <form action="{{ route('home') }}" method="GET" class="d-flex align-items-center gap-2">
+                    @if(request('per_page'))
+                        <input type="hidden" name="per_page" value="{{ request('per_page') }}">
+                    @endif
                     @if(request('query'))
                         <input type="hidden" name="query" value="{{ request('query') }}">
                     @endif
                     @if(request('category'))
                         <input type="hidden" name="category" value="{{ request('category') }}">
                     @endif
+
+                    <div class="d-flex align-items-center bg-white border border-light-subtle rounded-4 px-3 py-2 shadow-sm">
+                        <i class="bi bi-sort-down text-warning me-2 fs-5"></i>
+                        <span class="text-secondary small me-2 d-none d-sm-inline">Shows</span>
+                        <select name="per_page" class="form-select border-0 bg-transparent p-0 text-dark fw-bold small shadow-none cursor-pointer" style="width: 1.5cm;" onchange="this.form.submit()">
+                            <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
+                            <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
+                            <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
+                        </select>
+                    </div>
 
                     <div class="d-flex align-items-center bg-white border border-light-subtle rounded-4 px-3 py-2 shadow-sm">
                         <i class="bi bi-sort-down text-warning me-2 fs-5"></i>
@@ -69,11 +83,10 @@
                     </a>
                 @endforeach
             </div>
-        </div>
 
         <div class="row g-4">
             @forelse ($postAds as $ad)
-                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".2s">
+                <div class="col-md-6 pt-2 col-lg-4 wow fadeInUp" data-wow-delay=".2s">
                     <div class="card post-card h-100 bg-white rounded-4 border border-light-subtle shadow-sm overflow-hidden d-flex flex-column cursor-pointer"
                     data-bs-toggle="modal"
                     data-bs-target="#adModal"
@@ -139,6 +152,9 @@
                 </div>
             </form>
             @endforelse
+        </div>
+        <div class="pagination pt-4">
+            {{ $postAds->links() }}
         </div>
         <div class="modal fade" id="adModal" tabindex="-1" aria-labelledby="adModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">

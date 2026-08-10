@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\PostAdsStatus;
 use App\Models\Category;
 use App\Models\PostAds;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $query = PostAds::with(['images', 'user', 'category'])->where('status', 1);
+        $query = PostAds::with(['images', 'user', 'category'])->where(['status' => PostAdsStatus::APPROVED]);
         
         if ($request->filled('query')) {
             $query->where('title', 'like', '%' . $request->query('query') . '%');

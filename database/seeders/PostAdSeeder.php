@@ -354,14 +354,14 @@ class PostAdSeeder extends Seeder
         foreach($postAds as $ad) {
             DB::table('post_ads')->insert([
                 'user_id'          => $userIds[array_rand($userIds)],
-                'model_id'         => $models[$ad['model']] ?? 1,
-                'type_id'          => $types[$ad['type']] ?? 1,
-                'category_id'      => $categories[$ad['category']] ?? 1,
+                'model_id'         => $models[$ad['model']] ?? 'approved',
+                'type_id'          => $types[$ad['type']] ?? 'approved',
+                'category_id'      => $categories[$ad['category']] ?? 'approved',
                 'title'            => $ad['title'],
                 'manufacture_year' => $ad['year'],
                 'mileage'          => $ad['mileage'],
                 'price'            => $ad['price'],
-                'status'           => 1,
+                'status'           => 'approved',
                 'created_at'       => now(),
                 'updated_at'       => now(),
             ]);

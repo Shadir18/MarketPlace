@@ -22,7 +22,7 @@ return new class extends Migration
             $table->year('manufacture_year');
             $table->string('mileage');
             $table->integer('price');
-            $table->tinyInteger('status')->default(0);
+            $table->string('status')->default('listed');
             $table->timestamps();
         });
     }

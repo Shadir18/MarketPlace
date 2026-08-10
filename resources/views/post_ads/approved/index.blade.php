@@ -27,7 +27,7 @@
                             <td> {{$ad->type->name }} </td>
                             <td> {{$ad->model->name }} </td>
                             <td> {{ $ad->manufacture_year }} </td>
-                            <td style="width: 10%;"> {{ $ad->mileage }} </td>
+                            <td style="width: 7%;"> {{ $ad->mileage }} </td>
                             <td> {{ $ad->price }} </td>
                             <td> {{ $ad->user->last_name }}</td>
                             <td class="text-center">
@@ -36,8 +36,8 @@
                                     Sold Out
                                 </button>
                                 @else
-                                <button type="button" class="btn btn-success btn-sm fw-bold btn-sold w-50" data-id="{{ $ad->id }}">
-                                    Sold
+                                <button type="button" class="btn btn-success btn-sm fw-bold btn-sold w-60" data-id="{{ $ad->id }}">
+                                    Mark as Sold
                                 </button>
                                 @endif
                                 <button type="button" class="btn btn-danger btn-sm fw-bold btn-reject " data-id="{{ $ad->id }}">

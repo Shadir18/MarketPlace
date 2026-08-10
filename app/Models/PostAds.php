@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\PostAdsStatus;
 use App\Models\Model as ModelsModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,6 +21,13 @@ class PostAds extends Model
         'status',
         'category_id'
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'status' => PostAdsStatus::class,
+        ];
+    }
 
     public function images(): HasMany
     {

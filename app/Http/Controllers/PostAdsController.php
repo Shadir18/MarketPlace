@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\PostAdsStatus;
 use App\Models\Category;
 use App\Models\Model;
 use App\Models\PostAds;
@@ -18,14 +19,14 @@ class PostAdsController extends Controller
      */
     public function index()
     {
-        $postAds = PostAds::with(['user', 'category', 'type', 'category'])->latest()->where('status', 0)->get();
+        $postAds = PostAds::with(['user', 'category', 'type', 'category'])->latest()->where(['status' => PostAdsStatus::LISTED])->get();
         return view('post_ads.listed.index', compact('postAds'));
     }
 
     //approved ads page
     public function approvedIndex()
     {
-        $postAds = PostAds::with(['user'])->latest()->whereIn('status', [1, 3])->get();
+        $postAds = PostAds::with(['user'])->latest()->whereIn('status', [PostAdsStatus::APPROVED, PostAdsStatus::SOLDOUT])->get();
         return view('post_ads.approved.index', compact('postAds'));
     }
 
@@ -34,10 +35,10 @@ class PostAdsController extends Controller
         try{
             DB::beginTransaction();
             $postAds = PostAds::findOrFail($id);
-            $postAds->update(['status' => 1]);
+            $postAds->update(['status' => PostAdsStatus::APPROVED]);
             DB::commit();
             return response()->json([
-                'success' => 1,
+                'success' => true,
                 'message' => 'Post Ad approved successfully!',
                 'data' => $postAds
             ], 200);
@@ -52,7 +53,7 @@ class PostAdsController extends Controller
     //rejected index page
     public function rejectedIndex()
     {
-        $postAds = PostAds::with(['user'])->latest()->where('status', 2)->get();
+        $postAds = PostAds::with(['user'])->latest()->where(['status' => PostAdsStatus::REJECTED])->get();
         return view('post_ads.rejected.index', compact('postAds'));
     }
 
@@ -61,10 +62,10 @@ class PostAdsController extends Controller
         try{
             DB::beginTransaction();
             $postAds = PostAds::findOrFail($id);
-            $postAds->update(['status' => 2]);
+            $postAds->update(['status' => PostAdsStatus::REJECTED]);
             DB::commit();
             return response()->json([
-                'success' => 2,
+                'success' => true,
                 'message' => 'Post Ad approved successfully!',
                 'data' => $postAds
             ], 200);
@@ -138,7 +139,7 @@ class PostAdsController extends Controller
         try{
             DB::beginTransaction();
             $postAds = PostAds::findOrFail($id);
-            $postAds->update(['status' => 3]);
+            $postAds->update(['status' => PostAdsStatus::SOLDOUT]);
             DB::commit();
             return response()->json([
                 'success' => true,

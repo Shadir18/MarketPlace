@@ -23,9 +23,11 @@
                                 <td> <strong>{{ $model->name }}</strong> </td>
                                 <td>{{ $model->slug }}</td>                                
                                 <td>
-                                    <span class="badge {{ $model->is_active ? 'bg-success' : 'bg-secondary' }}">
-                                        {{ $model->is_active ? 'Active' : 'Inactive' }}
-                                    </span>
+                                    <h5>
+                                        <span class="badge w-25 badge-lg {{ $model->is_active->value === 'active' ? 'bg-success' : 'bg-secondary' }}">
+                                            {{ strtoupper($model->is_active->value) }}
+                                        </span>
+                                    </h5>
                                 </td>
                                 <td class="text-end pe-3">
                                     <a data-id="{{ $model->id }}" data-bs-toggle="modal" data-bs-target="#modeledit" class="btn btn-sm btn-primary fw-bold view-edit-btn">
@@ -66,8 +68,8 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="is_active" class="form-label fw-bold">Status</label>
-                                        <input id="modelis_active" name="is_active" type="text" class="form-control" required>
+                                        <label for="is_active" class="form-label fw-bold">Type</label>
+                                        <input id="modelis_active" name="is_active" placeholder="Type active or deactive" type="text" class="form-control" required>
                                         <div class="invalid-feedback" id="error-is_active"></div>
                                     </div>
                                 </form>
@@ -103,8 +105,8 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="is_active" class="form-label fw-bold">Status</label>
-                                    <input id="is_active" name="is_active" placeholder="Yes or No" class="form-control">
+                                    <label for="is_active" class="form-label fw-bold">Active</label>
+                                    <input id="is_active" name="is_active" placeholder="Type active or deactive" class="form-control">
                                     <div class="invalid-feedback" id="error-is_active"></div>
                                 </div>
 

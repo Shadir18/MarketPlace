@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\CategoryActiveStatus;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Enum;
 
 class CategoryController extends Controller
 {
@@ -33,7 +35,7 @@ class CategoryController extends Controller
         $attributes = $request->validate([
             'name' => 'required',
             'slug' => 'required',
-            'is_active' => 'required',
+            'is_active' => ["required", new Enum(CategoryActiveStatus::class)],
         ]);
         try{
             DB::beginTransaction();
@@ -79,7 +81,7 @@ class CategoryController extends Controller
          $attributes = $request->validate([
             'name' => 'required',
             'slug' => 'required',
-            'is_active' => 'required',
+            'is_active' => ["required", new Enum(CategoryActiveStatus::class)],
         ]);
         try{
             DB::beginTransaction();

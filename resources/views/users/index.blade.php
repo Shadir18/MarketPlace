@@ -1,6 +1,6 @@
 <x-admin-layout>
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="h4 mb-0 font-weight-bold">Models</h2>
+        <div class="d-flex justify-content-between align-items-center p-2 pe-2 mb-4">
+            <h2 class="h4 mb-0 fw-bold">Users</h2>
             <a href="#" data-bs-toggle="modal" data-bs-target="#createusermodal" class="btn btn-primary btn-sm fw-bold">Add New</a>
         </div>
 
@@ -33,10 +33,10 @@
             </div>
             {{-- edit modal --}}
             <div class="modal" id="userEdit" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">User Profile</h5>
+                            <h5 class="modal-title">Edit User Details</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                             <div class="card-body p-4">
@@ -147,7 +147,7 @@
 
                                 <div class="border-top pt-3 d-flex justify-content-end gap-2">
                                     <button type="button" class="btn btn-light border px-4" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" form="createuserform" class="btn btn-primary px-4 fw-bold">Save</button>
+                                    <button type="submit" form="createuserform" class="btn btn-primary px-4 fw-bold">Create</button>
                                 </div>
                             </form>
                         </div>

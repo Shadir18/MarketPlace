@@ -1,6 +1,6 @@
 <x-admin-layout>
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="h4 mb-0 font-weight-bold">Types</h2>
+        <div class="d-flex justify-content-between align-items-center p-2 pe-2 mb-4">
+            <h2 class="h4 mb-0 fw-bold">Vehicle Types</h2>
             <a href="#" data-bs-toggle="modal" data-bs-target="#typemodel" class="btn btn-primary btn-sm fw-bold">Add New</a>
         </div>
 
@@ -40,7 +40,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Modal title</h5>
+                            <h5 class="modal-title">Edit Type Details</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                             <div class="card-body p-4">
@@ -49,19 +49,19 @@
                                     <input type="hidden" id="typeID" name="id">
                                     
                                     <div class="mb-3">
-                                        <label for="name" class="form-label fw-bold">Category Name</label>
+                                        <label for="name" class="form-label fw-bold">Type Name</label>
                                         <input type="text" id="typename" name="name" class="form-control" required>
                                         <div class="invalid-feedback" id="error-name"></div>
                                     </div>
                                     
                                     <div class="mb-3">
-                                        <label for="slug" class="form-label fw-bold">Title</label>
+                                        <label for="slug" class="form-label fw-bold">Slug</label>
                                         <input id="typeslug" name="slug" type="text" class="form-control" required>
                                         <div class="invalid-feedback" id="error-slug"></div>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="is_active" class="form-label fw-bold">Type</label>
+                                        <label for="is_active" class="form-label fw-bold">Status</label>
                                         <input id="typeis_active" name="is_active" type="text" class="form-control" required>
                                         <div class="invalid-feedback" id="error-is_active"></div>
                                     </div>
@@ -79,34 +79,33 @@
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h2 class="h4 mb-1 font-weight-bold">Add New Model</h2>
-                            <p class="text-light opacity-75 small mb-0">Configure a new filter type model for the marketplace application.</p>
+                            <h2 class="h4 mb-1 font-weight-bold">Add New Type</h2>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="card-body p-4">
                             <form id="createTypeForm">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="name" class="form-label fw-bold">Name</label>
+                                    <label for="name" class="form-label fw-bold">Type Name</label>
                                     <input id="name" name="name" placeholder="Name" class="form-control" required>
                                     <div class="invalid-feedback" id="error-name"></div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="slug" class="form-label fw-bold">Slug </label>
+                                    <label for="slug" class="form-label fw-bold">Slug</label>
                                     <input id="slug" name="slug" placeholder="Slug" class="form-control">
                                     <div class="invalid-feedback" id="error-slug"></div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="is_active" class="form-label fw-bold">Active</label>
+                                    <label for="is_active" class="form-label fw-bold">Status</label>
                                     <input id="is_active" name="is_active" placeholder="Yes or No" class="form-control">
                                     <div class="invalid-feedback" id="error-is_active"></div>
                                 </div>
 
                                 <div class="border-top pt-3 d-flex justify-content-end gap-2">
                                     <button type="button" class="btn btn-light border px-4" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" form="createTypeForm" class="btn btn-primary px-4 fw-bold">Save</button>
+                                    <button type="submit" form="createTypeForm" class="btn btn-primary px-4 fw-bold">Create</button>
                                 </div>
                             </form>
                         </div>

@@ -77,7 +77,7 @@
             </div>
             {{-- create model --}}
             <div class="modal" id="createmodel" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h2 class="h4 mb-1 font-weight-bold">Add New Model</h2>

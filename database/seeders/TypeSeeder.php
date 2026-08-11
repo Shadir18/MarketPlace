@@ -33,7 +33,7 @@ class TypeSeeder extends Seeder
             Type::create([
                 'name' => $name,
                 'slug' => Str::slug($name),
-                'is_active' => true,
+                'is_active' => 'active',
             ]);
         }
     }

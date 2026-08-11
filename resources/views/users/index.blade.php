@@ -37,10 +37,10 @@
             </div>
             {{-- edit modal --}}
             <div class="modal" id="userEdit" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">User Profile</h5>
+                            <h5 class="modal-title">Edit User Details</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                             <div class="card-body p-4">
@@ -151,7 +151,7 @@
 
                                 <div class="border-top pt-3 d-flex justify-content-end gap-2">
                                     <button type="button" class="btn btn-light border px-4" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" form="createuserform" class="btn btn-primary px-4 fw-bold">Save</button>
+                                    <button type="submit" form="createuserform" class="btn btn-primary px-4 fw-bold">Create</button>
                                 </div>
                             </form>
                         </div>

@@ -1,7 +1,7 @@
 <x-admin-layout>
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="h4 mb-0 font-weight-bold">Categories</h2>
-            <a href="{{ route('categories.create') }}" class="btn btn-primary btn-sm fw-bold">Add New</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#createCategory" class="btn btn-primary btn-sm fw-bold">Add New</a>
         </div>
 
             <div class="table-responsive p-0">
@@ -35,6 +35,7 @@
                     </tbody>
                 </table>
             </div>
+            {{-- edit category --}}
             <div class="modal" id="categoryEdit" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -73,6 +74,45 @@
                     </div>
                 </div>
             </div>
+            {{-- create category --}}
+            <div class="modal" id="createCategory" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="h4 mb-1 font-weight-bold">Add New Category</h2>
+                            <p class="text-light opacity-75 small mb-0">Configure a new filter type category for the marketplace application.</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="card-body p-4">
+                            <form id="createCategoryForm">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="name" class="form-label fw-bold">Name</label>
+                                    <input id="name" name="name" placeholder="Name" class="form-control" required>
+                                    <div class="invalid-feedback" id="error-name"></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="slug" class="form-label fw-bold">Slug </label>
+                                    <input id="slug" name="slug" placeholder="Slug" class="form-control">
+                                    <div class="invalid-feedback" id="error-slug"></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="is_active" class="form-label fw-bold">Active</label>
+                                    <input id="is_active" name="is_active" placeholder="Yes or No" class="form-control">
+                                    <div class="invalid-feedback" id="error-is_active"></div>
+                                </div>
+
+                                <div class="border-top pt-3 d-flex justify-content-end gap-2">
+                                    <button type="button" class="btn btn-light border px-4" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" form="createCategoryForm" class="btn btn-primary px-4 fw-bold">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 </x-admin-layout>
 <script type="module">
@@ -89,7 +129,21 @@
             scrollY: 600,
             scroller: true,
     });
+    // create
+    $('#createCategoryForm').on('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData($('#createCategoryForm')[0]);
+        axios.post('/categories' ,formData)
+        .then(function (response){
+            window.location.href = `/categories`;
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error.response.data);
+        });
+    });
 
+    //view 
     $(document).on('click', '.view-edit-btn', function (e)  {
         e.preventDefault();
         const categoryID = $(this).data('id');
@@ -104,7 +158,7 @@
                 $('#categoryis_active').val(data.is_active);
             })
     })
-
+    //edit
     $('#editCategoryForm').on('submit', function (e){
         e.preventDefault();
         const id = $('#categoryID').val();

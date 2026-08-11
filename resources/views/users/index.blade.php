@@ -1,6 +1,6 @@
 <x-admin-layout>
         <div class="d-flex justify-content-between align-items-center p-2 pe-2 mb-4">
-            <h2 class="h4 mb-0 font-weight-bold">Models</h2>
+            <h2 class="h4 mb-0 font-weight-bold">User</h2>
             <a href="#" data-bs-toggle="modal" data-bs-target="#createusermodal" class="btn btn-primary btn-sm fw-bold"><i class="bi bi-person-plus"></i> Add New</a>
         </div>
 

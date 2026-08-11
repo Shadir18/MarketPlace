@@ -102,7 +102,6 @@
                 $('#categoryname').val(data.name);
                 $('#categoryslug').val(data.slug);
                 $('#categoryis_active').val(data.is_active);
-                $('#categoryEdit').modal('show');
             })
     })
 

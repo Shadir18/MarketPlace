@@ -104,7 +104,6 @@
                 $('#typename').val(data.name);
                 $('#typeslug').val(data.slug);
                 $('#typeis_active').val(data.is_active);
-                $('#typeEdit').modal('show');
             })
     })
 

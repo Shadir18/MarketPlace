@@ -105,7 +105,6 @@
                 $('#first_name').val(data.first_name);
                 $('#last_name').val(data.last_name);
                 $('#useremail').val(data.email);
-                $('#userEdit').modal('show');
             })
     })
     

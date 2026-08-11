@@ -101,7 +101,6 @@
                 $('#modelname').val(data.name);
                 $('#modelslug').val(data.slug);
                 $('#modelis_active').val(data.is_active);
-                $('#modeledit').modal('show');
             })
     })
 

@@ -28,7 +28,7 @@ class CategoriesSeeder extends Seeder
             Category::create([
                 'name' => $category,
                 'slug' => Str::slug($category),
-                'is_active' => true
+                'is_active' => 'active',
             ]);
         }
     }

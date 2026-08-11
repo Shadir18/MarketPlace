@@ -22,9 +22,11 @@
                                 <td> <strong>{{ $category->name }}</strong> </td>
                                 <td>{{ $category->slug }}</td>                                
                                 <td>
-                                    <span class="badge {{ $category->is_active ? 'bg-success' : 'bg-secondary' }}">
-                                        {{ $category->is_active ? 'Active' : 'Inactive' }}
-                                    </span>
+                                    <h5>
+                                        <span class="badge w-25 badge-lg {{ $category->is_active->value === 'active' ? 'bg-success' : 'bg-secondary' }}">
+                                            {{ strtoupper($category->is_active->value) }}
+                                        </span>
+                                    </h3>
                                 </td>
                                 <td class="text-end pe-3">
                                     <a data-id="{{ $category->id }}" data-bs-toggle="modal" data-bs-target="#categoryEdit" class="btn btn-sm btn-warning fw-bold view-edit-btn">Edit</a>
@@ -62,7 +64,7 @@
 
                                     <div class="mb-3">
                                         <label for="is_active" class="form-label fw-bold">Type</label>
-                                        <input id="categoryis_active" name="is_active" type="text" class="form-control" required>
+                                        <input id="categoryis_active" name="is_active" type="text" placeholder="Type active or deactive" class="form-control" required>
                                         <div class="invalid-feedback" id="error-is_active"></div>
                                     </div>
                                 </form>
@@ -100,7 +102,7 @@
 
                                 <div class="mb-3">
                                     <label for="is_active" class="form-label fw-bold">Active</label>
-                                    <input id="is_active" name="is_active" placeholder="Yes or No" class="form-control">
+                                    <input id="is_active" name="is_active" placeholder="Type active or deactive" class="form-control">
                                     <div class="invalid-feedback" id="error-is_active"></div>
                                 </div>
 

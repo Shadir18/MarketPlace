@@ -1,5 +1,5 @@
 <x-admin-layout>
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex justify-content-between align-items-center p-2 pe-2 mb-4">
             <h2 class="h4 mb-0 fw-bold">Listed Vehicle Advertisements</h2>
             <a href="{{ route('listed.create') }}" class="btn btn-primary btn-sm fw-bold"><i class="bi bi-plus-square pe-1 "></i>Create New Ad</a>
         </div>

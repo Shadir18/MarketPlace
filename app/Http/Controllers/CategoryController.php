@@ -59,7 +59,7 @@ class CategoryController extends Controller
     public function show(string $id)
     {
         $category  = Category::findOrFail($id);
-        return view('categories.show', compact('category'));
+        return response()->json($category);
     }
 
     /**
@@ -95,7 +95,9 @@ class CategoryController extends Controller
             DB::rollBack();
             return response()->json([
                 'success' => false,
-                'message' => 'failed to update try again later'
+                'message' => $th->getMessage(),
+                'line' => $th->getLine(),
+                'file' => $th->getFile(),
             ], 500);
         } 
     }

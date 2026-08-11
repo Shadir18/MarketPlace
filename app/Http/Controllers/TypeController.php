@@ -56,9 +56,10 @@ class TypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Type $type)
+    public function show(string $id)
     {
-        return view('types.show', ['type' => $type]);
+        $type = Type::findOrFail($id);
+        return response()->json($type);
     }
 
     /**

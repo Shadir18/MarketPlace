@@ -28,7 +28,7 @@
                                     </span>
                                 </td>
                                 <td class="text-end pe-3">
-                                    <a href="{{ route('models.edit', $model->id) }}" class="btn btn-sm btn-warning fw-bold me-1">Edit</a>
+                                    <a data-id="{{ $model->id }}" data-bs-toggle="modal" data-bs-target="#modeledit" class="btn btn-sm btn-warning fw-bold view-edit-btn">Edit</a>
                                     <button data-id="{{ $model->id }}" class="btn btn-sm btn-danger fw-bold delete-btn">Delete</button>
                                 </td>
                             </tr>
@@ -37,6 +37,44 @@
                 </table>
             </div>
 
+            <div class="modal" id="modeledit" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                            <div class="card-body p-4">
+                                <form id="editmodelform">
+                                    @csrf
+                                    <input type="hidden" id="modelID" name="id">
+                                    
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label fw-bold">Category Name</label>
+                                        <input type="text" id="modelname" name="name" class="form-control" required>
+                                        <div class="invalid-feedback" id="error-name"></div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="slug" class="form-label fw-bold">Title</label>
+                                        <input id="modelslug" name="slug" type="text" class="form-control" required>
+                                        <div class="invalid-feedback" id="error-slug"></div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="is_active" class="form-label fw-bold">Type</label>
+                                        <input id="modelis_active" name="is_active" type="text" class="form-control" required>
+                                        <div class="invalid-feedback" id="error-is_active"></div>
+                                    </div>
+                                </form>
+                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" form="editmodelform" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 </x-admin-layout>
 <script type="module">
     $(document).ready(function (){
@@ -51,6 +89,34 @@
             pageLength: 25,
             scrollY: 600,
             scroller: true,
+    });
+
+    $(document).on('click', '.view-edit-btn', function (e)  {
+        e.preventDefault();
+        const modelID = $(this).data('id');
+         axios.get(`/models/${modelID}`)
+            .then(function (response) {
+                const data = response.data;
+                $('#modelID').val(data.id);
+                $('#modelname').val(data.name);
+                $('#modelslug').val(data.slug);
+                $('#modelis_active').val(data.is_active);
+                $('#modeledit').modal('show');
+            })
+    })
+
+    $('#editmodelform').on('submit', function (e){
+        e.preventDefault();
+        const id = $('#modelID').val();
+        const formData = new FormData(this);
+        formData.append('_method', 'PUT');
+        axios.post(`/models/${id}`, formData)
+        .then(function (response){
+            window.location.href = `/models`;
+        })
+        .catch(function (error){
+            console.error(error.response.data);
+        })
     });
 
         //Delete Function

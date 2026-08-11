@@ -59,7 +59,7 @@ class ModelController extends Controller
     public function show(string $id)
     {
         $model = Model::findOrFail($id);
-        return view('models.show', compact('model'));
+        return response()->json($model);
     }
 
     /**

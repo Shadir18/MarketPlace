@@ -33,15 +33,15 @@
                             <td class="text-center">
                                 @if($ad->status == 'soldout')
                                 <button type="button" class="btn btn-secondary btn-sm fw-bold w-50" data-id="{{ $ad->id }}" disabled>
-                                    Sold Out
+                                    <i class="bi bi-box2-fill"></i>
                                 </button>
                                 @else
                                 <button type="button" class="btn btn-success btn-sm fw-bold btn-sold w-60" data-id="{{ $ad->id }}">
-                                    Mark as Sold
+                                    <i class="bi bi-dropbox"></i>
                                 </button>
                                 @endif
                                 <button type="button" class="btn btn-danger btn-sm fw-bold btn-reject " data-id="{{ $ad->id }}">
-                                    Reject
+                                    <i class="bi bi-trash3"></i>
                                 </button>
                             </td>
                         </tr>
@@ -74,7 +74,7 @@
             if (confirm('Are you sure you want changed this product as Sold?')){
                 axios.patch(`/post_ads/${id}/sold`)
                 .then(function (response){
-                    $button.text('Sold out');
+                    $button.html('<i class="bi bi-box2-fill"></i>');
                     $button.removeClass('btn-success');
                     $button.addClass('btn-secondary');
                     $button.prop('disabled', true);

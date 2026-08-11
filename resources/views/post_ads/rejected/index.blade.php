@@ -32,7 +32,7 @@
                             <td> {{ $ad->user->last_name }}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-success btn-sm fw-bold btn-approve" data-id="{{ $ad->id }}">
-                                    Approve
+                                    <i class="bi bi-bag-check"></i>
                                 </button>
                             </td>
                         </tr>

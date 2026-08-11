@@ -1,7 +1,7 @@
 <x-admin-layout>
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="h4 mb-0 fw-bold">Listed Vehicle Advertisements</h2>
-            <a href="{{ route('listed.create') }}" class="btn btn-primary btn-sm fw-bold">Create New Ad</a>
+            <a href="{{ route('listed.create') }}" class="btn btn-primary btn-sm fw-bold"><i class="bi bi-plus-square pe-1 "></i>Create New Ad</a>
         </div>
 
             <div class="table-responsive">
@@ -33,10 +33,10 @@
                             <td> {{ $ad->user->last_name }}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-success btn-sm fw-bold btn-approve" data-id="{{ $ad->id }}">
-                                    Approve
+                                    <i class="bi bi-bag-check"></i>
                                 </button>
                                 <button type="button" class="btn btn-danger btn-sm fw-bold btn-reject" data-id="{{ $ad->id }}">
-                                    Reject
+                                    <i class="bi bi-bag-x"></i>
                                 </button>
                             </td>
                         </tr>

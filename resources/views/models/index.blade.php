@@ -1,7 +1,7 @@
 <x-admin-layout>
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="h4 mb-0 font-weight-bold">Models</h2>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#createmodel" class="btn btn-primary btn-sm fw-bold">Add New</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#createmodel" class="btn btn-primary btn-sm fw-bold"><i class="bi bi-car-front"></i> Add New</a>
         </div>
 
 
@@ -28,8 +28,12 @@
                                     </span>
                                 </td>
                                 <td class="text-end pe-3">
-                                    <a data-id="{{ $model->id }}" data-bs-toggle="modal" data-bs-target="#modeledit" class="btn btn-sm btn-warning fw-bold view-edit-btn">Edit</a>
-                                    <button data-id="{{ $model->id }}" class="btn btn-sm btn-danger fw-bold delete-btn">Delete</button>
+                                    <a data-id="{{ $model->id }}" data-bs-toggle="modal" data-bs-target="#modeledit" class="btn btn-sm btn-primary fw-bold view-edit-btn">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <button data-id="{{ $model->id }}" class="btn btn-sm btn-danger fw-bold delete-btn">
+                                        <i class="bi bi-trash3"></i>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach

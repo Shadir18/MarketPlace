@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\ModelActiveStatus;
 use App\Models\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Enum;
 
 class ModelController extends Controller
 {
@@ -33,7 +35,7 @@ class ModelController extends Controller
         $attributes = $request->validate([
             'name' => 'required',
             'slug' => 'required',
-            'is_active' => 'required'
+            'is_active' => ["required", new Enum(ModelActiveStatus::class)],
         ]);
         try {
             DB::beginTransaction();
@@ -59,7 +61,7 @@ class ModelController extends Controller
     public function show(string $id)
     {
         $model = Model::findOrFail($id);
-        return view('models.show', compact('model'));
+        return response()->json($model);
     }
 
     /**
@@ -79,7 +81,7 @@ class ModelController extends Controller
         $attributes = $request->validate([
             'name' => 'required',
             'slug' => 'required',
-            'is_active' => 'required'
+            'is_active' => ["required", new Enum(ModelActiveStatus::class)],
         ]);
         try {
             DB::beginTransaction();

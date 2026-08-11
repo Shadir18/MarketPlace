@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\CategoryActiveStatus;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Enum;
 
 class CategoryController extends Controller
 {
@@ -33,7 +35,7 @@ class CategoryController extends Controller
         $attributes = $request->validate([
             'name' => 'required',
             'slug' => 'required',
-            'is_active' => 'required',
+            'is_active' => ["required", new Enum(CategoryActiveStatus::class)],
         ]);
         try{
             DB::beginTransaction();
@@ -59,7 +61,7 @@ class CategoryController extends Controller
     public function show(string $id)
     {
         $category  = Category::findOrFail($id);
-        return view('categories.show', compact('category'));
+        return response()->json($category);
     }
 
     /**
@@ -79,7 +81,7 @@ class CategoryController extends Controller
          $attributes = $request->validate([
             'name' => 'required',
             'slug' => 'required',
-            'is_active' => 'required',
+            'is_active' => ["required", new Enum(CategoryActiveStatus::class)],
         ]);
         try{
             DB::beginTransaction();
@@ -95,7 +97,9 @@ class CategoryController extends Controller
             DB::rollBack();
             return response()->json([
                 'success' => false,
-                'message' => 'failed to update try again later'
+                'message' => $th->getMessage(),
+                'line' => $th->getLine(),
+                'file' => $th->getFile(),
             ], 500);
         } 
     }

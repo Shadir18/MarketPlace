@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\TypeActiveStatus;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Enum;
 
 class TypeController extends Controller
 {
@@ -33,7 +35,7 @@ class TypeController extends Controller
         $attributes = $request->validate([
             'name' => 'required',
             'slug' => 'required',
-            'is_active' => 'nullable|boolean',
+            'is_active' => ["required", new Enum(TypeActiveStatus::class)],
         ]);
         try {
             DB::beginTransaction();
@@ -56,9 +58,10 @@ class TypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Type $type)
+    public function show(string $id)
     {
-        return view('types.show', ['type' => $type]);
+        $type = Type::findOrFail($id);
+        return response()->json($type);
     }
 
     /**
@@ -77,7 +80,7 @@ class TypeController extends Controller
         $attributes = $request->validate([
             'name' => 'required',
             'slug' => 'required',
-            'is_active' => 'nullable|boolean',
+            'is_active' => ["required", new Enum(TypeActiveStatus::class)]
         ]);
         try {
             DB::beginTransaction();

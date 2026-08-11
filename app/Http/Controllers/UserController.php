@@ -55,7 +55,7 @@ class UserController extends Controller
     public function show(string $id)
     {
         $users  = User::findOrFail($id);
-        return view('users.show', compact('users'));
+        return response()->json($users);
     }
 
     /**

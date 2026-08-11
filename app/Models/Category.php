@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\CategoryActiveStatus;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -11,4 +12,11 @@ class Category extends Model
         'slug',
         'is_active'
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'is_active' =>CategoryActiveStatus::class,
+        ];
+    }
 }

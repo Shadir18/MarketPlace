@@ -31,8 +31,8 @@
                             <td> {{ $ad->price }} </td>
                             <td> {{ $ad->user->last_name }}</td>
                             <td class="text-center">
-                                @if (auth()->check() && auth()->user()->email == 'admin@example.com')
-                                <button type="button" data-id="{{ $ad->id }}" data-bs-toggle="modal" data-bs-target="#editpostad" class="btn btn-sm btn-primary fw-bold view-edit-btn">
+                                @if (auth()->check() && auth()->user()->email == App\Models\User::$ADMIN_EMAIL)
+                                <button type="button" data-id="{{ $ad->id }}" data-bs-toggle="modal" data-bs-target="#editpostad" class="btn btn-sm btn-primary fw-bold view-edit-btn" disabled>
                                     <i class="bi bi-pencil"></i>
                                 </button>
                                 @endif

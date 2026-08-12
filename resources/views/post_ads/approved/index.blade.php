@@ -31,7 +31,7 @@
                             <td> {{ $ad->price }} </td>
                             <td> {{ $ad->user->last_name }}</td>
                             <td class="text-center">
-                                @if($ad->status == 'soldout')
+                                @if($ad->status->value == 'soldout')
                                 <button type="button" class="btn btn-secondary btn-sm fw-bold w-50" data-id="{{ $ad->id }}" disabled>
                                     <i class="bi bi-box2-fill"></i>
                                 </button>

@@ -37,11 +37,11 @@
                                 </button>
                                 @endif
                                 @if($ad->status == 'soldout')
-                                <button type="button" class="btn btn-secondary btn-sm fw-bold w-50" data-id="{{ $ad->id }}" disabled>
+                                <button type="button" class="btn btn-secondary btn-sm fw-bold w-25" data-id="{{ $ad->id }}" disabled>
                                     <i class="bi bi-box2-fill"></i>
                                 </button>
                                 @else
-                                <button type="button" class="btn btn-success btn-sm fw-bold btn-sold w-60" data-id="{{ $ad->id }}">
+                                <button type="button" class="btn btn-success btn-sm fw-bold btn-sold w-25" data-id="{{ $ad->id }}">
                                     <i class="bi bi-dropbox"></i>
                                 </button>
                                 @endif
@@ -222,6 +222,7 @@
                     $button.removeClass('btn-success');
                     $button.addClass('btn-secondary');
                     $button.prop('disabled', true);
+
                 })
                 .catch(function (error) {
                     console.error(error.response.data);

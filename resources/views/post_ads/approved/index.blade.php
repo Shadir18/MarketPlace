@@ -36,12 +36,12 @@
                                     <i class="bi bi-pencil"></i>
                                 </button>
                                 @endif
-                                @if($ad->status == 'soldout')
-                                <button type="button" class="btn btn-secondary btn-sm fw-bold w-50" data-id="{{ $ad->id }}" disabled>
+                                @if($ad->status->value == 'soldout')
+                                <button type="button" class="btn btn-secondary btn-sm fw-bold" data-id="{{ $ad->id }}" disabled>
                                     <i class="bi bi-box2-fill"></i>
                                 </button>
                                 @else
-                                <button type="button" class="btn btn-success btn-sm fw-bold btn-sold w-60" data-id="{{ $ad->id }}">
+                                <button type="button" class="btn btn-success btn-sm fw-bold btn-sold" data-id="{{ $ad->id }}">
                                     <i class="bi bi-dropbox"></i>
                                 </button>
                                 @endif

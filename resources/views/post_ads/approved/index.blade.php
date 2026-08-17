@@ -27,12 +27,17 @@
                             <td> {{$ad->type->name }} </td>
                             <td> {{$ad->model->name }} </td>
                             <td> {{ $ad->manufacture_year }} </td>
-                            <td style="width: 7%;"> {{ $ad->mileage }} </td>
+                            <td> {{ $ad->mileage }} </td>
                             <td> {{ $ad->price }} </td>
                             <td> {{ $ad->user->last_name }}</td>
                             <td class="text-center">
+                                @if (auth()->check() && auth()->user()->email == App\Models\User::$ADMIN_EMAIL)
+                                <button type="button" data-id="{{ $ad->id }}" data-bs-toggle="modal" data-bs-target="#editpostad" class="btn btn-sm btn-primary fw-bold view-edit-btn">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                @endif
                                 @if($ad->status->value == 'soldout')
-                                <button type="button" class="btn btn-secondary btn-sm fw-bold w-50" data-id="{{ $ad->id }}" disabled>
+                                <button type="button" class="btn btn-secondary btn-sm fw-bold" data-id="{{ $ad->id }}" disabled>
                                     <i class="bi bi-box2-fill"></i>
                                 </button>
                                 @else

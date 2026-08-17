@@ -36,7 +36,7 @@
                                     <i class="bi bi-box2-fill"></i>
                                 </button>
                                 @else
-                                <button type="button" class="btn btn-success btn-sm fw-bold btn-sold w-60" data-id="{{ $ad->id }}">
+                                <button type="button" class="btn btn-success btn-sm fw-bold btn-sold" data-id="{{ $ad->id }}">
                                     <i class="bi bi-dropbox"></i>
                                 </button>
                                 @endif

@@ -16,7 +16,6 @@ use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Route;
 
 
-// Route::get('/', [SessionController::class, 'create'])->name('login');
 Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);

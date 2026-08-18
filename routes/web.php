@@ -34,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/about', 'about');
     Route::resource('types', TypeController::class);
     Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
+    Route::get('/settings/{id}', [SettingsController::class, 'show'])->name('settings.show');
     Route::post('/settings', [SettingsController::class, 'update'])->name('settings.update');
     Route::resource('contactmessages', ContactMessageController::class);
     });

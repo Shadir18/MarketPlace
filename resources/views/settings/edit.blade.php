@@ -14,46 +14,45 @@
 
                 <form id="settingsForm">
                     @csrf
-
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="application_name" class="form-label fw-bold">Application Name</label>
-                            <input id="application_name" name="application_name" type="text" class="form-control" value="{{ $setting->application_name }}" required>
+                            <input id="application_name" name="application_name" type="text" class="form-control" required>
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="name" class="form-label fw-bold">Company / Owner Name</label>
-                            <input id="name" name="name" type="text" class="form-control" value="{{ $setting->name }}">
+                            <input id="name" name="name" type="text" class="form-control" >
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="currency" class="form-label fw-bold">Currency Symbol/Code</label>
-                            <input id="currency" name="currency" type="text" class="form-control" value="{{ $setting->currency }}" placeholder="LKR, USD, etc." required>
+                            <input id="currency" name="currency" type="text" class="form-control"  placeholder="LKR, USD, etc." required>
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="contacting_hours" class="form-label fw-bold">Contacting Hours</label>
-                            <input id="contacting_hours" name="contacting_hours" type="text" class="form-control" value="{{ $setting->contacting_hours }}" placeholder="Mon-Fri 9:00 AM - 5:00 PM">
+                            <input id="contacting_hours" name="contacting_hours" type="text" class="form-control" placeholder="Mon-Fri 9:00 AM - 5:00 PM">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="email" class="form-label fw-bold">Contact Email</label>
-                            <input id="email" name="email" type="email" class="form-control" value="{{ $setting->email }}">
+                            <input id="email" name="email" type="email" class="form-control">
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="phone" class="form-label fw-bold">Contact Phone</label>
-                            <input id="phone" name="phone" type="text" class="form-control" value="{{ $setting->phone }}">
+                            <input id="phone" name="phone" type="text" class="form-control">
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="address" class="form-label fw-bold">Address</label>
-                        <textarea id="address" name="address" class="form-control" rows="3">{{ $setting->address }}</textarea>
+                        <textarea id="address" name="address" class="form-control" rows="3"></textarea>
                     </div>
 
                     <div class="border-top pt-3 d-flex justify-content-end gap-2">
@@ -66,6 +65,20 @@
 </x-admin-layout>
 <script type="module">
     $(document).ready(function(){
+        const settingsID = "{{ $setting->id }}";
+        axios.get(`/settings/${settingsID}`)
+        .then(function(response){
+            const data = response.data;
+            $('#settingsID').val(data.id);
+            $('#application_name').val(data.application_name);
+            $('#name').val(data.name);
+            $('#currency').val(data.currency);
+            $('#email').val(data.email);
+            $('#phone').val(data.phone);
+            $('#address').val(data.address);
+            $('#contacting_hours').val(data.contacting_hours);
+        })
+
         $('#settingsForm').on('submit', function(e){
             e.preventDefault();
             const $btn = $('#submitBtn');

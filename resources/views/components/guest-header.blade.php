@@ -11,10 +11,10 @@
         <div class="ms-auto d-flex align-items-center gap-3">
             @auth
                 <x-nav-link href="/post_ads" :active="true" class="btn btn-warning text-dark fw-bold rounded-pill px-3">Post Ads</x-nav-link>
-                <x-nav-link href="/products" :active="request()->is('/')" class="nav-link text-dark fw-medium">Home</x-nav-link>
+                <x-nav-link href="/dashboard" :active="request()->is('/')" class="nav-link text-dark fw-medium">Home</x-nav-link>
                 <x-nav-link href="/about" :active="request()->is('about')" class="nav-link text-dark fw-medium">About</x-nav-link>
                 <x-nav-link href="/contact" :active="request()->is('contact')" class="nav-link text-dark fw-medium">Contact</x-nav-link>
-                <x-nav-link href="/products" :active="request()->is('/products')" class="nav-link text-dark fw-medium">Dashboard</x-nav-link>                
+                <x-nav-link href="/dashboard" :active="request()->is('/dashboard')" class="nav-link text-dark fw-medium">Dashboard</x-nav-link>                
             @endauth
             @guest
                 <x-nav-link href="/login" :active="true" class="btn btn-warning text-dark fw-bold rounded-pill px-3">Post Ads</x-nav-link>

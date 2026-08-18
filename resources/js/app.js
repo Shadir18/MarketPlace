@@ -14,3 +14,7 @@ import 'datatables.net-responsive';
 import 'datatables.net-responsive-bs5';
 import 'datatables.net-searchbuilder-bs5';
 import 'datatables.net-searchpanes-bs5';
+
+import '../formvalidation/dist/js/Bootstrap.min.js';
+import '../formvalidation/dist/js/FormValidation.min.js';
+

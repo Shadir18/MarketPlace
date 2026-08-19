@@ -15,20 +15,6 @@
                         <th>Message</th>
                     </tr>
                 </thead>
-                @foreach ($contactMessages as $ctcmsg)
-                    <tr id="row-{{ $ctcmsg->id }}">
-                        <td> {{ $ctcmsg->id }} </td>
-                        <td>
-                            <a data-id="{{ $ctcmsg->id }}" data-bs-toggle="modal" data-bs-target="#ctcmsg" class="btn btn-sm btn-primary fw-bold view-edit-btn">
-                                <i class="bi bi-pencil"></i>
-                            </a>
-                        </td>
-                        <td> {{ $ctcmsg->name}} </td>
-                        <td> {{ $ctcmsg->email }} </td>
-                        <td> {{ $ctcmsg->subject }} </td>
-                        <td> {{ $ctcmsg->message }} </td>
-                    </tr>
-                @endforeach
             </table>
         </div>
 
@@ -82,9 +68,25 @@
 </x-admin-layout>
 <script type="module">
     $(document).ready(function () {
-        axios.get('/post_ads/approved')
+        axios.get('/contactmessages')
             .then(function (response) {
                 $('#ctcTable').DataTable({
+                    data: response.data,
+                    columns: [
+                        { data: 'id' },
+                        { data: null,
+                            render: function (data, type, row){
+                                return `
+                                <a href="#" data-id="${row.id}" data-bs-toggle="modal" data-bs-target="#ctcmsg" class="btn btn-sm btn-primary fw-bold view-edit-btn">
+                                    <i class="bi bi-pencil"></i>
+                                </a> `;
+                            },
+                        },
+                        { data: 'name' },
+                        { data: 'email' },
+                        { data: 'subject' },
+                        { data: 'message' },
+                    ],
                     layout:{
                         bottomEnd: {
                             paging: {
@@ -104,7 +106,7 @@
         axios.get(`/contactmessages/${ctcmsgID}`)
         .then(function (response) {
             const data = response.data;
-            $('#ctcmsgID').text(data.id);
+            $('#ctcmsgID').val(data.id);
             $('#name').text(data.name);
             $('#email').text(data.email);
             $('#date').text(data.created_at);

@@ -12,10 +12,13 @@ class ContactMessageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $contactMessages = ContactMessage::with(['setting'])->get();
-        return view('contactmessages.index', compact('contactMessages'));
+        if ($request->wantsJson()) {
+            return response()->json($contactMessages);
+        }
+        return view('contactmessages.index');
     }
 
     /**

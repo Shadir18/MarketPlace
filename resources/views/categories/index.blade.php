@@ -8,37 +8,13 @@
                 <table id="CategoryTable" class="table table-striped table-hover align-middle mb-0 w-100 border">
                     <thead class="table-light">
                         <tr>
-                            <th class="ps-3">ID</th>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Slug</th>
                             <th>Active Status</th>
-                            <th class="text-end pe-3 no-sort">Actions</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($categories as $category)
-                            <tr id="row-{{ $category->id }}">
-                                <td class="ps-3 text-muted">{{ $category->id }}</td>
-                                <td> <strong>{{ $category->name }}</strong> </td>
-                                <td>{{ $category->slug }}</td>                                
-                                <td>
-                                    <h5>
-                                        <span class="badge w-25 badge-lg {{ $category->is_active->value === 'active' ? 'bg-success' : 'bg-secondary' }}">
-                                            {{ strtoupper($category->is_active->value) }}
-                                        </span>
-                                    </h3>
-                                </td>
-                                <td class="text-end pe-3">
-                                    <a data-id="{{ $category->id }}" data-bs-toggle="modal" data-bs-target="#categoryEdit" class="btn btn-sm btn-primary fw-bold view-edit-btn">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <button data-id="{{ $category->id }}" class="btn btn-sm btn-danger fw-bold delete-btn">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
             {{-- edit category --}}
@@ -122,17 +98,39 @@
 </x-admin-layout>
 <script type="module">
     $(document).ready(function (){
-        $('#CategoryTable').DataTable({
-            layout:{
-                bottomEnd: {
-                    paging: {
-                        firstLast: false
+        axios.get('/categories')
+        .then(function (response){
+            $('#CategoryTable').DataTable({
+                data: response.data,
+                columns: [
+                    { data: 'id' },
+                    { data: 'name' },
+                    { data: 'slug' },
+                    { data: 'is_active' },
+                    { data: null,
+                        render: function (data, type, row){
+                            return `
+                                <a data-id="${row.id}" data-bs-toggle="modal" data-bs-target="#categoryEdit" class="btn btn-sm btn-primary fw-bold view-edit-btn">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <button data-id="${row.id}" class="btn btn-sm btn-danger fw-bold delete-btn">
+                                    <i class="bi bi-trash3"></i>
+                                </button>`;
+                        },
+                     },
+                ],
+                layout:{
+                    bottomEnd: {
+                        paging: {
+                            firstLast: false
+                        }
                     }
-                }
-            },
-            pageLength: 25,
-            scrollY: 600,
-            scroller: true,
+                },
+                pageLength: 25,
+                scrollY: 600,
+                scroller: true,
+        })
+        
     });
     // create
     $('#createCategoryForm').on('submit', function (e) {

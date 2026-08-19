@@ -13,9 +13,12 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $categories = Category::latest()->get();
+        if ($request->wantsJson()){
+            return response()->json($categories);
+        }
         return view('categories.index', compact('categories'));
     }
 

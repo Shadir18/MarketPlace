@@ -13,9 +13,12 @@ class ModelController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $models = Model::latest()->get();
+        if ($request->wantsJson()){
+            return response()->json($models);
+        }
         return view('models.index', compact('models'));
     }
 

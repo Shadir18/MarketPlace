@@ -9,37 +9,13 @@
                 <table id="ModelTable" class="table table-striped table-hover align-middle mb-0 w-100 border">
                     <thead class="table-light">
                         <tr>
-                            <th class="ps-3">ID</th>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>slug</th>
                             <th>Active Status</th>
-                            <th class="text-end pe-3 no-sort">Actions</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($models as $model)
-                            <tr id="row-{{ $model->id }}">
-                                <td class="ps-3 text-muted">{{ $model->id }}</td>
-                                <td> <strong>{{ $model->name }}</strong> </td>
-                                <td>{{ $model->slug }}</td>                                
-                                <td>
-                                    <h5>
-                                        <span class="badge w-25 badge-lg {{ $model->is_active->value === 'active' ? 'bg-success' : 'bg-secondary' }}">
-                                            {{ strtoupper($model->is_active->value) }}
-                                        </span>
-                                    </h5>
-                                </td>
-                                <td class="text-end pe-3">
-                                    <a data-id="{{ $model->id }}" data-bs-toggle="modal" data-bs-target="#modeledit" class="btn btn-sm btn-primary fw-bold view-edit-btn">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <button data-id="{{ $model->id }}" class="btn btn-sm btn-danger fw-bold delete-btn">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
             {{-- edit model --}}
@@ -122,7 +98,27 @@
 </x-admin-layout>
 <script type="module">
     $(document).ready(function (){
+        axios.get('/models')
+        .then(function (response){
         $('#ModelTable').DataTable({
+            data: response.data,
+            columns: [
+                { data: 'id' },
+                { data: 'name' },
+                { data: 'slug' },
+                { data: 'is_active' },
+                { data: null,
+                    render: function (data, type, row){
+                        return `
+                            <a data-id="${row.id}" data-bs-toggle="modal" data-bs-target="#modeledit" class="btn btn-sm btn-primary fw-bold view-edit-btn">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <button data-id="${row.id}" class="btn btn-sm btn-danger fw-bold delete-btn">
+                                <i class="bi bi-trash3"></i>
+                            </button>`;
+                    },
+                },
+            ],
             layout:{
                 bottomEnd: {
                     paging: {
@@ -133,6 +129,7 @@
             pageLength: 25,
             scrollY: 600,
             scroller: true,
+        });
     });
     // create
     $('#createModelForm').on('submit', function (e) {

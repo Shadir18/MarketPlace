@@ -8,37 +8,13 @@
                 <table id="TypeTable" class="table table-striped table-hover align-middle mb-0 w-100 border">
                     <thead class="table-light">
                         <tr>
-                            <th class="ps-3">ID</th>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Slug</th>
                             <th>Status</th>
-                            <th class="text-end pe-3 no-sort">Actions</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($types as $type)
-                            <tr id="row-{{ $type->id }}">
-                                <td class="ps-3 text-muted">{{ $type->id }}</td>
-                                <td><strong>{{ $type->name }}</strong></td>
-                                <td><code class="text-secondary bg-light px-2 py-1 rounded small">{{ $type->slug }}</code></td>
-                                <td>
-                                    <h5>
-                                        <span class="badge w-50 badge-lg {{ $type->is_active->value === 'active' ? 'bg-success' : 'bg-secondary' }}">
-                                            {{ strtoupper($type->is_active->value) }}
-                                        </span>
-                                    </h5>
-                                </td>
-                                <td class="text-end pe-3">
-                                    <a data-id="{{ $type->id }}" data-bs-toggle="modal" data-bs-target="#typeEdit" class="btn btn-sm btn-primary fw-bold view-edit-btn">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <button data-id="{{ $type->id }}" class="btn btn-sm btn-danger fw-bold delete-btn">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
             {{-- edit model --}}
@@ -125,6 +101,24 @@
         axios.get('/types')
             .then(function (response) {
                 $('#TypeTable').DataTable({
+                    data: response.data,
+                    columns: [
+                        { data: 'id' },
+                        { data: 'name' },
+                        { data: 'slug' },
+                        { data: 'is_active' },
+                        { data: null,
+                            render: function (data, type, row){
+                                return `
+                                    <a data-id="${row.id}" data-bs-toggle="modal" data-bs-target="#typeEdit" class="btn btn-sm btn-primary fw-bold view-edit-btn">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <button data-id="${row.id}" class="btn btn-sm btn-danger fw-bold delete-btn">
+                                        <i class="bi bi-trash3"></i>
+                                    </button>`;
+                            },
+                        },
+                    ],
                     layout:{
                         bottomEnd: {
                             paging: {

@@ -13,9 +13,12 @@ class TypeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $types = Type::latest()->get();
+        if ($request->wantsJson()){
+            return response()->json($types);
+        }
         return view('types.index', compact('types'));
     }
 

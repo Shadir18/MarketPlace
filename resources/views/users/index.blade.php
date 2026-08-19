@@ -12,27 +12,9 @@
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
-                            <th class="text-end pe-3 no-sort">Actions</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($users as $user)
-                            <tr id="row-{{ $user->id }}">
-                                <td class="ps-3 text-muted">{{ $user->id }}</td>
-                                <td> <strong>{{ $user->first_name }}</strong> </td>
-                                <td>{{ $user->last_name }}</td>                                
-                                <td>{{ $user->email }}</td>
-                                <td class="text-end pe-3">
-                                    <a data-id="{{ $user->id }}" data-bs-toggle="modal" data-bs-target="#userEdit" class="btn btn-sm btn-primary fw-bold view-edit-btn">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <button data-id="{{ $user->id }}" class="btn btn-sm btn-danger fw-bold delete-btn">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
             {{-- edit modal --}}
@@ -161,7 +143,27 @@
 </x-admin-layout>
 <script type="module">
     $(document).ready(function (){
+    axios.get('/users')
+    .then(function (response){
         $('#UserTable').DataTable({
+            data: response.data,
+            columns: [
+                { data: 'id' },
+                { data: 'first_name' },
+                { data: 'last_name' },
+                { data: 'email' },
+                { data: null,
+                    render: function (data, type, row){
+                        return `
+                        <a data-id="${row.id}" data-bs-toggle="modal" data-bs-target="#userEdit" class="btn btn-sm btn-primary fw-bold view-edit-btn">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <button data-id="${row.id}" class="btn btn-sm btn-danger fw-bold delete-btn">
+                            <i class="bi bi-trash3"></i>
+                        </button>`;
+                    },
+                },
+            ],
         layout:{
             bottomEnd: {
                 paging: {
@@ -173,6 +175,7 @@
         scrollY: 600,
         scroller: true,
     });
+    })
     //create
     $('#createuserform').on('submit', function (e) {
         e.preventDefault();

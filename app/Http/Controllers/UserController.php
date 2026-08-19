@@ -15,9 +15,12 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = User::latest()->get();
+        if ($request->wantsJson()){
+            return response()->json($users);
+        }
         return view('users.index', compact('users'));
     }
 

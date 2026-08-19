@@ -2,6 +2,9 @@
 
 @import "bootstrap/scss/bootstrap";
 @import "admin-lte/dist/css/adminlte.min.css";
-@import "datatables.net-dt/css/dataTables.dataTables";
 @import "bootstrap-icons/font/bootstrap-icons.css";
-@import "overlayscrollbars/styles/overlayscrollbars.css";
+@import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
+@import 'datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css';
+@import 'datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css';
+@import 'datatables.net-searchbuilder-bs5/css/searchBuilder.bootstrap5.min.css';
+@import 'datatables.net-searchpanes-bs5/css/searchPanes.bootstrap5.min.css';

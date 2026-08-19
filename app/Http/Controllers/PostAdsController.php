@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\PostAdsStatus;
+use App\Models\Category;
+use App\Models\Model;
 use App\Models\PostAds;
 use App\Models\PostadsImage;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,15 +19,21 @@ class PostAdsController extends Controller
      */
     public function index()
     {
-        $postAds = PostAds::with(['user'])->latest()->where('status', 0)->get();
-        return view('post_ads.listed.index', compact('postAds'));
+        $postAds = PostAds::with(['user', 'category', 'type', 'category'])->latest()->where(['status' => PostAdsStatus::LISTED])->get();
+        $categories = Category::all();
+        $models = Model::all();
+        $types = Type::all();
+        return view('post_ads.listed.index', compact('postAds', 'categories', 'models', 'types'));
     }
 
     //approved ads page
     public function approvedIndex()
     {
-        $postAds = PostAds::with(['user'])->latest()->where('status', 1)->get();
-        return view('post_ads.approved.index', compact('postAds'));
+        $postAds = PostAds::with(['user'])->latest()->whereIn('status', [PostAdsStatus::APPROVED, PostAdsStatus::SOLDOUT])->get();
+        $categories = Category::all();
+        $models = Model::all();
+        $types = Type::all();
+        return view('post_ads.approved.index', compact('postAds', 'categories', 'models', 'types'));
     }
 
     public function approve(string $id)
@@ -31,10 +41,10 @@ class PostAdsController extends Controller
         try{
             DB::beginTransaction();
             $postAds = PostAds::findOrFail($id);
-            $postAds->update(['status' => 1]);
+            $postAds->update(['status' => PostAdsStatus::APPROVED]);
             DB::commit();
             return response()->json([
-                'success' => 1,
+                'success' => true,
                 'message' => 'Post Ad approved successfully!',
                 'data' => $postAds
             ], 200);
@@ -49,7 +59,7 @@ class PostAdsController extends Controller
     //rejected index page
     public function rejectedIndex()
     {
-        $postAds = PostAds::with(['user'])->latest()->where('status', 2)->get();
+        $postAds = PostAds::with(['user'])->latest()->where(['status' => PostAdsStatus::REJECTED])->get();
         return view('post_ads.rejected.index', compact('postAds'));
     }
 
@@ -58,10 +68,10 @@ class PostAdsController extends Controller
         try{
             DB::beginTransaction();
             $postAds = PostAds::findOrFail($id);
-            $postAds->update(['status' => 2]);
+            $postAds->update(['status' => PostAdsStatus::REJECTED]);
             DB::commit();
             return response()->json([
-                'success' => 2,
+                'success' => true,
                 'message' => 'Post Ad approved successfully!',
                 'data' => $postAds
             ], 200);
@@ -78,7 +88,10 @@ class PostAdsController extends Controller
      */
     public function create()
     {
-        return view ('post_ads.create');
+        $categories = Category::all();
+        $models = Model::all();
+        $types = Type::all();
+        return view ('post_ads.create', compact('categories', 'models', 'types'));
     }
 
     /**
@@ -127,12 +140,36 @@ class PostAdsController extends Controller
         }
     }
 
+    public function sold(string $id)
+    {
+        try{
+            DB::beginTransaction();
+            $postAds = PostAds::findOrFail($id);
+            $postAds->update(['status' => PostAdsStatus::SOLDOUT]);
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => 'Post Ad solded!',
+                'data' => $postAds
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => $th->getMessage(),
+                'line' => $th->getLine(),
+                'file' => $th->getFile(),
+            ], 500);
+        }
+    }
+
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        $postAds = PostAds::findOrFail($id);
+        return response()->json($postAds);
     }
 
     /**
@@ -148,7 +185,45 @@ class PostAdsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $attributes = $request->validate([
+            'title'        => 'required',
+            'manufacture_year'     => 'required',
+            'mileage'      => 'required',
+            'price'        => 'required',
+            'postads_img'  => 'array',
+            'postads_img.*'=> 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'type_id'      => 'required|exists:types,id',
+            'model_id'     => 'required|exists:models,id',
+            'category_id'  => 'required|exists:categories,id',
+        ]);
+        try{
+            DB::beginTransaction();
+            $postAd = PostAds::findOrFail($id);
+            $postAd->update($attributes);
+            if($request->hasFile('postads_img')){
+                foreach ($request->file('postads_img')as $postads_img){
+                    $path = $postads_img->create('postads_images', 'public');
+                    PostadsImage::update([
+                        'post_ads_id' => $postAd->id,
+                        'postads_img' => $path,
+                    ]);
+                }
+            }
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => 'successfully updated',
+                'data' => $postAd
+            ], 200);
+        } catch (\Throwable $th){
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => $th->getMessage(),
+                'line' => $th->getLine(),
+                'file' => $th->getFile(),
+            ], 500);
+        }
     }
 
     /**

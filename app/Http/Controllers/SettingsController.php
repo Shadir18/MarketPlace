@@ -37,7 +37,8 @@ class SettingsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $setting = Setting::findOrFail($id);
+        return response()->json($setting);
     }
 
     /**

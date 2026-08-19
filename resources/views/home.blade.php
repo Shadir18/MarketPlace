@@ -22,6 +22,7 @@
                 </form>
             </div>
         </div>
+        
 
         <div class="mt-5 mb-4 pb-3 border-bottom border-light-subtle">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
@@ -31,12 +32,25 @@
                 </div>
 
                 <form action="{{ route('home') }}" method="GET" class="d-flex align-items-center gap-2">
+                    @if(request('per_page'))
+                        <input type="hidden" name="per_page" value="{{ request('per_page') }}">
+                    @endif
                     @if(request('query'))
                         <input type="hidden" name="query" value="{{ request('query') }}">
                     @endif
                     @if(request('category'))
                         <input type="hidden" name="category" value="{{ request('category') }}">
                     @endif
+
+                    <div class="d-flex align-items-center bg-white border border-light-subtle rounded-4 px-3 py-2 shadow-sm">
+                        <i class="bi bi-sort-down text-warning me-2 fs-5"></i>
+                        <span class="text-secondary small me-2 d-none d-sm-inline">Shows</span>
+                        <select name="per_page" class="form-select border-0 bg-transparent p-0 text-dark fw-bold small shadow-none cursor-pointer" style="width: 1.5cm;" onchange="this.form.submit()">
+                            <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
+                            <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
+                            <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
+                        </select>
+                    </div>
 
                     <div class="d-flex align-items-center bg-white border border-light-subtle rounded-4 px-3 py-2 shadow-sm">
                         <i class="bi bi-sort-down text-warning me-2 fs-5"></i>
@@ -69,12 +83,27 @@
                     </a>
                 @endforeach
             </div>
-        </div>
 
-        <div class="row g-5">
+        <div class="row g-4">
             @forelse ($postAds as $ad)
-                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".2s">
-                    <div class="card h-100 bg-white rounded-4 border border-light-subtle shadow-sm overflow-hidden d-flex flex-column">
+                <div class="col-md-6 pt-2 col-lg-4 wow fadeInUp" data-wow-delay=".2s">
+                    <div class="card post-card h-100 bg-white rounded-4 border border-light-subtle shadow-sm overflow-hidden d-flex flex-column cursor-pointer"
+                    data-bs-toggle="modal"
+                    data-bs-target="#adModal"
+                    style="cursor: pointer;"
+                    data-id="{{ $ad->id }}"
+                    data-title="{{ $ad->title }}"
+                    data-price="{{ number_format($ad->price, 2) }}"
+                    data-image="{{ asset('storage/' . ($ad->images->first()?->postads_img ?? 'no-image.jpg')) }}"
+                    data-category-name="{{ $ad->category->name }}"
+                    data-model-name="{{ $ad->model->name }}"
+                    data-type-name="{{ $ad->type->name }}"
+                    data-mileage="{{ $ad->mileage }}"
+                    data-manufacture_year="{{ $ad->manufacture_year }}"
+                    data-seller="{{ $ad->user->first_name }} {{ $ad->user->last_name }}"
+                    data-posted="{{ $ad->created_at->format('M d, Y') }}"
+                    data-contact="{{ $ad->user->email}}"
+                    >
     
                         <div class="position-relative bg-light" style="height: 220px;">
                             <img src="{{ asset('storage/' . ($ad->images->first()?->postads_img ?? 'no-image.jpg' )) }}" alt="{{ $ad->title }}" class="w-100 h-100 object-fit-cover">
@@ -91,13 +120,13 @@
                             </div>
 
                             <h3 class="h5 fw-bold text-dark mb-2">
-                                <a href="#" class="text-decoration-none text-dark hover-warning">
+                                <a  class="text-decoration-none text-dark hover-warning">
                                     {{ $ad->title }}
                                 </a>
                             </h3>
 
                             <div class="d-flex align-items-center gap-3 text-secondary small mb-3">
-                                <span><i class="bi bi-speedometer2 text-warning me-1"></i> {{ ($ad->mileage) }} km</span>
+                                <span><i class="bi bi-speedometer2 text-warning me-1"></i> {{ ($ad->mileage) }} </span>
                                 <span><i class="bi bi-calendar3 text-warning me-1"></i> {{ $ad->manufacture_year }}</span>
                             </div>
 
@@ -125,5 +154,139 @@
             </form>
             @endforelse
         </div>
+        <div class="pagination pt-4">
+            {{ $postAds->links() }}
+        </div>
+        <div class="modal fade" id="adModal" tabindex="-1" aria-labelledby="adModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content rounded-4 border-0 shadow">
+                    <div class="modal-header border-bottom border-light-subtle">
+                        <h5 class="modal-title fw-bold text-dark" id="adModalLabel">
+                            {{-- lead tit --}}
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="rounded-3 overflow-hidden border border-light-subtle">
+                                    <img id="modal-img" src="" alt="" class="img-fluid w-100 object-fit-cover" style="max-height: 300px;">
+                                </div>
+                            </div>
+                            <div class="col-md-6 d-flex flex-column justify-content-between">
+                                <div>
+                                    <span id="modal-category" class="badge bg-warning text-dark fw-bold mb-2"></span>
+                                    <h3 id="modal-price" class="text-warning fw-bold mb-3">LKR</h3>
+                                    
+                                    <ul class="list-group list-group-flush mb-3 small">
+                                        <li class="list-group-item d-flex justify-content-between px-0">
+                                            <strong class="text-secondary">Category: </strong>
+                                            <span id="modal-category-name" class="fw-semibold"></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between px-0">
+                                            <strong class="text-secondary">Model: </strong>
+                                            <span id="modal-model-name" class="fw-semibold"></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between px-0">
+                                            <strong class="text-secondary">Vehicle Type: </strong>
+                                            <span id="modal-type-name" class="fw-semibold"></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between px-0">
+                                            <strong class="text-secondary">Mileage:</strong>
+                                            <span id="modal-mileage" class="fw-semibold"></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between px-0">
+                                            <strong class="text-secondary">Manufacture Year:</strong>
+                                            <span id="modal-manufacture_year" class="fw-semibold"></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between px-0">
+                                            <strong class="text-secondary">Posted:</strong>
+                                            <span id="modal-posted" class="fw-semibold"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card container shadow-sm" style="max-width: 800px">
+                                <div class="justify-content-start">
+                                    <div class="container-fluid">
+                                        <div class="row pt-3">
+                                            <div class="col-6 offset-6">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-muted small text-uppercase fw-bold pe-1">Listed By:</span>
+                                                    <h6 id="modal-seller" class="fw-bold text-dark mb-0 fs-6"></h6>
+                                                </div>
+                                                <small id="modal-contact" class="text-secondary"></small>
+                                            </div>
+                                        </div>
+                                        <div class="row pt-1 mb-2">
+                                            <div class="col-6 offset-6">
+                                                <div class="d-flex align-items-center">
+                                                    <a href="tel:+941234567894" class="text-decoration-none fw-bold text-warning align-items-center">
+                                                    <i class="bi bi-telephone-fill fs-5"><span class="text-dark p-1 fs-6">+94 123 4567894</span></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6 offset-6">
+                                                <div class="d-flex align-items-center">
+                                                    <a href="#" class="btn btn-primary align-items-center w-50 gap-2">
+                                                    <i class="bi bi-chat-dots-fill"></i>
+                                                    <span>Chat with Seller</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-6 offset-6">
+                                                <div class="d-flex align-items-center">
+                                                    <a href="https://wa.me/941234567894" id="modal-whatsapp" target="_blank" class="btn btn-success w-50 gap-2 shadow-sm">
+                                                    <i class="bi bi-whatsapp"></i>
+                                                    <span>WhatsApp</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top border-light-subtle">
+                        <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </x-guest-layout>
+<script type="module">
+$(document).ready(function () {
+    $(document).on('click', '.post-card', function () {
+        var title = $(this).data('title');
+        var price = $(this).data('price');
+        var image = $(this).data('image');
+        var categoryName = $(this).data('category-name');
+        var modelName = $(this).data('model-name');
+        var typeName = $(this).data('type-name');
+        var mileage = $(this).data('mileage');
+        var manufactureYear = $(this).data('manufacture_year');
+        var seller = $(this).data('seller');
+        var posted = $(this).data('posted');
+        var contact = $(this).data('contact');
+
+        $('#adModalLabel').text(title);
+        $('#modal-img').attr('src', image).attr('alt', title);
+        $('#modal-category').text(categoryName);
+        $('#modal-price').text('LKR ' + price);
+        $('#modal-category-name').text(categoryName);
+        $('#modal-model-name').text(modelName);
+        $('#modal-type-name').text(typeName);
+        $('#modal-mileage').text(mileage);
+        $('#modal-manufacture_year').text(manufactureYear);
+        $('#modal-seller').text(seller);
+        $('#modal-posted').text(posted);
+        $('#modal-contact').text(contact)
+    });
+});
+</script>

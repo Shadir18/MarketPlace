@@ -15,6 +15,8 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
     
+    public static $ADMIN_EMAIL = 'admin@example.com';
+    
     protected $fillable = [
         'first_name',
         'last_name',

@@ -17,12 +17,20 @@ class PostAdsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $postAds = PostAds::with(['user', 'category', 'type', 'category'])->latest()->where(['status' => PostAdsStatus::LISTED])->get();
+        $postAds = PostAds::with(['user', 'category', 'type', 'model'])->latest()->where(['status' => PostAdsStatus::LISTED])->get();
         $categories = Category::all();
         $models = Model::all();
         $types = Type::all();
+        if ($request->wantsJson()){
+            return response()->json([
+                'postAds' => $postAds,
+                'categories' => $categories,
+                'models' => $models,
+                'types' => $types,
+            ]);
+        }
         return view('post_ads.listed.index', compact('postAds', 'categories', 'models', 'types'));
     }
 

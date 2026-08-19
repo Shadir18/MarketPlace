@@ -17,10 +17,10 @@
                             <th>Mileage</th>
                             <th>Price (LKR)</th>
                             <th>Posted By</th>
-                            <th class="text-center">Approve</th>
+                            <th>Approve</th>
                         </tr>
                     </thead>
-                    @foreach ($postAds as $ad)
+                    {{-- @foreach ($postAds as $ad)
                         <tr id="row-{{ $ad->id }}">
                             <td> {{ $ad->id }} </td>
                             <td> {{ $ad->title}} </td>
@@ -32,20 +32,10 @@
                             <td> {{ $ad->price }} </td>
                             <td> {{ $ad->user->last_name }}</td>
                             <td class="text-center">
-                                @if (auth()->check() && auth()->user()->email == App\Models\User::$ADMIN_EMAIL)
-                                <button type="button" data-id="{{ $ad->id }}" data-bs-toggle="modal" data-bs-target="#editpostad" class="btn btn-sm btn-primary fw-bold view-edit-btn">
-                                    <i class="bi bi-pencil"></i>
-                                </button>
-                                @endif
-                                <button type="button" class="btn btn-success btn-sm fw-bold btn-approve" data-id="{{ $ad->id }}">
-                                    <i class="bi bi-bag-check"></i>
-                                </button>
-                                <button type="button" class="btn btn-danger btn-sm fw-bold btn-reject" data-id="{{ $ad->id }}">
-                                    <i class="bi bi-bag-x"></i>
-                                </button>
+                                
                             </td>
                         </tr>
-                    @endforeach
+                    @endforeach --}}
                 </table>
             </div>
 
@@ -158,9 +148,37 @@
 </x-admin-layout>
 <script type="module">
     $(document).ready(function () {
-        axios.get('/post_ads')
+        axios.get('/post_ads/listed')
             .then(function (response) {
                 $('#listtable').DataTable({
+                    data: response.data.postAds,
+                    columns: [
+                        { data: 'id' },
+                        { data: 'title' },
+                        { data: 'category.name' },
+                        { data: 'type.name' },
+                        { data: 'model.name' },
+                        { data: 'manufacture_year' },
+                        { data: 'mileage' },
+                        { data: 'price' },
+                        { data: 'user.last_name' },
+                        { data: null,
+                            render: function (data, type, row){
+                                return `
+                                    @if (auth()->check() && auth()->user()->email == App\Models\User::$ADMIN_EMAIL)
+                                    <button type="button" data-id="${row.id}" data-bs-toggle="modal" data-bs-target="#editpostad" class="btn btn-sm btn-primary fw-bold view-edit-btn">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    @endif
+                                    <button type="button" class="btn btn-success btn-sm fw-bold btn-approve" data-id="${row.id}">
+                                        <i class="bi bi-bag-check"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm fw-bold btn-reject" data-id="${row.id}">
+                                        <i class="bi bi-bag-x"></i>
+                                    </button>`;
+                            },
+                        },
+                    ],
                     layout:{
                         bottomEnd: {
                             paging: {

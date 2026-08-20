@@ -297,7 +297,7 @@
                                         <i class="bi bi-trash3"></i>
                                     </button>`;
                                 let statusbtn = "";
-                                if (data.status === "soldout") {
+                                if (row.status === "soldout") {
                                     statusbtn = `<button type="button" class="btn btn-secondary btn-sm fw-bold " data-id="${row.id}" disabled>
                                     <i class="bi bi-box2-fill"></i>
                                 </button>`;

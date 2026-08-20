@@ -19,24 +19,6 @@
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
-                    @foreach ($postAds as $ad)
-                        <tr id="row-{{ $ad->id }}">
-                            <td> {{ $ad->id }} </td>
-                            <td> {{ $ad->title}} </td>
-                            <td> {{$ad->category->name }} </td>
-                            <td> {{$ad->type->name }} </td>
-                            <td> {{$ad->model->name }} </td>
-                            <td> {{ $ad->manufacture_year }} </td>
-                            <td> {{ $ad->mileage }} </td>
-                            <td> {{ $ad->price }} </td>
-                            <td> {{ $ad->user->last_name }}</td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-success btn-sm fw-bold btn-approve" data-id="{{ $ad->id }}">
-                                    <i class="bi bi-bag-check"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    @endforeach
                 </table>
             </div>
 </x-admin-layout>
@@ -45,6 +27,27 @@
         axios.get('/post_ads/rejected')
             .then(function (response) {
                 $('#rejecttable').DataTable({
+                    data: response.data.postAds,
+                    columns: [
+                        { data: 'id' },
+                        { data: 'title' },
+                        { data: 'category.name' },
+                        { data: 'type.name' },
+                        { data: 'model.name' },
+                        { data: 'manufacture_year' },
+                        { data: 'mileage' },
+                        { data: 'price' },
+                        { data: 'user.last_name' },
+                        { data: null,
+                            render: function(data, type, row) {
+                                console.log(row)
+                                let actionbtn = `<button type="button" class="btn btn-success btn-sm fw-bold btn-approve" data-id="${row.id}">
+                                    <i class="bi bi-bag-check"></i>
+                                </button>`;
+                                return actionbtn;
+                            },
+                        },
+                    ],
                     layout:{
                         bottomEnd: {
                             paging: {

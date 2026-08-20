@@ -73,10 +73,21 @@ class PostAdsController extends Controller
         }
     }
     //rejected index page
-    public function rejectedIndex()
+    public function rejectedIndex(Request $request)
     {
-        $postAds = PostAds::with(['user'])->latest()->where(['status' => PostAdsStatus::REJECTED])->get();
-        return view('post_ads.rejected.index', compact('postAds'));
+        $postAds = PostAds::with(['user', 'category', 'type', 'model'])->latest()->where(['status' => PostAdsStatus::REJECTED])->get();
+        $categories = Category::all();
+        $models = Model::all();
+        $types = Type::all();
+        if ($request->wantsJson()){
+            return response()->json([
+                'postAds' => $postAds,
+                'categories' => $categories,
+                'models' => $models,
+                'types' => $types,
+            ]);
+        }
+        return view('post_ads.rejected.index', compact('postAds', 'categories', 'models', 'types'));
     }
 
     public function reject(string $id)

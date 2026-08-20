@@ -35,12 +35,20 @@ class PostAdsController extends Controller
     }
 
     //approved ads page
-    public function approvedIndex()
+    public function approvedIndex(Request $request)
     {
-        $postAds = PostAds::with(['user'])->latest()->whereIn('status', [PostAdsStatus::APPROVED, PostAdsStatus::SOLDOUT])->get();
+        $postAds = PostAds::with(['user', 'category', 'type', 'model'])->latest()->whereIn('status', [PostAdsStatus::APPROVED, PostAdsStatus::SOLDOUT])->get();
         $categories = Category::all();
         $models = Model::all();
         $types = Type::all();
+        if ($request->wantsJson()){
+            return response()->json([
+                'postAds' => $postAds,
+                'categories' => $categories,
+                'models' => $models,
+                'types' => $types,
+            ]);
+        }
         return view('post_ads.approved.index', compact('postAds', 'categories', 'models', 'types'));
     }
 

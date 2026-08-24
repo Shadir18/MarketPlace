@@ -20,22 +20,6 @@
                             <th>Approve</th>
                         </tr>
                     </thead>
-                    {{-- @foreach ($postAds as $ad)
-                        <tr id="row-{{ $ad->id }}">
-                            <td> {{ $ad->id }} </td>
-                            <td> {{ $ad->title}} </td>
-                            <td> {{$ad->category->name }} </td>
-                            <td> {{$ad->type->name }} </td>
-                            <td> {{$ad->model->name }} </td>
-                            <td> {{ $ad->manufacture_year }} </td>
-                            <td> {{ $ad->mileage }} </td>
-                            <td> {{ $ad->price }} </td>
-                            <td> {{ $ad->user->last_name }}</td>
-                            <td class="text-center">
-                                
-                            </td>
-                        </tr>
-                    @endforeach --}}
                 </table>
             </div>
 

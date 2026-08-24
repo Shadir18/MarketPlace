@@ -43,7 +43,7 @@ class PostAdsController extends Controller
         $types = Type::all();
         if ($request->wantsJson()){
             return response()->json([
-                'postAds' => $postAds,
+                'aaData' => $postAds,
                 'categories' => $categories,
                 'models' => $models,
                 'types' => $types,

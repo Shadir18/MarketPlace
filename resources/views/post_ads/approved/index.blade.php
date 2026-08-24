@@ -271,89 +271,145 @@
 </x-admin-layout>
 <script type="module">
     $(document).ready(function () {
-        axios.get('/post_ads/approved')
-            .then(function (response) {
-                $('#approvetable').DataTable({
-                    data: response.data.postAds,
-                    columns: [
-                        { data: 'id' },
-                        { data: 'title' },
-                        { data: 'category.name' },
-                        { data: 'type.name' },
-                        { data: 'model.name' },
-                        { data: 'manufacture_year' },
-                        { data: 'mileage' },
-                        { data: 'price' },
-                        { data: 'user.last_name' },
-                        { data: null,
-                            render: function (data, type, row){
-                                console.log(row)
-                                let actionbtn = `
-                                    @if (auth()->check() && auth()->user()->email == App\Models\User::$ADMIN_EMAIL)
-                                    <button type="button" data-id="${row.id}" data-bs-toggle="modal" data-bs-target="#editpostad" class="btn btn-sm btn-primary fw-bold view-edit-btn">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>@endif
-                                    <button type="button" class="btn btn-danger btn-sm fw-bold btn-reject" data-id="${row.id}">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>`;
-                                let statusbtn = "";
-                                if (row.status === "soldout") {
-                                    statusbtn = `<button type="button" class="btn btn-secondary btn-sm fw-bold " data-id="${row.id}" disabled>
-                                    <i class="bi bi-box2-fill"></i>
-                                </button>`;
-                                } else {
-                                    statusbtn = `<button type="button" class="btn btn-success btn-sm fw-bold btn-sold" data-id="${row.id}">
-                                    <i class="bi bi-dropbox"></i>
-                                </button>`;
-                                };
-                                return `${actionbtn} ${statusbtn}`;
-                            },
-                        },
-                    ],
-                    layout:{
-                        bottomEnd: {
-                            paging: {
-                                firstLast: false
-                            }
-                        }
+        $('#approvetable').DataTable({
+            ajax: {
+                url: "/post_ads/approved",
+                type: 'GET'
+            },
+            processing: true,
+            serverSide:false,
+            searching: true,
+            draw: 5,
+            columns: [
+                { data: 'id' },
+                { data: 'title' },
+                { data: 'category.name' },
+                { data: 'type.name' },
+                { data: 'model.name' },
+                { data: 'manufacture_year' },
+                { data: 'mileage' },
+                { data: 'price' },
+                { data: 'user.last_name' },
+                { data: null,
+                    render: function (data, type, row){
+                        console.log(row)
+                        let actionbtn = `
+                            @if (auth()->check() && auth()->user()->email == App\Models\User::$ADMIN_EMAIL)
+                            <button type="button" data-id="${row.id}" data-bs-toggle="modal" data-bs-target="#editpostad" class="btn btn-sm btn-primary fw-bold view-edit-btn">
+                                <i class="bi bi-pencil"></i>
+                            </button>@endif
+                            <button type="button" class="btn btn-danger btn-sm fw-bold btn-reject" data-id="${row.id}">
+                                <i class="bi bi-trash3"></i>
+                            </button>`;
+                        let statusbtn = "";
+                        if (row.status === "soldout") {
+                            statusbtn = `<button type="button" class="btn btn-secondary btn-sm fw-bold " data-id="${row.id}" disabled>
+                            <i class="bi bi-box2-fill"></i>
+                        </button>`;
+                        } else {
+                            statusbtn = `<button type="button" class="btn btn-success btn-sm fw-bold btn-sold" data-id="${row.id}">
+                            <i class="bi bi-dropbox"></i>
+                        </button>`;
+                        };
+                        return `${actionbtn} ${statusbtn}`;
                     },
-                    pageLength: 25,
-                    scrollY: 600,
-                    scroller: true,
-            });
+                },
+            ],
+            layout:{
+                bottomEnd: {
+                    paging: {
+                        firstLast: false,
+                    }
+                }
+            },
+            pageLength: 25,
+            scrollY: 600,
+            scroller: true,
         });
+        
+        // axios.get('/post_ads/approved')
+        //     .then(function (response) {
+        //         $('#approvetable').DataTable({
+        //             data: response.data.postAds,
+        //             columns: [
+        //                 { data: 'id' },
+        //                 { data: 'title' },
+        //                 { data: 'category.name' },
+        //                 { data: 'type.name' },
+        //                 { data: 'model.name' },
+        //                 { data: 'manufacture_year' },
+        //                 { data: 'mileage' },
+        //                 { data: 'price' },
+        //                 { data: 'user.last_name' },
+        //                 { data: null,
+        //                     render: function (data, type, row){
+        //                         console.log(row)
+        //                         let actionbtn = `
+        //                             @if (auth()->check() && auth()->user()->email == App\Models\User::$ADMIN_EMAIL)
+        //                             <button type="button" data-id="${row.id}" data-bs-toggle="modal" data-bs-target="#editpostad" class="btn btn-sm btn-primary fw-bold view-edit-btn">
+        //                                 <i class="bi bi-pencil"></i>
+        //                             </button>@endif
+        //                             <button type="button" class="btn btn-danger btn-sm fw-bold btn-reject" data-id="${row.id}">
+        //                                 <i class="bi bi-trash3"></i>
+        //                             </button>`;
+        //                         let statusbtn = "";
+        //                         if (row.status === "soldout") {
+        //                             statusbtn = `<button type="button" class="btn btn-secondary btn-sm fw-bold " data-id="${row.id}" disabled>
+        //                             <i class="bi bi-box2-fill"></i>
+        //                         </button>`;
+        //                         } else {
+        //                             statusbtn = `<button type="button" class="btn btn-success btn-sm fw-bold btn-sold" data-id="${row.id}">
+        //                             <i class="bi bi-dropbox"></i>
+        //                         </button>`;
+        //                         };
+        //                         return `${actionbtn} ${statusbtn}`;
+        //                     },
+        //                 },
+        //             ],
+        //             layout:{
+        //                 bottomEnd: {
+        //                     paging: {
+        //                         firstLast: false
+        //                     }
+        //                 }
+        //             },
+        //             pageLength: 25,
+        //             scrollY: 600,
+        //             scroller: true,
+        //     });
+        // });
 
         $('#postAdeditForm').on('submit', function (e){
-        e.preventDefault();
-        const id = $('#postadID').val();
-        const formData = new FormData(this);
-        formData.append('_method', 'PUT');
-        axios.post(`/post_ads/approved/${id}`, formData)
-        .then(function (response){
-            window.location.href = `/post_ads/approved`;
-        })
-        .catch(function (error){
-            console.error(error.response.data);
-        })
-    });
-
-    $(document).on('click', '.view-edit-btn', function (e)  {
-        e.preventDefault();
-        const postadID = $(this).data('id');
-        axios.get(`/post_ads/approved/${postadID}`)
-            .then(function (response) {
-                const data = response.data;
-                $('#postadID').val(data.id);
-                $('#title').val(data.title);
-                $('#category_id').val(data.category_id);
-                $('#model_id').val(data.model_id);
-                $('#type_id').val(data.type_id);
-                $('#manufacture_year').val(data.manufacture_year);
-                $('#mileage').val(data.mileage);
-                $('#price').val(data.price);
-                $('#postads_img').val(data.postads_img);
+            e.preventDefault();
+            const id = $('#postadID').val();
+            const formData = new FormData(this);
+            formData.append('_method', 'PUT');
+            axios.post(`/post_ads/approved/${id}`, formData)
+            .then(function (response){
+                window.location.href = `/post_ads/approved`;
             })
-    })
+            .catch(function (error){
+                console.error(error.response.data);
+            })
+        });
+
+        $(document).on('click', '.view-edit-btn', function (e)  {
+            e.preventDefault();
+            const postadID = $(this).data('id');
+            axios.get(`/post_ads/approved/${postadID}`)
+                .then(function (response) {
+                    const data = response.data;
+                    $('#postadID').val(data.id);
+                    $('#title').val(data.title);
+                    $('#category_id').val(data.category_id);
+                    $('#model_id').val(data.model_id);
+                    $('#type_id').val(data.type_id);
+                    $('#manufacture_year').val(data.manufacture_year);
+                    $('#mileage').val(data.mileage);
+                    $('#price').val(data.price);
+                    $('#postads_img').val(data.postads_img);
+                })
+        })
 
         //MARK AS SOLD 
         $('#approvetable').on('click', '.btn-sold', function (e){

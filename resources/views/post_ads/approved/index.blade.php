@@ -306,7 +306,7 @@
                                     <i class="bi bi-dropbox"></i>
                                 </button>`;
                                 };
-                                return actionbtn + statusbtn;
+                                return `${actionbtn} ${statusbtn}`;
                             },
                         },
                     ],

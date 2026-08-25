@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
@@ -73,8 +74,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id, User $users)
     {
+        Gate::authorize('update', $users);
         $attributes = $request->validate([
             'first_name' => ['required'],
             'last_name' => ['required'],
@@ -90,6 +92,7 @@ class UserController extends Controller
             unset($attributes['password']);
         }
         try {
+            Gate::authorize('update', $users);
             DB::beginTransaction();
             $users = User::findOrFail($id);
             $users->password = Hash::make($request->password);
@@ -110,8 +113,9 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, User $users)
     {
+        Gate::authorize('delete', $users);
         try{
             DB::beginTransaction();
             $users = User::findOrFail($id);

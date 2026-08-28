@@ -41,12 +41,9 @@
                         { data: null,
                             render: function(data, type, row) {
                                 console.log(row)
-                                let actionbtn = `
-                                    @can('post-approve')
-                                    <button type="button" class="btn btn-success btn-sm fw-bold btn-approve" data-id="${row.id}">
-                                        <i class="bi bi-bag-check"></i>
-                                    </button>
-                                    @endcan`;
+                                let actionbtn = `<button type="button" class="btn btn-success btn-sm fw-bold btn-approve" data-id="${row.id}">
+                                    <i class="bi bi-bag-check"></i>
+                                </button>`;
                                 return actionbtn;
                             },
                         },

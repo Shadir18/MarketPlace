@@ -77,11 +77,9 @@
                         { data: null,
                             render: function (data, type, row){
                                 return `
-                                @can('contact-view')
                                 <a href="#" data-id="${row.id}" data-bs-toggle="modal" data-bs-target="#ctcmsg" class="btn btn-sm btn-primary fw-bold view-edit-btn">
                                     <i class="bi bi-pencil"></i>
-                                </a>
-                                @endcan `;
+                                </a> `;
                             },
                         },
                         { data: 'name' },

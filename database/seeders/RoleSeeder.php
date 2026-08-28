@@ -17,8 +17,30 @@ class RoleSeeder extends Seeder
 
         Role::firstOrCreate(['name' => 'super-admin', 'guard_name' => 'web'])->syncPermissions($permissions);
 
-        Role::firstOrCreate(['name' => 'manager', 'guard_name' => 'web'])->syncPermissions(['role-create','role-edit','role-view',]);
+        Role::firstOrCreate(['name' => 'manager', 'guard_name' => 'web'])->syncPermissions([
+            'dashboard-view',
+            'user-view',
+            'category-view',
+            'category-create',
+            'category-edit',
+            'model-view',
+            'model-create',
+            'model-edit',
+            'type-view',
+            'type-create',
+            'type-edit',
+            'post-view',
+            'post-edit',
+            'post-approve',
+            'post-reject',
+            'post-sold',
+            'contact-view',
+            'setting-view',
+        ]);
 
-        Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web'])->syncPermissions(['role-view']);
+        Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web'])->syncPermissions([
+            'dashboard-view',
+            'post-view',
+        ]);
     }
 }

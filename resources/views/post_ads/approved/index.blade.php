@@ -31,11 +31,11 @@
                             <td> {{ $ad->price }} </td>
                             <td> {{ $ad->user->last_name }}</td>
                             <td class="text-center">
-                                @if (auth()->check() && auth()->user()->email == App\Models\User::$ADMIN_EMAIL)
+                                @can('post-edit')
                                 <button type="button" data-id="{{ $ad->id }}" data-bs-toggle="modal" data-bs-target="#editpostad" class="btn btn-sm btn-primary fw-bold view-edit-btn">
                                     <i class="bi bi-pencil"></i>
                                 </button>
-                                @endif
+                                @endcan
                                 @if($ad->status->value == 'soldout')
                                 <button type="button" class="btn btn-secondary btn-sm fw-bold" data-id="{{ $ad->id }}" disabled>
                                     <i class="bi bi-box2-fill"></i>
@@ -289,22 +289,27 @@
                             render: function (data, type, row){
                                 console.log(row)
                                 let actionbtn = `
-                                    @if (auth()->check() && auth()->user()->email == App\Models\User::$ADMIN_EMAIL)
+                                    @can('post-edit')
                                     <button type="button" data-id="${row.id}" data-bs-toggle="modal" data-bs-target="#editpostad" class="btn btn-sm btn-primary fw-bold view-edit-btn">
                                         <i class="bi bi-pencil"></i>
-                                    </button>@endif
+                                    </button>
+                                    @endcan
+                                    @can('post-reject')
                                     <button type="button" class="btn btn-danger btn-sm fw-bold btn-reject" data-id="${row.id}">
                                         <i class="bi bi-trash3"></i>
-                                    </button>`;
+                                    </button>
+                                    @endcan`;
                                 let statusbtn = "";
                                 if (row.status === "soldout") {
                                     statusbtn = `<button type="button" class="btn btn-secondary btn-sm fw-bold " data-id="${row.id}" disabled>
                                     <i class="bi bi-box2-fill"></i>
                                 </button>`;
                                 } else {
+                                    @can('post-sold')
                                     statusbtn = `<button type="button" class="btn btn-success btn-sm fw-bold btn-sold" data-id="${row.id}">
                                     <i class="bi bi-dropbox"></i>
                                 </button>`;
+                                    @endcan
                                 };
                                 return `${actionbtn} ${statusbtn}`;
                             },

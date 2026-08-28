@@ -9,15 +9,18 @@
         <nav class="mt-2" aria-label="Main navigation">
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" data-accordion="false" id="navigation">
 
+                @can('dashboard-view')
                 <li class="nav-item">
                     <x-nav-link href="/dashboard" :active="request()->is('dashboard')">
                         <i class="nav-icon bi bi-grid"></i>
                         <p>Dashboard</p>
                     </x-nav-link>
                 </li>
+                @endcan
 
-                <li class="nav-item {{ request()->is('posts*') ? 'menu-open' : '' }}">
-                    <x-nav-link href="#" class="nav-link {{ request()->is('posts*') ? 'active' : '' }}">
+                @can('post-view')
+                <li class="nav-item {{ request()->is('posts*') || request()->is('post_ads*') ? 'menu-open' : '' }}">
+                    <x-nav-link href="#" class="nav-link {{ request()->is('posts*') || request()->is('post_ads*') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-file-earmark-text-fill"></i>
                         <p>
                             Posts
@@ -46,48 +49,61 @@
                         </li>
                     </ul>
                 </li>
+                @endcan
 
+                @can('user-view')
                 <li class="nav-item">
                     <x-nav-link href="/users" :active="request()->is('users*')">
                         <i class="nav-icon bi bi-people-fill"></i>
                         <p>Manage Users</p>
                     </x-nav-link>
                 </li>
+                @endcan
 
+                @can('category-view')
                 <li class="nav-item">
                     <x-nav-link href="/categories" :active="request()->is('categories*')">
                         <i class="nav-icon bi bi-tags-fill"></i>
                         <p>Manage Categories</p>
                     </x-nav-link>
                 </li>
+                @endcan
 
+                @can('model-view')
                 <li class="nav-item">
                     <x-nav-link href="/models" :active="request()->is('models*')">
                         <i class="nav-icon bi bi-cpu-fill"></i>
                         <p>Manage Models</p>
                     </x-nav-link>
                 </li>
+                @endcan
 
+                @can('type-view')
                 <li class="nav-item">
                     <x-nav-link href="/types" :active="request()->is('types*')">
                         <i class="nav-icon bi bi-grid-fill"></i>
                         <p>Manage Types</p>
                     </x-nav-link>
                 </li>
+                @endcan
 
+                @can('contact-view')
                 <li class="nav-item">
                     <x-nav-link href="/contactmessages" :active="request()->is('contactmessages*')">
                         <i class="nav-icon bi bi-chat-left-text"></i>
                         <p>Inquiries</p>
                     </x-nav-link>
                 </li>
+                @endcan
 
+                @can('setting-view')
                 <li class="nav-item">
                     <x-nav-link href="/settings" :active="request()->is('settings*')">
                         <i class="nav-icon bi bi-gear-fill"></i>
                         <p>Settings</p>
                     </x-nav-link>
                 </li>
+                @endcan
                 
             </ul>
         </nav>

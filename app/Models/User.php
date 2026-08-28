@@ -17,7 +17,12 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasRoles;
     
     public static $ADMIN_EMAIL = 'admin@example.com';
-    
+
+    public function isAdmin(): bool
+    {
+        return $this->email === self::$ADMIN_EMAIL;
+    }
+
     protected $fillable = [
         'first_name',
         'last_name',

@@ -1,7 +1,9 @@
 <x-admin-layout>
         <div class="d-flex justify-content-between align-items-center p-2 pe-2 mb-4">
             <h2 class="h4 mb-0 font-weight-bold">Categories</h2>
+            @can('category-create')
             <a href="#" data-bs-toggle="modal" data-bs-target="#createCategory" class="btn btn-primary btn-sm fw-bold"><i class="bi bi-car-front"></i> Add New</a>
+            @endcan
         </div>
 
             <div class="table-responsive p-0">
@@ -110,12 +112,16 @@
                     { data: null,
                         render: function (data, type, row){
                             return `
+                                @can('category-edit')
                                 <a data-id="${row.id}" data-bs-toggle="modal" data-bs-target="#categoryEdit" class="btn btn-sm btn-primary fw-bold view-edit-btn">
                                     <i class="bi bi-pencil"></i>
                                 </a>
+                                @endcan
+                                @can('category-delete')
                                 <button data-id="${row.id}" class="btn btn-sm btn-danger fw-bold delete-btn">
                                     <i class="bi bi-trash3"></i>
-                                </button>`;
+                                </button>
+                                @endcan`;
                         },
                      },
                 ],

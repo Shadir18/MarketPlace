@@ -149,17 +149,21 @@
                         { data: null,
                             render: function (data, type, row){
                                 return `
-                                    @if (auth()->check() && auth()->user()->email == App\Models\User::$ADMIN_EMAIL)
+                                    @can('post-edit')
                                     <button type="button" data-id="${row.id}" data-bs-toggle="modal" data-bs-target="#editpostad" class="btn btn-sm btn-primary fw-bold view-edit-btn">
                                         <i class="bi bi-pencil"></i>
                                     </button>
-                                    @endif
+                                    @endcan
+                                    @can('post-approve')
                                     <button type="button" class="btn btn-success btn-sm fw-bold btn-approve" data-id="${row.id}">
                                         <i class="bi bi-bag-check"></i>
                                     </button>
+                                    @endcan
+                                    @can('post-reject')
                                     <button type="button" class="btn btn-danger btn-sm fw-bold btn-reject" data-id="${row.id}">
                                         <i class="bi bi-bag-x"></i>
-                                    </button>`;
+                                    </button>
+                                    @endcan`;
                             },
                         },
                     ],

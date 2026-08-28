@@ -60,10 +60,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $users)
     {
-        $users  = User::findOrFail($id);
-        return response()->json($users);
+        return response()->json($users->load('roles'));
     }
 
     /**
@@ -88,6 +87,8 @@ class UserController extends Controller
             'email' => ['required', 'email'],
             'current_password' => ['nullable', 'current_password'],
             'password' => ['nullable', 'confirmed'],
+            'roles' => ['required', 'array'],
+            'roles.*' => ['exists:roles,id'],
         ]);
         unset($attributes['current_password']);
         if (!empty($attributes['password'])){
@@ -95,13 +96,13 @@ class UserController extends Controller
         } else {
             unset($attributes['password']);
         }
+        $roles = $attributes['roles'];
+        unset($attributes['roles']);
+
         try {
-            Gate::authorize('update', $users);
             DB::beginTransaction();
-            $users = User::findOrFail($id);
-            $users->syncRoles($request->roles);
-            $users->password = Hash::make($request->password);
             $users->update($attributes);
+            $users->syncRoles($roles);
             DB::commit();
             return response()->json([
                 'message' => 'Your account has been created successfully!',
@@ -123,7 +124,6 @@ class UserController extends Controller
         Gate::authorize('delete', $users);
         try{
             DB::beginTransaction();
-            $users = User::findOrFail($id);
             $users->delete();
             DB::commit();
             return response()->json([

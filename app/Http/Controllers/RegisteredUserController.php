@@ -17,7 +17,7 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
-    public function store(array $attributes, Request $request)
+    public function store(array $attributes)
     {
         try {
             DB::beginTransaction();
@@ -26,7 +26,6 @@ class RegisteredUserController extends Controller
                 'user_id' => $user->id,
                 'name' => $user->first_name,
             ]);
-            $user->syncRoles($request->roles);
             DB::commit();
             if (! Auth::check()){
                 Auth::login($user);

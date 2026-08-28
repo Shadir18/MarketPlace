@@ -12,7 +12,6 @@
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
-                            <th>Role</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -44,15 +43,6 @@
                                         <label for="email" class="form-label fw-bold">Mail</label>
                                         <input id="useremail" name="email" type="text" class="form-control">
                                         <div class="invalid-feedback" id="error-email"></div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="role" class="form-label fw-bold">Role</label>
-                                        <select class="form-select" name="roles[]">
-                                            {{-- <option>--Select Role--</option> --}}
-                                            @foreach ($roles as $role)
-                                                <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                            @endforeach
-                                        </select>
                                     </div>
                                     <div id="div1" class="mb-3">
                                         <label for="password" class="form-label fw-bold">New Password</label>
@@ -162,12 +152,6 @@
                 { data: 'first_name' },
                 { data: 'last_name' },
                 { data: 'email' },
-                {
-                    data: 'roles',
-                    render: function (roles) {
-                        return roles && roles.length ? roles.map(role => role.name).join(', '): 'No role';
-                    }
-                },
                 { data: null,
                     render: function (data, type, row){
                         return `

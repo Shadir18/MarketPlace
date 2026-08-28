@@ -50,7 +50,6 @@ class UserSeeder extends Seeder
 
         foreach ($users as $userData) {
             $user = User::create($userData);
-            $user->assignRole($user->email === 'admin@example.com' ? 'super-admin' : 'user');
             Seller::create([
                 'user_id' => $user->id,
                 'name' => $user->first_name . ' ' . $user->last_name,

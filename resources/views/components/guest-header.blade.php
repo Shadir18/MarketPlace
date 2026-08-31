@@ -5,8 +5,10 @@
         {{ env('APP_NAME')}}
       </span>
     </a>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="bi bi-list fs-4"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
       <div class="navbar-nav w-100 d-flex align-items-center">
         <div class="ms-auto d-flex align-items-center gap-3">
             @auth

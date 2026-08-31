@@ -1,10 +1,9 @@
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
-    <div class="sidebar-brand">
+    <div class="sidebar-brand p-4">
         <a href="/dashboard" class="brand-link">
             <span class="brand-text fw-light"> {{ env('APP_NAME')}} </span>
         </a>
     </div>
-
     <div class="sidebar-wrapper">
         <nav class="mt-2" aria-label="Main navigation">
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" data-accordion="false" id="navigation">
@@ -88,7 +87,6 @@
                         <p>Settings</p>
                     </x-nav-link>
                 </li>
-                
             </ul>
         </nav>
     </div>

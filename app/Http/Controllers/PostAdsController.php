@@ -19,7 +19,12 @@ class PostAdsController extends Controller
      */
     public function index(Request $request)
     {
-        $postAds = PostAds::with(['user', 'category', 'type', 'model'])->latest()->where(['status' => PostAdsStatus::LISTED])->get();
+        $user = Auth::user();
+        $query = PostAds::with(['user', 'category', 'type', 'model'])->latest()->where(['status' => PostAdsStatus::LISTED]);
+        if (! $user->admin && ! $user->manager){
+            $query->where('user_id', $user->id);
+        }
+        $postAds = $query->get();
         $categories = Category::all();
         $models = Model::all();
         $types = Type::all();
@@ -37,7 +42,12 @@ class PostAdsController extends Controller
     //approved ads page
     public function approvedIndex(Request $request)
     {
-        $postAds = PostAds::with(['user', 'category', 'type', 'model'])->latest()->whereIn('status', [PostAdsStatus::APPROVED, PostAdsStatus::SOLDOUT])->get();
+        $user = Auth::user();
+        $query = PostAds::with(['user', 'category', 'type', 'model'])->latest()->whereIn('status', [PostAdsStatus::APPROVED, PostAdsStatus::SOLDOUT]);
+        if (! $user->admin && ! $user->manager){
+            $query->where('user_id', $user->id);
+        }
+        $postAds = $query->get();
         $categories = Category::all();
         $models = Model::all();
         $types = Type::all();
@@ -75,7 +85,12 @@ class PostAdsController extends Controller
     //rejected index page
     public function rejectedIndex(Request $request)
     {
-        $postAds = PostAds::with(['user', 'category', 'type', 'model'])->latest()->where(['status' => PostAdsStatus::REJECTED])->get();
+        $user = Auth::user();
+        $query = PostAds::with(['user', 'category', 'type', 'model'])->latest()->where(['status' => PostAdsStatus::REJECTED]);
+        if (! $user->admin && ! $user->manager){
+            $query->where('user_id', $user->id);
+        }
+        $postAds = $query->get();
         $categories = Category::all();
         $models = Model::all();
         $types = Type::all();
